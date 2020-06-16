@@ -1,0 +1,491 @@
+" vim-Plug
+call plug#begin('~/.vim/plugged')
+
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'preservim/nerdcommenter'
+Plug 'jiangmiao/auto-pairs'
+Plug 'liuchengxu/vista.vim'
+Plug 'luochen1990/rainbow'
+Plug 'tmhedberg/SimpylFold'   "折叠插件
+Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/LeaderF', {'do': './install.sh'}
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-startify'
+Plug 'ryanoasis/vim-devicons' "图标
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'guns/xterm-color-table.vim'    "配色
+
+call plug#end()            " required
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 通用配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"split navigations切割窗口
+nnoremap <C-J> <C-W><C-J>  “crtl+J切换到下方分割窗口
+nnoremap <C-K> <C-W><C-K>   ”crtl+K切换到上方分割窗口
+nnoremap <C-L> <C-W><C-L>   “  crtl+J切换到右侧分割窗口
+nnoremap <C-H> <C-W><C-H>   ”crtl+J切换到左侧分割窗口
+
+imap jk <Esc>
+imap kj <Esc>
+
+" 映射切换buffer的键位
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
+" 删除当前缓冲区
+nnoremap <leader>d :bdelete<CR>
+" 映射<leader>num到num buffer
+map <leader>1 :b 1<CR>
+map <leader>2 :b 2<CR>
+map <leader>3 :b 3<CR>
+map <leader>4 :b 4<CR>
+map <leader>5 :b 5<CR>
+map <leader>6 :b 6<CR>
+map <leader>7 :b 7<CR>
+map <leader>8 :b 8<CR>
+map <leader>9 :b 9<CR>
+
+nnoremap <leader>q :nohl<CR>
+" colorscheme desert
+" colorscheme darkblue
+" colorscheme zellner
+colorscheme onedark
+" set termguicolors
+" colorscheme ron
+syntax on    "语法高亮
+syntax enable
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=1
+set updatetime=300
+set shortmess+=c
+set number      "显示行号
+set nowrap    "不自动折行
+set showmatch    "显示匹配的括号
+set scrolloff=3     "距离顶部和底部3行"
+set encoding=UTF-8  "编码
+set fenc=UTF-8       "编码
+" set mouse=a        "启用鼠标
+set hlsearch        "搜索高亮
+set t_Co=256
+"set clipboard+=unnamed  "共享系统剪切板
+set autowrite  "切换buffer时自动保存当前文件
+set backspace=2
+set ignorecase "搜索时忽略大小写
+set smartcase  "如果搜索包含大写字母，不忽略大小写
+set expandtab       "tab替换为空格键
+set showcmd
+set fileformat=unix   "保存文件格式
+set foldmethod=syntax
+set foldlevel=99
+set foldlevelstart=0
+set tabstop=4   "tab宽度
+set softtabstop=4
+set shiftwidth=4
+set foldcolumn=0
+set fillchars=vert:‖
+set cursorline
+if has('nvim')
+    set signcolumn=yes
+else
+    set signcolumn=number
+endif
+highlight cursorLineNr  ctermfg=12
+highlight cursorLine    ctermbg=238
+highlight Normal        ctermbg=NONE guibg=NONE
+" highlight LineNr        ctermbg=NONE guibg=NONE ctermfg=10
+" highlight SignColumn    ctermbg=NONE guibg=NONE ctermfg=red
+" highlight foldcolumn    ctermbg=NONE guibg=NONE
+highlight Comment       ctermbg=NONE ctermfg=117
+" highlight VertSplit     ctermfg=56 guibg=NONE
+highlight link CocFloating SignColumn
+" highlight Pmenu ctermbg=DarkBlue
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+if has('nvim')
+    set guicursor=n-v-c:block,i-ci-ve:hor100,r-cr:hor20,o:hor50,
+            \a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor,
+            \sm:block-blinkwait175-blinkoff150-blinkon175
+else
+    if &term =~ '^xterm'
+        " normal mode
+        let &t_EI .= "\<Esc>[1 q"
+        " insert mode
+        let &t_SI .= "\<Esc>[3 q"
+    endif
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 对于py文件
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufNewFile,BufRead *.py
+\ set textwidth=79
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 对于c/c++文件
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufNewFile,BufRead *.c,*.cpp,*.[ch]
+\ set cindent
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 对于c/c++文件
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufNewFile,BufRead *.md
+\ set textwidth=80
+\ wrap
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" coc-nvim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('showSignatureHelp')
+
+if exists('*complete_info')
+    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+"补全结束后退出预览窗口
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+"使用'[g 和']g跳转诊断出
+nmap <silent> gi <Plug>(coc-diagnostic-info)
+nmap <silent> gp <Plug>(coc-diagnostic-prev)
+nmap <silent> gn <Plug>(coc-diagnostic-next)
+nnoremap <silent> <leader>gg :<C-u>CocList diagnostics<cr>']'
+" highlight link CocErrorSign GruvboxRed
+
+"跳转定义/声明等
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gc <Plug>(coc-declaration)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gl <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+imap <silent> <C-q> <Plug>(coc-float-hide)
+
+"使用K预览窗口显示文档
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocActionAsync('doHover')
+    endif
+endfunction
+
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+"重命名当前word
+nmap <leader>rn <Plug>(coc-rename)
+
+"格式化选中区域
+nmap <leader>pr <Plug>(coc-format-selected)
+xmap <leader>pr <Plug>(coc-format-selected)
+augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+
+"跳转下一个代码段占位符
+let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_prev = "<C-k>"
+
+" show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>"
+
+function! SetupCommandAbbrs(from, to)
+    exec 'cnoreabbrev <expr> '.a:from
+        \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+endfunction
+
+" Use C to open coc config
+call SetupCommandAbbrs('C', 'CocConfig')
+
+"yank
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+"enable/disable coc integration >
+let g:airline#extensions#coc#enabled = 1
+"change error symbol:
+let airline#extensions#coc#error_symbol = '😭'
+"change warning symbol:
+let airline#extensions#coc#warning_symbol = '😱'
+"change error format:
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+"change warning format:
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+
+let g:coc_global_extensions = ['coc-marketplace', 'coc-highlight', 'coc-css', 'coc-python', 'coc-html', 'coc-json',
+                            \  'coc-sh', 'coc-tsserver', 'coc-vimlsp', 'coc-yank', "coc-prettier",
+                            \  'coc-markdownlint', 'coc-emmet']
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" indentLine
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_char = '¦'
+let g:indentLine_enabled = 1
+let g:indentLine_color_term = 175
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LeaderF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:Lf_ShortcutF = "<leader>f"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+let g:Lf_WindowHeight = 0.40
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_ShowDevIcons = 1
+" let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_StlSeparator = { 'left': "\u2b80", 'right': "\u2b82" }
+let g:Lf_HideHelp = 1
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \}
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" airline_theme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline_theme='violet'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-airline配置:优化vim界面"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline#extensions#nerdtree_status = 1
+" 使用powerline打过补丁的字体
+let g:airline_powerline_fonts = 1
+" 开启tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#alt_sep = 1
+let g:airline#extensions#tabline#right_alt_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+" tabline中buffer显示编号
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" 是否监测空格错误
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#symbol = '~'
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'conflicts' ]
+let g:airline#extensions#whitespace#skip_indent_check_ft = {'markdown': ['trailing']}
+let g:airline_left_alt_sep = '😮'
+let g:airline_right_alt_sep = "😃"
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap ]1 <Plug>AirlineSelectTab1
+nmap ]2 <Plug>AirlineSelectTab2
+nmap ]3 <Plug>AirlineSelectTab3
+nmap ]4 <Plug>AirlineSelectTab4
+nmap ]5 <Plug>AirlineSelectTab5
+nmap ]6 <Plug>AirlineSelectTab6
+nmap ]7 <Plug>AirlineSelectTab7
+nmap ]8 <Plug>AirlineSelectTab8
+nmap ]9 <Plug>AirlineSelectTab9
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vista
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F3> :Vista!!<CR>
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"DTree 配置:F2快捷键显示当前目录树
+map <F2> :NERDTreeToggle<CR>
+let NERDTreeMinimalUI=0 "去除第一行提示
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']
+let NERDTreeWinSize=25
+let NRRDChristmasTree=1 "显示增强
+let NERDTreeAutoCenter=1 "自动调整焦点
+let NERDTreeHighCursorline=1  "高亮当前文件
+let NERDTreeShowLineNumbers=1 "显示行号
+let NERDTreeShowFiles=1 "显示文件
+let g:NERDTreeDirArrowExpandable = '→'
+let g:NERDTreeDirArrowCollapsible = '⇣'
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" nerdcommenter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDSpaceDelims = 1   "注释自动添加一个空格
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left' "对齐方式
+let g:NERDCommentEmptyLines = 1
+let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" auto-pairs配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsMultilineClose = 1
+let g:AutoPairsShortcutJump = '<leader>nn'
+let g:AutoPairsShortcutBackInsert = '<leader>bb'
+let g:AutoPairsMapCR = 1  " 换行并缩进
+let g:AutoPairsCenterLine = 1
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-devicons
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:webdevicons_enable_startify = 1
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-Startify
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" function! StartifyEntryFormat()
+"     return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+" endfunction
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SimplyFold配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:SimpylFold_docstring_preview=1   "看到折叠代码的文档字符串
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-rainbow
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rainbow_active = 1        "set to 0 if you want to enable it later via :RainbowToggle"
+let g:rainbow_conf = {
+        \'separately': {
+    \       'nerdtree': 0,
+    \   }
+    \}
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-gitgutter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gitgutter_preview_win_floating = 1
+highlight GitGutterAdd ctermfg=2
+highlight GitGutterChange ctermfg=3
+highlight GitGutterDelete ctermfg=1
+highlight GitGutterChangeDelete ctermfg=4
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" c/c++文件表头
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -- New file .h .c .cpp, add file header --
+autocmd BufNeWFile *.[ch],*.cpp exec ":call CFileHeader()"
+func CFileHeader()
+        call setline(1, "// File:    ".strftime(expand('%d')))
+        call append(line("."), "// Author:  csh")
+        call append(line(".")+1, "// Date:    " .strftime("%Y/%m/%d"))
+        call append(line(".")+2, "// ===================")
+        call append(line(".")+3, "")
+        call append(line(".")+4, "")
+        exec "$"
+endfunc
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" py文件表头
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -- New file .py, add file header
+autocmd BufNeWFile *.py exec ":call PFileHeader()"
+func PFileHeader()
+        call setline(1, '"""')
+        call append(line("."), '@File:    '.strftime(expand('%d')))
+        call append(line(".")+1, "@Author:  csh")
+        call append(line(".")+2, "@Date:    " .strftime("%Y/%m/%d"))
+        call append(line(".")+3, '"""')
+        call append(line(".")+4, "")
+        call append(line(".")+5, "")
+        exec "$"
+endfunc
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Quickly Run    bash改为zsh
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec '!gcc % -o a.out'
+        exec '!time ./a.out'
+    elseif &filetype == 'cpp'
+        exec '!g++ % -o a.out'
+        exec '!time ./a.out'
+    elseif &filetype == 'python'
+        exec '!time python3 %'
+    elseif &filetype == 'sh'
+        :!time zsh%
+    endif
+endfunc
