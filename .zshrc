@@ -146,6 +146,7 @@ set_proxy(){
     fi
 
     ssh_proxy
+
     # echo $ALL_PROXY
     # echo "set proxy success"
 }
@@ -157,23 +158,29 @@ unset_proxy(){
     unset https_proxy
     unset ALL_PROXY
 
-    ssh_proxy
+    ssh_proxy cancel
     git config --global --unset https.proxy
     git config --global --unset http.proxy
-
-    echo "unset proxy"
 }
 
 
 # ssh_proxy
 ssh_proxy(){
     ssh="$hostip:10808"
-    if ! grep -qF "Host github.com" ~/.ssh/config ; then
+    oldip=`cat ~/.ssh/config | grep -o "[0-9].*[0-9]"`
+    pcd=`cat ~/.ssh/config | grep "ProxyCommand"`
+
+    if [ "$pcd" = "" ]; then
         echo "Host github.com" >> ~/.ssh/config
         echo "    HostName github.com" >> ~/.ssh/config
         echo "    User git" >> ~/.ssh/config
         echo "    ProxyCommand nc -v -x $ssh %h %p" >> ~/.ssh/config
-    else
+    elif [ "$ssh" != "$oldip" ]; then
+        sed -i "s/[0-9].*[0-9]/$ssh/g" ~/.ssh/config
+    fi
+
+    if [ "$1" = "cancel" ]; then
+        echo "unset proxy"
         startLine=`sed -n '/Host github.com/=' ~/.ssh/config`
         lineAfter=3
         let endLine="startLine + lineAfter"
