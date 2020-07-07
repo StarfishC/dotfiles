@@ -187,8 +187,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gl <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-imap <silent> <C-q> <Plug>(coc-float-hide)
-
 "使用K预览窗口显示文档
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -275,7 +273,7 @@ let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
 let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
 let g:coc_global_extensions = ['coc-marketplace', 'coc-highlight', 'coc-css', 'coc-python', 'coc-html', 'coc-json',
-                            \  'coc-sh', 'coc-tsserver', 'coc-vimlsp', 'coc-yank', "coc-prettier",
+                            \  'coc-sh', 'coc-snippets', 'coc-tsserver', 'coc-vimlsp', 'coc-yank', "coc-prettier",
                             \  'coc-markdownlint', 'coc-emmet']
 
 
@@ -450,7 +448,7 @@ highlight GitGutterChangeDelete ctermfg=4
 " c/c++文件表头
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -- New file .h .c .cpp, add file header --
-autocmd BufNeWFile *.[ch],*.cpp exec ":call CFileHeader()"
+autocmd BufNeWFile *.[ch],*.cpp,*.hpp exec ":call CFileHeader()"
 func CFileHeader()
         call setline(1, "// File:    ".strftime(expand('%d')))
         call append(line("."), "// Author:  csh")
