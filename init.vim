@@ -20,6 +20,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons' "图标
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'PProvost/vim-ps1'
 " Plug 'guns/xterm-color-table.vim'    "配色
 
 call plug#end()            " required
@@ -248,6 +249,13 @@ function! SetupCommandAbbrs(from, to)
         \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
         \ .'? ("'.a:to.'") : ("'.a:from.'"))'
 endfunction
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Use C to open coc config
 call SetupCommandAbbrs('C', 'CocConfig')
