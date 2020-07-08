@@ -133,7 +133,8 @@ wslip=$(hostname -I | awk '{print $1}')
 export hostip=$(cat /etc/resolv.conf | grep -oP '(?<=nameserver\ ).*')
 
 set_proxy(){
-    export ALL_PROXY=socks5://$hostip:10808
+    # export ALL_PROXY=socks5://$hostip:10809
+    export ALL_PROXY=http://$hostip:10809
     export HTTP_PROXY=$ALL_PROXY
     export http_proxy=$ALL_PROXY
     export HTTPS_PROXY=$ALL_PROXY
