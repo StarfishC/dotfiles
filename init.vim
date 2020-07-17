@@ -161,7 +161,10 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+if has("nvim")
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd CursorHold * silent call CocActionAsync('showSignatureHelp')
 
