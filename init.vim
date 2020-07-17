@@ -197,18 +197,21 @@ function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
     else
-        call CocActionAsync('doHover')
+        call CocAction('doHover')
     endif
 endfunction
 
+" 跳转到第一个浮动窗口
+inoremap <leader>jf <plug>(coc-float-jump)
+
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>qf <Plug>(coc-fix-current)
 
 "重命名当前word
 nmap <leader>rn <Plug>(coc-rename)
 
 "格式化选中区域
-nmap <leader>pr <Plug>(coc-format-selected)
+nmap <leader>fs <Plug>(coc-format-selected)
 xmap <leader>pr <Plug>(coc-format-selected)
 augroup mygroup
     autocmd!
