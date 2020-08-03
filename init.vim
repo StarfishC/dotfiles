@@ -1,3 +1,6 @@
+set nocompatible
+filetype plugin indent on
+
 " vim-Plug
 call plug#begin('~/.vim/plugged')
 
@@ -64,69 +67,6 @@ colorscheme onedark
 " colorscheme ron
 syntax on    "语法高亮
 syntax enable
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=1
-set updatetime=300
-set shortmess+=c
-set number      "显示行号
-set nowrap    "不自动折行
-set showmatch    "显示匹配的括号
-set scrolloff=3     "距离顶部和底部3行"
-set encoding=UTF-8  "编码
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set fenc=UTF-8       "编码
-set mouse=a        "启用鼠标
-set wrap
-set hlsearch        "搜索高亮
-set t_Co=256
-"set clipboard+=unnamed  "共享系统剪切板
-set autowrite  "切换buffer时自动保存当前文件
-set backspace=2
-set ignorecase "搜索时忽略大小写
-set smartcase  "如果搜索包含大写字母，不忽略大小写
-set expandtab       "tab替换为空格键
-set showcmd
-set fileformat=unix   "保存文件格式
-set foldmethod=syntax
-set foldlevel=99
-set foldlevelstart=0
-set tabstop=4   "tab宽度
-set softtabstop=4
-set shiftwidth=4
-set foldcolumn=0
-set fillchars=vert:‖
-set cursorline
-if has('nvim')
-    set signcolumn=yes
-else
-    set signcolumn=number
-endif
-highlight cursorLineNr  ctermfg=12
-highlight cursorLine    ctermbg=238
-highlight Normal        ctermbg=NONE guibg=NONE
-" highlight LineNr        ctermbg=NONE guibg=NONE ctermfg=10
-" highlight SignColumn    ctermbg=NONE guibg=NONE ctermfg=red
-" highlight foldcolumn    ctermbg=NONE guibg=NONE
-highlight Comment       ctermbg=NONE ctermfg=117
-" highlight VertSplit     ctermfg=56 guibg=NONE
-highlight link CocFloating SignColumn
-" highlight Pmenu ctermbg=DarkBlue
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-if has('nvim')
-    set guicursor=n-v-c:block,i-ci-ve:hor100,r-cr:hor20,o:hor50,
-            \a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor,
-            \sm:block-blinkwait175-blinkoff150-blinkon175
-else
-    if &term =~ '^xterm'
-        " normal mode
-        let &t_EI .= "\<Esc>[1 q"
-        " insert mode
-        let &t_SI .= "\<Esc>[3 q"
-    endif
-endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
