@@ -75,6 +75,8 @@ set nowrap    "不自动折行
 set showmatch    "显示匹配的括号
 set scrolloff=3     "距离顶部和底部3行"
 set encoding=UTF-8  "编码
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
 set fenc=UTF-8       "编码
 set mouse=a        "启用鼠标
 set wrap
