@@ -76,7 +76,8 @@ set showmatch    "显示匹配的括号
 set scrolloff=3     "距离顶部和底部3行"
 set encoding=UTF-8  "编码
 set fenc=UTF-8       "编码
-" set mouse=a        "启用鼠标
+set mouse=a        "启用鼠标
+set wrap
 set hlsearch        "搜索高亮
 set t_Co=256
 "set clipboard+=unnamed  "共享系统剪切板
@@ -145,7 +146,6 @@ au BufNewFile,BufRead *.c,*.cpp,*.[ch]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.md
 \ set textwidth=80
-\ wrap
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
