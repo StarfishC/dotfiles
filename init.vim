@@ -1,5 +1,4 @@
 set nocompatible
-filetype plugin indent on
 
 " vim-Plug
 call plug#begin('~/.vim/plugged')
