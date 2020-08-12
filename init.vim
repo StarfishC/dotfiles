@@ -100,6 +100,7 @@ set shiftwidth=4
 set foldcolumn=0
 set fillchars=vert:‖
 set cursorline
+set wildmenu
 if has('nvim')
     set signcolumn=yes
 else
