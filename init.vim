@@ -80,7 +80,8 @@ set encoding=UTF-8  "编码
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set fenc=UTF-8       "编码
-" set mouse=a        "启用鼠标
+set smartindent
+set mouse=a        "启用鼠标
 set hlsearch        "搜索高亮
 set t_Co=256
 "set clipboard+=unnamed  "共享系统剪切板
@@ -205,7 +206,7 @@ function! s:show_documentation()
 endfunction
 
 " 跳转到第一个浮动窗口
-inoremap <leader>jf <plug>(coc-float-jump)
+inoremap <leader>aa <plug>(coc-float-jump)
 
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf <Plug>(coc-fix-current)

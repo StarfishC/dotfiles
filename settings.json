@@ -22,7 +22,6 @@
       "fontFace": "Mononoki NF",
       "fontSize": 13,
       "historySize": 9001,
-      "padding": "0, 0, 0, 0",
       "snapOnInput": true,
       "startingDirectory": "D:/code/",
       "useAcrylic": true
@@ -186,23 +185,38 @@
       "keys": ["ctrl+shift+t"]
     },
     {
-      "command": { "action": "newTab", "index": 0 },
+      "command": {
+        "action": "newTab",
+        "index": 0
+      },
       "keys": ["ctrl+shift+1"]
     },
     {
-      "command": { "action": "newTab", "index": 1 },
+      "command": {
+        "action": "newTab",
+        "index": 1
+      },
       "keys": ["ctrl+shift+2"]
     },
     {
-      "command": { "action": "newTab", "index": 2 },
+      "command": {
+        "action": "newTab",
+        "index": 2
+      },
       "keys": ["ctrl+shift+3"]
     },
     {
-      "command": { "action": "newTab", "index": 3 },
+      "command": {
+        "action": "newTab",
+        "index": 3
+      },
       "keys": ["ctrl+shift+4"]
     },
     {
-      "command": { "action": "newTab", "index": 4 },
+      "command": {
+        "action": "newTab",
+        "index": 4
+      },
       "keys": ["ctrl+shift+5"]
     },
     {
@@ -238,27 +252,53 @@
       "keys": ["ctrl+shift+pgup"]
     },
     {
-      "command": { "action": "switchToTab", "index": 0 },
+      "command": "commandPalette",
+      "keys": ["alt+shift+p"]
+    },
+    {
+      "command": "toggleFocusMode",
+      "keys": ["alt+shift+f"]
+    },
+    {
+      "command": {
+        "action": "switchToTab",
+        "index": 0
+      },
       "keys": ["alt+1"]
     },
     {
-      "command": { "action": "switchToTab", "index": 1 },
+      "command": {
+        "action": "switchToTab",
+        "index": 1
+      },
       "keys": ["alt+2"]
     },
     {
-      "command": { "action": "switchToTab", "index": 2 },
+      "command": {
+        "action": "switchToTab",
+        "index": 2
+      },
       "keys": ["alt+3"]
     },
     {
-      "command": { "action": "switchToTab", "index": 3 },
+      "command": {
+        "action": "switchToTab",
+        "index": 3
+      },
       "keys": ["alt+4"]
     },
     {
-      "command": { "action": "switchToTab", "index": 4 },
+      "command": {
+        "action": "switchToTab",
+        "index": 4
+      },
       "keys": ["alt+5"]
     },
     {
-      "command": { "action": "switchToTab", "index": 5 },
+      "command": {
+        "action": "switchToTab",
+        "index": 5
+      },
       "keys": ["alt+6"]
     },
     {
@@ -267,7 +307,7 @@
         "split": "auto",
         "splitMode": "duplicate"
       },
-      "keys": "alt+shift+d"
+      "keys": ["alt+shift+d"]
     },
     {
       "command": {
@@ -275,7 +315,7 @@
         "split": "auto",
         "index": 0
       },
-      "keys": "alt+ctrl+/"
+      "keys": ["alt+ctrl+/"]
     },
     {
       "command": {
@@ -318,10 +358,6 @@
         "direction": "up"
       },
       "keys": ["alt+w"]
-    },
-    {
-      "command": "find",
-      "keys": "ctrl+shift+f"
     }
   ]
 }
