@@ -72,7 +72,8 @@ set nowritebackup
 set cmdheight=1
 set updatetime=300
 set shortmess+=c
-set number      "显示行号
+set relativenumber      "显示行号
+set incsearch
 set nowrap    "不自动折行
 set showmatch    "显示匹配的括号
 set scrolloff=3     "距离顶部和底部3行"
