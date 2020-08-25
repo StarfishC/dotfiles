@@ -183,10 +183,9 @@ endif
 "补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "使用'[g 和']g跳转诊断出
-nmap <silent> gi <Plug>(coc-diagnostic-info)
 nmap <silent> gp <Plug>(coc-diagnostic-prev)
 nmap <silent> gn <Plug>(coc-diagnostic-next)
-nnoremap <silent> <leader>gg :<C-u>CocList diagnostics<cr>']'
+nmap <silent> gg <Plug>(coc-diagnostic-info)
 " highlight link CocErrorSign GruvboxRed
 
 "跳转定义/声明等
@@ -217,7 +216,7 @@ nmap <leader>rn <Plug>(coc-rename)
 
 "格式化选中区域
 nmap <leader>fs <Plug>(coc-format-selected)
-xmap <leader>pr <Plug>(coc-format-selected)
+xmap <leader>fs <Plug>(coc-format-selected)
 augroup mygroup
     autocmd!
     " Setup formatexpr specified filetype(s).
@@ -300,7 +299,7 @@ let g:indentLine_color_term = 175
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LeaderF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:Lf_ShortcutF = "<leader>f"
+let g:Lf_ShortcutF = "<leader>ff"
 noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
@@ -329,6 +328,7 @@ let g:airline_theme='violet'
 " vim-airline配置:优化vim界面"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#nerdtree_status = 1
+let g:airline#extensions#vista#enabled = 1
 " 使用powerline打过补丁的字体
 let g:airline_powerline_fonts = 1
 " 开启tabline
@@ -419,14 +419,6 @@ let g:webdevicons_enable_startify = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-Startify
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" function! StartifyEntryFormat()
-"     return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
-" endfunction
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SimplyFold配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:SimpylFold_docstring_preview=1   "看到折叠代码的文档字符串
@@ -453,6 +445,22 @@ highlight GitGutterAdd ctermfg=2
 highlight GitGutterChange ctermfg=3
 highlight GitGutterDelete ctermfg=1
 highlight GitGutterChangeDelete ctermfg=4
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-fugitive
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>df :Gvdiffsplit<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" easymotion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>oc  <Plug>(easymotion-overwin-f)
+nmap <leader>ot  <Plug>(easymotion-overwin-f2)
+nmap <leader>ow  <Plug>(easymotion-overwin-w)
+nmap <leader>ol  <Plug>(easymotion-overwin-line)
 
 
 
