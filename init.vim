@@ -23,6 +23,7 @@ Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons' "图标
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PProvost/vim-ps1'
+Plug 'APZelos/blamer.nvim'
 " Plug 'guns/xterm-color-table.vim'    "配色
 
 call plug#end()            " required
@@ -461,6 +462,14 @@ nmap <leader>oc  <Plug>(easymotion-overwin-f)
 nmap <leader>ot  <Plug>(easymotion-overwin-f2)
 nmap <leader>ow  <Plug>(easymotion-overwin-w)
 nmap <leader>ol  <Plug>(easymotion-overwin-line)
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Balmer.nvim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:blamer_delay = 300
+highlight link Blamer SignColumn
 
 
 
