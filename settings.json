@@ -8,8 +8,6 @@
   "$schema": "https://aka.ms/terminal-profiles-schema",
   "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
   "requestedTheme": "dark",
-  "copyOnSelect": false,
-  "copyFormatting": false,
   "theme": "dark",
   "profiles": {
     "defaults": {
@@ -17,7 +15,6 @@
       "acrylicOpacity": 0.4,
       "closeOnExit": true,
       "colorScheme": "Monokai Night",
-      "cursorHeight": 25,
       "cursorShape": "filledBox",
       "fontFace": "Mononoki NF",
       "fontSize": 13,
@@ -244,6 +241,10 @@
       "keys": ["ctrl+shift+up"]
     },
     {
+      "command": "find",
+      "keys": "ctrl+shift+f"
+    },
+    {
       "command": "commandPalette",
       "keys": ["ctrl+shift+p"]
     },
@@ -322,6 +323,14 @@
         "split": "horizontal"
       },
       "keys": ["ctrl+/"]
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "vertical",
+        "profile": "Windows PowerShell"
+      },
+      "keys": "ctrl+shift+."
     },
     {
       "command": {
