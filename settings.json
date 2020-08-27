@@ -24,7 +24,7 @@
       "historySize": 9001,
       "snapOnInput": true,
       "startingDirectory": "D:/code/",
-      "useAcrylic": true
+      "useAcrylic": false
     },
     "list": [
       {
@@ -240,20 +240,12 @@
       "keys": ["ctrl+shift+down"]
     },
     {
-      "command": "scrollDownPage",
-      "keys": ["ctrl+shift+pgdn"]
-    },
-    {
       "command": "scrollUp",
       "keys": ["ctrl+shift+up"]
     },
     {
-      "command": "scrollUpPage",
-      "keys": ["ctrl+shift+pgup"]
-    },
-    {
       "command": "commandPalette",
-      "keys": ["alt+shift+p"]
+      "keys": ["ctrl+shift+p"]
     },
     {
       "command": "toggleFocusMode",
