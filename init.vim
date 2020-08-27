@@ -75,16 +75,17 @@ set updatetime=300
 set shortmess+=c
 set relativenumber      "显示行号
 set incsearch
-set nowrap    "不自动折行
-set showmatch    "显示匹配的括号
+set nowrap              "不自动折行
+set showmatch
 set scrolloff=3     "距离顶部和底部3行"
-set encoding=UTF-8  "编码
+set encoding=UTF-8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set fenc=UTF-8       "编码
 set smartindent
 set mouse=a        "启用鼠标
-set hlsearch        "搜索高亮
+set hlsearch
+set linebreak
 set t_Co=256
 "set clipboard+=unnamed  "共享系统剪切板
 set autowrite  "切换buffer时自动保存当前文件
@@ -468,7 +469,7 @@ nmap <leader>ol  <Plug>(easymotion-overwin-line)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Balmer.nvim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:blamer_delay = 300
+let g:blamer_delay = 200
 highlight link Blamer SignColumn
 
 
