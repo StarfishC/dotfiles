@@ -39,8 +39,8 @@ nnoremap <C-K> <C-W><C-K>   ”crtl+K切换到上方分割窗口
 nnoremap <C-L> <C-W><C-L>   “  crtl+J切换到右侧分割窗口
 nnoremap <C-H> <C-W><C-H>   ”crtl+J切换到左侧分割窗口
 
-imap jk <Esc>
-imap kj <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 " 映射切换buffer的键位
 nnoremap [b :bp<CR>
@@ -87,6 +87,7 @@ set mouse=a        "启用鼠标
 set hlsearch
 set linebreak
 set t_Co=256
+set t_u7=
 "set clipboard+=unnamed  "共享系统剪切板
 set autowrite  "切换buffer时自动保存当前文件
 set backspace=2
@@ -105,11 +106,7 @@ set foldcolumn=0
 set fillchars=vert:‖
 set cursorline
 set wildmenu
-if has('nvim')
-    set signcolumn=yes
-else
-    set signcolumn=number
-endif
+set signcolumn=number
 highlight cursorLineNr  ctermfg=12
 highlight cursorLine    ctermbg=238
 highlight Normal        ctermbg=NONE guibg=NONE
