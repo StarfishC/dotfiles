@@ -519,6 +519,6 @@ func! CompileRunGcc()
     elseif &filetype == 'python'
         exec '!time python3 %'
     elseif &filetype == 'sh'
-        :!time zsh%
+        exec '!time zsh%'
     endif
 endfunc

@@ -3,6 +3,7 @@
     "python.venvPath": "~/.virtualenvs",
     "python.linting.enabled": true,
     "html.autoClosingTags": true,
+    "signature.preferShownAbove": false,
     "suggest.timeout": 500,
     "suggest.autoTrigger": "always",
     "suggest.enablePreview": true,
