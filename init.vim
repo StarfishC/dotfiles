@@ -75,7 +75,7 @@ set updatetime=300
 set shortmess+=c
 set relativenumber      "显示行号
 set incsearch
-set nowrap              "不自动折行
+set wrap
 set showmatch
 set scrolloff=3     "距离顶部和底部3行"
 set encoding=UTF-8
@@ -89,6 +89,7 @@ set linebreak
 set t_Co=256
 set t_u7=
 "set clipboard+=unnamed  "共享系统剪切板
+set autoread
 set autowrite  "切换buffer时自动保存当前文件
 set backspace=2
 set ignorecase "搜索时忽略大小写
