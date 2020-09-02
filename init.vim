@@ -34,10 +34,10 @@ call plug#end()            " required
 " 通用配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "split navigations切割窗口
-nnoremap <C-J> <C-W><C-J>  “crtl+J切换到下方分割窗口
-nnoremap <C-K> <C-W><C-K>   ”crtl+K切换到上方分割窗口
-nnoremap <C-L> <C-W><C-L>   “  crtl+J切换到右侧分割窗口
-nnoremap <C-H> <C-W><C-H>   ”crtl+J切换到左侧分割窗口
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 inoremap jk <Esc>
 inoremap kj <Esc>
@@ -333,9 +333,6 @@ let g:airline#extensions#vista#enabled = 1
 let g:airline_powerline_fonts = 1
 " 开启tabline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#alt_sep = 1
-let g:airline#extensions#tabline#right_alt_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
 " tabline中buffer显示编号
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
@@ -344,8 +341,8 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '~'
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'conflicts' ]
 let g:airline#extensions#whitespace#skip_indent_check_ft = {'markdown': ['trailing']}
-let g:airline_left_alt_sep = '😮'
-let g:airline_right_alt_sep = "😃"
+let g:airline_left_alt_sep = ''
+let g:airline_right_alt_sep = "🙈"
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap ]1 <Plug>AirlineSelectTab1
 nmap ]2 <Plug>AirlineSelectTab2
