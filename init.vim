@@ -24,6 +24,7 @@ Plug 'ryanoasis/vim-devicons' "图标
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PProvost/vim-ps1'
 Plug 'APZelos/blamer.nvim'
+Plug 'skywind3000/asyncrun.vim'
 " Plug 'guns/xterm-color-table.vim'    "配色
 
 call plug#end()            " required
