@@ -504,19 +504,17 @@ endfunc
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Quickly Run    bash改为zsh
+" Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
-        exec '!gcc % -o a.out'
-        exec '!time ./a.out'
+        exec 'AsyncRun clang % -o a.out'
     elseif &filetype == 'cpp'
-        exec '!g++ % -o a.out'
-        exec '!time ./a.out'
+        exec 'AsyncRun clang++ % -o a.out'
     elseif &filetype == 'python'
-        exec '!time python3 %'
+        exec 'AsyncRun -raw python3 %'
     elseif &filetype == 'sh'
         exec '!time zsh%'
     endif
