@@ -471,6 +471,15 @@ highlight link Blamer SignColumn
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AsyncRun
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
+let g:asyncrun_status = ''
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " c/c++文件表头
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -- New file .h .c .cpp, add file header --
@@ -509,13 +518,14 @@ endfunc
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
+    exec "call asyncrun#quickfix_toggle(8)"
     if &filetype == 'c'
-        exec 'AsyncRun clang % -o a.out'
+        exec 'AsyncRun! clang % -o a.out; time ./a.out'
     elseif &filetype == 'cpp'
-        exec 'AsyncRun clang++ % -o a.out'
+        exec 'AsyncRun! clang++ % -o a.out; time ./a.out'
     elseif &filetype == 'python'
-        exec 'AsyncRun -raw python3 %'
+        exec 'AsyncRun! -raw python3 %'
     elseif &filetype == 'sh'
-        exec '!time zsh%'
+        exec 'AsyncRun! time zsh%'
     endif
 endfunc
