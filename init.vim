@@ -48,17 +48,6 @@ nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
 " 删除当前缓冲区
 nnoremap <leader>d :bdelete<CR>
-" 映射<leader>num到num buffer
-map <leader>1 :b 1<CR>
-map <leader>2 :b 2<CR>
-map <leader>3 :b 3<CR>
-map <leader>4 :b 4<CR>
-map <leader>5 :b 5<CR>
-map <leader>6 :b 6<CR>
-map <leader>7 :b 7<CR>
-map <leader>8 :b 8<CR>
-map <leader>9 :b 9<CR>
-
 nnoremap <leader>q :nohl<CR>
 " colorscheme desert
 " colorscheme darkblue
@@ -335,7 +324,9 @@ let g:airline_powerline_fonts = 1
 " 开启tabline
 let g:airline#extensions#tabline#enabled = 1
 " tabline中buffer显示编号
-let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_show = 0
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 " 是否监测空格错误
 let g:airline#extensions#whitespace#enabled = 1
@@ -345,15 +336,17 @@ let g:airline#extensions#whitespace#skip_indent_check_ft = {'markdown': ['traili
 let g:airline_left_alt_sep = ''
 let g:airline_right_alt_sep = "🙈"
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap ]1 <Plug>AirlineSelectTab1
-nmap ]2 <Plug>AirlineSelectTab2
-nmap ]3 <Plug>AirlineSelectTab3
-nmap ]4 <Plug>AirlineSelectTab4
-nmap ]5 <Plug>AirlineSelectTab5
-nmap ]6 <Plug>AirlineSelectTab6
-nmap ]7 <Plug>AirlineSelectTab7
-nmap ]8 <Plug>AirlineSelectTab8
-nmap ]9 <Plug>AirlineSelectTab9
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
 
 
 
