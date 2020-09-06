@@ -1,41 +1,36 @@
 {
-    "python.jediEnabled": false,
-    "python.venvPath": "~/.virtualenvs",
-    "python.linting.enabled": true,
-    "html.autoClosingTags": true,
-    "signature.preferShownAbove": false,
-    "suggest.timeout": 500,
-    "suggest.autoTrigger": "always",
-    "suggest.enablePreview": true,
-    "suggest.minTriggerInputLength": 1,
-    "suggest.snippetIndicator": "👈",
-    "diagnostic.enableSign": true,
-    "diagnostic.refreshOnInsertMode": true,
-    "diagnostic.errorSign": "✘",
-    "diagnostic.warningSign": "⚠️",
-    "languageserver": {
-        "ccls": {
-            "command": "ccls",
-            "filetypes": [
-                "c",
-                "cpp",
-                "cuda",
-                "objc",
-                "objcpp"
-            ],
-            "rootPatterns": [
-                ".ccls-root",
-                "compile_commands.json"
-            ],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/home/ubuntu/.cache/ccls-cache"
-                },
-                "client": {
-                    "snippetSupport": true
-                }
-            }
+  "python.jediEnabled": false,
+  "python.venvPath": "~/.virtualenvs",
+  "python.linting.enabled": true,
+  "html.autoClosingTags": true,
+  "signature.preferShownAbove": false,
+  "suggest.timeout": 500,
+  "suggest.autoTrigger": "always",
+  "suggest.enablePreview": true,
+  "suggest.minTriggerInputLength": 1,
+  "suggest.snippetIndicator": "👈",
+  "diagnostic.enableSign": true,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.errorSign": "✘",
+  "diagnostic.warningSign": "⚠️",
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls-root", "compile_commands.json"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/home/ubuntu/.cache/ccls-cache"
+        },
+        "client": {
+          "snippetSupport": true
         }
-    },
-    "coc.preferences.extensionUpdateCheck": "weekly"
+      }
+    }
+  },
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "markdownlint.config": {
+    "MD033": false,
+    "MD013": false
+  }
 }

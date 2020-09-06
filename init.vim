@@ -175,7 +175,7 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "使用'[g 和']g跳转诊断出
 nmap <silent> gp <Plug>(coc-diagnostic-prev)
 nmap <silent> gn <Plug>(coc-diagnostic-next)
-nmap <silent> gg <Plug>(coc-diagnostic-info)
+nmap <silent> gi <Plug>(coc-diagnostic-info)
 " highlight link CocErrorSign GruvboxRed
 
 "跳转定义/声明等
@@ -467,6 +467,7 @@ highlight link Blamer SignColumn
 " AsyncRun
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
+let g:asyncrun_open = 8
 let g:asyncrun_status = ''
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
@@ -508,10 +509,9 @@ endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F5> :call CompileRunGcc()<CR>
-func! CompileRunGcc()
+map <F5> :call CompieAndRunCode()<CR>
+func! CompileAndRunCode()
     exec "w"
-    exec "call asyncrun#quickfix_toggle(8)"
     if &filetype == 'c'
         exec 'AsyncRun! clang % -o a.out; time ./a.out'
     elseif &filetype == 'cpp'

@@ -21,7 +21,7 @@
       "historySize": 9001,
       "snapOnInput": true,
       "startingDirectory": "D:/code/",
-      "useAcrylic": false
+      "useAcrylic": true
     },
     "list": [
       {
@@ -242,7 +242,7 @@
     },
     {
       "command": "find",
-      "keys": "ctrl+f"
+      "keys": ["ctrl+shift+f"]
     },
     {
       "command": "commandPalette",
