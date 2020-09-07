@@ -31,6 +31,7 @@
   "coc.preferences.extensionUpdateCheck": "weekly",
   "markdownlint.config": {
     "MD033": false,
-    "MD013": false
+    "MD013": false,
+    "MD027": false
   }
 }

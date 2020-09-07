@@ -25,6 +25,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PProvost/vim-ps1'
 Plug 'APZelos/blamer.nvim'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
 " Plug 'guns/xterm-color-table.vim'    "配色
 
 call plug#end()            " required
@@ -466,10 +467,20 @@ highlight link Blamer SignColumn
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AsyncRun
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
+noremap <F6> :call asyncrun#quickfix_toggle(8)<cr>
 let g:asyncrun_open = 8
 let g:asyncrun_status = ''
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AsyncRun
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" sudo ln -s /mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe /usr/bin/edge
+let g:mkdp_browser = 'edge'
+let g:mkdp_page_title = '「${name}」'
+nmap <F9> <Plug>MarkdownPreviewToggle
 
 
 
