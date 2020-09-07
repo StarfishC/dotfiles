@@ -312,7 +312,7 @@ let g:Lf_WildIgnore = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline_theme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme='violet'
+let g:airline_theme = 'violet'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -363,14 +363,14 @@ map <F3> :Vista!!<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "DTree 配置:F2快捷键显示当前目录树
 map <F2> :NERDTreeToggle<CR>
-let NERDTreeMinimalUI=0 "去除第一行提示
-let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']
-let NERDTreeWinSize=25
-let NRRDChristmasTree=1 "显示增强
-let NERDTreeAutoCenter=1 "自动调整焦点
-let NERDTreeHighCursorline=1  "高亮当前文件
-let NERDTreeShowLineNumbers=1 "显示行号
-let NERDTreeShowFiles=1 "显示文件
+let NERDTreeMinimalUI = 0 "去除第一行提示
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '__pycache__$']
+let NERDTreeWinSize = 25
+let NRRDChristmasTree = 1 "显示增强
+let NERDTreeAutoCenter = 1 "自动调整焦点
+let NERDTreeHighCursorline = 1  "高亮当前文件
+let NERDTreeShowLineNumbers = 1 "显示行号
+let NERDTreeShowFiles = 1 "显示文件
 let g:NERDTreeDirArrowExpandable = '→'
 let g:NERDTreeDirArrowCollapsible = '⇣'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -479,6 +479,7 @@ let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " sudo ln -s /mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe /usr/bin/edge
 let g:mkdp_browser = 'edge'
+let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '「${name}」'
 nmap <F9> <Plug>MarkdownPreviewToggle
 
