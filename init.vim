@@ -509,7 +509,7 @@ endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F5> :call CompieAndRunCode()<CR>
+map <F5> :call CompileAndRunCode()<CR>
 func! CompileAndRunCode()
     exec "w"
     if &filetype == 'c'
