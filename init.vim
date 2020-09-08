@@ -478,7 +478,8 @@ let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status
 " AsyncRun
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " sudo ln -s /mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe /usr/bin/edge
-let g:mkdp_browser = 'edge'
+" let g:mkdp_browser = 'edge'
+let g:mkdp_browser = '/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '「${name}」'
 nmap <F9> <Plug>MarkdownPreviewToggle
