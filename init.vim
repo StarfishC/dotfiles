@@ -276,7 +276,12 @@ let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
 let g:coc_global_extensions = ['coc-marketplace', 'coc-highlight', 'coc-css', 'coc-python', 'coc-html', 'coc-json',
                             \  'coc-sh', 'coc-snippets', 'coc-tsserver', 'coc-vimlsp', 'coc-yank', "coc-prettier",
-                            \  'coc-markdownlint', 'coc-emmet']
+                            \  'coc-markdownlint', 'coc-emmet', 'coc-bookmark']
+
+nmap bj <Plug>(coc-bookmark-next)
+nmap bk <Plug>(coc-bookmark-prev)
+nmap bm <Plug>(coc-bookmark-toggle)
+nmap ba <Plug>(coc-bookmark-annotate)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
