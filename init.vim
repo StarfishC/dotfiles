@@ -475,7 +475,7 @@ highlight link Blamer SignColumn
 noremap <F6> :call asyncrun#quickfix_toggle(8)<cr>
 let g:asyncrun_open = 8
 let g:asyncrun_status = ''
-let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+" let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
 
 
