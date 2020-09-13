@@ -65,6 +65,7 @@ set cmdheight=1
 set updatetime=300
 set shortmess+=c
 set relativenumber      "显示行号
+set number
 set incsearch
 set wrap
 set showmatch
