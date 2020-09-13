@@ -288,9 +288,11 @@ nmap ba <Plug>(coc-bookmark-annotate)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indentLine_char = '¦'
+" let g:indentLine_char = '¦'
 let g:indentLine_enabled = 1
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_color_term = 175
+autocmd BufNewFile,BufReadPre *.json let g:indentLine_setConceal = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
