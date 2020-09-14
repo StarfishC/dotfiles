@@ -33,6 +33,5 @@
     "MD033": false,
     "MD013": false,
     "MD027": false
-  },
-  "git.addGBlameToVirtualText": true
+  }
 }
