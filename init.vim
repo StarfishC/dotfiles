@@ -24,7 +24,6 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PProvost/vim-ps1'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
-Plug 'airblade/vim-gitgutter'
 " Plug 'voldikss/vim-floaterm'
 " Plug 'guns/xterm-color-table.vim'    "配色
 
@@ -106,11 +105,8 @@ set signcolumn=number
 highlight cursorLineNr  ctermfg=12
 highlight cursorLine    ctermbg=238
 highlight Normal        ctermbg=NONE guibg=NONE
-" highlight LineNr        ctermbg=NONE guibg=NONE ctermfg=10
-" highlight SignColumn    ctermbg=NONE guibg=NONE ctermfg=red
-" highlight foldcolumn    ctermbg=NONE guibg=NONE
+highlight SignColumn    ctermbg=NONE guibg=NONE ctermfg=NONE
 highlight Comment       ctermbg=NONE ctermfg=117
-" highlight VertSplit     ctermfg=56 guibg=NONE
 highlight link CocFloating SignColumn
 " highlight Pmenu ctermbg=DarkBlue
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -282,10 +278,20 @@ let g:coc_global_extensions = ['coc-marketplace', 'coc-highlight', 'coc-css', 'c
                             \  'coc-sh', 'coc-snippets', 'coc-tsserver', 'coc-vimlsp', 'coc-yank', "coc-prettier",
                             \  'coc-markdownlint', 'coc-emmet', 'coc-bookmark']
 
+" coc-bookmark
 nmap bj <Plug>(coc-bookmark-next)
 nmap bk <Plug>(coc-bookmark-prev)
 nmap bm <Plug>(coc-bookmark-toggle)
 nmap ba <Plug>(coc-bookmark-annotate)
+
+" coc-git
+highlight DiffAdd       ctermbg=NONE ctermfg=green
+highlight DiffDelete    ctermbg=NONE ctermfg=red
+highlight DiffChange    ctermfg=NONE ctermfg=cyan cterm=NONE
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -441,17 +447,6 @@ let g:rainbow_conf = {
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-gitgutter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_preview_win_floating = 1
-highlight GitGutterAdd ctermfg=2
-highlight GitGutterChange ctermfg=3
-highlight GitGutterDelete ctermfg=1
-highlight GitGutterChangeDelete ctermfg=4
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-fugitive
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>df :Gvdiffsplit<CR>
@@ -464,14 +459,6 @@ nmap <leader>oc  <Plug>(easymotion-overwin-f)
 nmap <leader>ot  <Plug>(easymotion-overwin-f2)
 nmap <leader>ow  <Plug>(easymotion-overwin-w)
 nmap <leader>ol  <Plug>(easymotion-overwin-line)
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Balmer.nvim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:blamer_delay = 200
-highlight link Blamer SignColumn
 
 
 
