@@ -18,14 +18,14 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons' "图标
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PProvost/vim-ps1'
-Plug 'APZelos/blamer.nvim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
+Plug 'airblade/vim-gitgutter'
+" Plug 'voldikss/vim-floaterm'
 " Plug 'guns/xterm-color-table.vim'    "配色
 
 call plug#end()            " required
@@ -43,6 +43,9 @@ nnoremap <C-H> <C-W><C-H>
 
 inoremap jk <Esc>
 inoremap kj <Esc>
+
+inoremap <M-o> <Esc>o
+inoremap <M-O> <Esc>O
 
 " 映射切换buffer的键位
 nnoremap [b :bp<CR>
@@ -483,7 +486,7 @@ let g:asyncrun_status = ''
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AsyncRun
+" markdown-preview
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " sudo ln -s /mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe /usr/bin/edge
 " let g:mkdp_browser = 'edge'
