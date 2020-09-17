@@ -24,6 +24,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PProvost/vim-ps1'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
+Plug 'honza/vim-snippets'
 " Plug 'voldikss/vim-floaterm'
 " Plug 'guns/xterm-color-table.vim'    "配色
 
@@ -276,7 +277,7 @@ let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
 let g:coc_global_extensions = ['coc-marketplace', 'coc-highlight', 'coc-css', 'coc-python', 'coc-html', 'coc-json',
                             \  'coc-sh', 'coc-snippets', 'coc-tsserver', 'coc-vimlsp', 'coc-yank', "coc-prettier",
-                            \  'coc-markdownlint', 'coc-emmet', 'coc-bookmark']
+                            \  'coc-markdownlint', 'coc-emmet', 'coc-bookmark', 'coc-git']
 
 " coc-bookmark
 nmap bj <Plug>(coc-bookmark-next)
