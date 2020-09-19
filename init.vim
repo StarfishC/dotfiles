@@ -70,7 +70,7 @@ set shortmess+=c
 set relativenumber      "显示行号
 set number
 set incsearch
-set wrap
+set nowrap
 set showmatch
 set scrolloff=3     "距离顶部和底部3行"
 set encoding=UTF-8
@@ -139,7 +139,7 @@ au BufNewFile,BufRead *.c,*.cpp,*.[ch]
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 对于c/c++文件
+" 对于md文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.md
 \ set textwidth=80
