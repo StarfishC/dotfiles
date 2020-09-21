@@ -13,6 +13,7 @@
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "⚠️",
+  "yank.enableCompletion": false,
   "languageserver": {
     "ccls": {
       "command": "ccls",

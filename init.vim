@@ -45,27 +45,22 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 
 inoremap <M-o> <Esc>o
-inoremap <M-O> <Esc>O
+inoremap <M-p> <Esc>O
 
 " 映射切换buffer的键位
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
 " 删除当前缓冲区
 nnoremap <leader>d :bdelete<CR>
-nnoremap <leader>q :nohl<CR>
-" colorscheme desert
-" colorscheme darkblue
-" colorscheme zellner
-colorscheme onedark
+nnoremap <BS> :nohl<CR>
 " set termguicolors
-" colorscheme ron
 syntax on    "语法高亮
 syntax enable
 set hidden
 set nobackup
 set nowritebackup
 set cmdheight=1
-set updatetime=300
+set updatetime=250
 set shortmess+=c
 set relativenumber      "显示行号
 set number
@@ -103,13 +98,15 @@ set fillchars=vert:‖
 set cursorline
 set wildmenu
 set signcolumn=number
-highlight cursorLineNr  ctermfg=12
-highlight cursorLine    ctermbg=238
+colorscheme space-vim-dark
+" highlight cursorLineNr  ctermfg=12
+" highlight cursorLine    ctermbg=238
 highlight Normal        ctermbg=NONE guibg=NONE
-highlight SignColumn    ctermbg=NONE guibg=NONE ctermfg=NONE
-highlight Comment       ctermbg=NONE ctermfg=117
+highlight SignColumn    ctermbg=NONE guibg=NONE
+highlight LineNr        ctermbg=NONE guibg=NONE
+" highlight Comment       ctermbg=NONE ctermfg=117
 highlight link CocFloating SignColumn
-" highlight Pmenu ctermbg=DarkBlue
+highlight Pmenu ctermbg=NONE
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 if has('nvim')
     set guicursor=n-v-c:block,i-ci-ve:hor100,r-cr:hor20,o:hor50,
@@ -286,9 +283,9 @@ nmap bm <Plug>(coc-bookmark-toggle)
 nmap ba <Plug>(coc-bookmark-annotate)
 
 " coc-git
-highlight DiffAdd       ctermbg=NONE ctermfg=green
-highlight DiffDelete    ctermbg=NONE ctermfg=red
-highlight DiffChange    ctermfg=NONE ctermfg=cyan cterm=NONE
+highlight DiffAdd       ctermbg=NONE ctermfg=green cterm=NONE
+highlight DiffDelete    ctermbg=NONE ctermfg=red cterm=NONE
+highlight DiffChange    ctermbg=NONE ctermfg=cyan cterm=NONE
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
