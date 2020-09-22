@@ -529,5 +529,7 @@ func! CompileAndRunCode()
         exec 'AsyncRun! -raw python3 %'
     elseif &filetype == 'sh'
         exec 'AsyncRun! time zsh%'
+    elseif &filetype == 'markdown'
+        exec 'MarkdownPreview'
     endif
 endfunc

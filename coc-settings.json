@@ -14,6 +14,13 @@
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "⚠️",
   "yank.enableCompletion": false,
+  "git.addGBlameToVirtualText": true,
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "markdownlint.config": {
+    "MD033": false,
+    "MD013": false,
+    "MD027": false
+  },
   "languageserver": {
     "ccls": {
       "command": "ccls",
@@ -28,11 +35,5 @@
         }
       }
     }
-  },
-  "coc.preferences.extensionUpdateCheck": "weekly",
-  "markdownlint.config": {
-    "MD033": false,
-    "MD013": false,
-    "MD027": false
   }
 }
