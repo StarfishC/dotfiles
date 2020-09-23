@@ -76,8 +76,6 @@ set smartindent
 set mouse=a        "启用鼠标
 set hlsearch
 set linebreak
-set t_Co=256
-set t_u7=
 "set clipboard+=unnamed  "共享系统剪切板
 set autoread
 set autowrite  "切换buffer时自动保存当前文件
@@ -272,9 +270,24 @@ let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
 "change warning format:
 let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
-let g:coc_global_extensions = ['coc-marketplace', 'coc-highlight', 'coc-css', 'coc-python', 'coc-html', 'coc-json',
-                            \  'coc-sh', 'coc-snippets', 'coc-tsserver', 'coc-vimlsp', 'coc-yank', "coc-prettier",
-                            \  'coc-markdownlint', 'coc-emmet', 'coc-bookmark', 'coc-git']
+let g:coc_global_extensions = ['coc-marketplace',
+                            \  'coc-highlight',
+                            \  'coc-git',
+                            \  'coc-python',
+                            \  'coc-json',
+                            \  'coc-sh',
+                            \  'coc-snippets',
+                            \  'coc-vimlsp',
+                            \  'coc-yank',
+                            \  'coc-prettier',
+                            \  'coc-markdownlint',
+                            \  'coc-bookmark',
+                            \  'coc-emmet',
+                            \  'coc-tsserver',
+                            \  'coc-html',
+                            \  'coc-css',
+                            \  'coc-cmake'
+                            \ ]
 
 " coc-bookmark
 nmap bj <Plug>(coc-bookmark-next)
@@ -352,6 +365,8 @@ let g:airline#extensions#whitespace#skip_indent_check_ft = {'markdown': ['traili
 let g:airline_left_alt_sep = ''
 let g:airline_right_alt_sep = "🙈"
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
