@@ -16,6 +16,7 @@
   "yank.enableCompletion": false,
   "git.addGBlameToVirtualText": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
+  "snippets.textmateSnippetsRoots": ["~/.config/snippets"],
   "markdownlint.config": {
     "MD033": false,
     "MD013": false,
