@@ -22,16 +22,14 @@
 			"> ${3:解答内容}",
 			">",
 			"> ```cpp",
-			"> ```",
-			"$0"
+			"> ```$0"
 		],
 		"description": "习题块"
 	},
 	"html image":{
 		"prefix": "div",
 		"body": [
-			"<div align=\"center\"><img src=\"$1\" alt=\"$2\" height=$3, width=$4 /></div>",
-			"$0"
+			"<div align=\"center\"><img src=\"$1\" alt=\"$2\" height=$3, width=$4 /></div>$0"
 		],
 		"description": "html图片"
 	},
