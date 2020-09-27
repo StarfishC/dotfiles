@@ -137,7 +137,15 @@ au BufNewFile,BufRead *.c,*.cpp,*.[ch]
 " 对于md文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.md
-\ set textwidth=80
+\ set textwidth=80 wrap
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 对于json
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufRead,BufNewFile *.json
+\ set filetype=jsonc syntax=json
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -478,7 +486,7 @@ nmap <leader>ol  <Plug>(easymotion-overwin-line)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AsyncRun
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <F6> :call asyncrun#quickfix_toggle(8)<cr>
+noremap <F4> :call asyncrun#quickfix_toggle(8)<cr>
 let g:asyncrun_open = 8
 let g:asyncrun_status = ''
 " let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
@@ -493,7 +501,7 @@ let g:asyncrun_status = ''
 let g:mkdp_browser = '/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '「${name}」'
-nmap <F9> <Plug>MarkdownPreviewToggle
+nmap <F6> <Plug>MarkdownPreviewToggle
 
 
 

@@ -24,7 +24,7 @@
 	"django1":{
 		"prefix": "djbe",
 		"body": "{% block ${1:name} %}${2:content}{% endblock ${3:name} %}$0",
-		"description": "block-end块",
+		"description": "block-end块"
 	},
 	"django2": {
 		"prefix": "dje",
