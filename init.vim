@@ -99,10 +99,11 @@ set signcolumn=number
 colorscheme space-vim-dark
 " highlight cursorLineNr  ctermfg=12
 " highlight cursorLine    ctermbg=238
+" highlight Comment       ctermbg=NONE ctermfg=117
 highlight Normal        ctermbg=NONE guibg=NONE
 highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight LineNr        ctermbg=NONE guibg=NONE
-" highlight Comment       ctermbg=NONE ctermfg=117
+highlight Terminal      ctermbg=NONE guibg=NONE
 highlight link CocFloating SignColumn
 highlight Pmenu ctermbg=NONE
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -436,6 +437,8 @@ let g:AutoPairsShortcutJump = '<leader>nn'
 let g:AutoPairsShortcutBackInsert = '<leader>bb'
 let g:AutoPairsMapCR = 1  " 换行并缩进
 let g:AutoPairsCenterLine = 1
+" 删除右括号
+imap <C-x> <Esc>lxa
 
 
 
@@ -486,10 +489,16 @@ nmap <leader>ol  <Plug>(easymotion-overwin-line)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AsyncRun
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <F4> :call asyncrun#quickfix_toggle(8)<cr>
 let g:asyncrun_open = 8
 let g:asyncrun_status = ''
+let g:asyncrun_stdin = 1
 " let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+noremap <F4> :call OpenCloseWin()<CR>
+function OpenCloseWin()
+    if &buftype != "quickfix"
+        exec "call asyncrun#quickfix_toggle(8)"
+    endif
+endfunction
 
 
 
@@ -501,7 +510,7 @@ let g:asyncrun_status = ''
 let g:mkdp_browser = '/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '「${name}」'
-nmap <F6> <Plug>MarkdownPreviewToggle
+nmap <F9> <Plug>MarkdownPreviewToggle
 
 
 
@@ -541,8 +550,9 @@ endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" QucikFix
 map <F5> :call CompileAndRunCode()<CR>
-func! CompileAndRunCode()
+function! CompileAndRunCode()
     exec "w"
     if &filetype == 'c'
         exec 'AsyncRun! clang % -o a.out; time ./a.out'
@@ -551,8 +561,23 @@ func! CompileAndRunCode()
     elseif &filetype == 'python'
         exec 'AsyncRun! -raw python3 %'
     elseif &filetype == 'sh'
-        exec 'AsyncRun! time zsh%'
+        exec 'AsyncRun! time zsh %'
     elseif &filetype == 'markdown'
         exec 'MarkdownPreview'
     endif
-endfunc
+endfunction
+" terminal
+map <F6> :call CompileAndRunCode2()<CR>
+function! CompileAndRunCode2()
+    if &filetype == 'c'
+        exec 'AsyncRun! -mode=term -rows=8 -focus=0 clang % -o a.out; time ./a.out'
+    elseif &filetype == 'cpp'
+        exec 'AsyncRun! -mode=term -rows=8 -focus=0 clang++ % -o a.out; time ./a.out'
+    elseif &filetype == 'python'
+        exec 'AsyncRun! -mode=term -rows=8 -focus=0 -raw python3 %'
+    elseif &filetype == 'sh'
+        exec 'AsyncRun! -mode=term -rows=8 -focus=0 time zsh %'
+    elseif &filetype == 'markdown'
+        exec 'MarkdownStop'
+    endif
+endfunction
