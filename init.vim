@@ -493,12 +493,6 @@ let g:asyncrun_open = 8
 let g:asyncrun_status = ''
 let g:asyncrun_stdin = 1
 " let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
-noremap <F4> :call OpenCloseWin()<CR>
-function OpenCloseWin()
-    if &buftype != "quickfix"
-        exec "call asyncrun#quickfix_toggle(8)"
-    endif
-endfunction
 
 
 
@@ -550,8 +544,19 @@ endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" delete win
+noremap <F4> :call OpenCloseWin()<CR>
+function OpenCloseWin()
+    if term_list() != []
+        for i in term_list()
+            exec 'bdelete! ' . i
+        endfor
+    else
+        exec "call asyncrun#quickfix_toggle(8)"
+    endif
+endfunction
 " QucikFix
-map <F5> :call CompileAndRunCode()<CR>
+noremap <F5> :call CompileAndRunCode()<CR>
 function! CompileAndRunCode()
     exec "w"
     if &filetype == 'c'
@@ -567,7 +572,7 @@ function! CompileAndRunCode()
     endif
 endfunction
 " terminal
-map <F6> :call CompileAndRunCode2()<CR>
+noremap <F6> :call CompileAndRunCode2()<CR>
 function! CompileAndRunCode2()
     if &filetype == 'c'
         exec 'AsyncRun! -mode=term -rows=8 -focus=0 clang % -o a.out; time ./a.out'
