@@ -9,10 +9,11 @@
   "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
   "requestedTheme": "dark",
   "theme": "dark",
+  "multiLinePasteWarning": false,
   "profiles": {
     "defaults": {
       // Put settings here that you want to apply to all profiles.
-      "acrylicOpacity": 0.4,
+      "acrylicOpacity": 0.55,
       "closeOnExit": true,
       "colorScheme": "Monokai Night",
       "cursorShape": "filledBox",
