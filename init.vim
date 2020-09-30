@@ -574,6 +574,7 @@ endfunction
 " terminal
 noremap <F6> :call CompileAndRunCode2()<CR>
 function! CompileAndRunCode2()
+    exec 'w'
     if &filetype == 'c'
         exec 'AsyncRun! -mode=term -rows=8 -focus=0 clang % -o a.out; time ./a.out'
     elseif &filetype == 'cpp'
