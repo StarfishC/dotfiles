@@ -568,7 +568,7 @@ function! CompileAndRunCode()
     elseif &filetype == 'sh'
         exec 'AsyncRun! time zsh %'
     elseif &filetype == 'markdown'
-        exec 'MarkdownPreview'
+        exec 'call mkdp#util#toggle_preview()'
     endif
 endfunction
 " terminal
@@ -582,7 +582,5 @@ function! CompileAndRunCode2()
         exec 'AsyncRun! -mode=term -rows=8 -focus=0 -raw python3 %'
     elseif &filetype == 'sh'
         exec 'AsyncRun! -mode=term -rows=8 -focus=0 time zsh %'
-    elseif &filetype == 'markdown'
-        exec 'MarkdownStop'
     endif
 endfunction
