@@ -202,7 +202,7 @@ function! s:show_documentation()
 endfunction
 
 " 跳转到第一个浮动窗口
-inoremap <leader>aa <plug>(coc-float-jump)
+nnoremap <leader>aa <plug>(coc-float-jump)
 
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf <Plug>(coc-fix-current)
@@ -394,6 +394,9 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 " Vista
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F3> :Vista!!<CR>
+let g:vista_update_on_text_changed = 0
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'coc'
 
 
 
@@ -545,10 +548,17 @@ endfunc
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " delete win
-noremap <F4> :call OpenCloseWin()<CR>
+noremap <silent> <F4> :call OpenCloseWin()<CR>
 function OpenCloseWin()
-    if term_list() != []
-        for i in term_list()
+    let s:winlist = []
+    let s:wininfo = getwininfo()            " vim支持term_list
+    for win in s:wininfo
+        if win['terminal']
+            call add(s:winlist, win['bufnr'])
+        endif
+    endfor
+    if s:winlist != []
+        for i in s:winlist
             exec 'bdelete! ' . i
         endfor
     else
@@ -556,7 +566,7 @@ function OpenCloseWin()
     endif
 endfunction
 " QucikFix
-noremap <F5> :call CompileAndRunCode()<CR>
+noremap <silent> <F5> :call CompileAndRunCode()<CR>
 function! CompileAndRunCode()
     exec "w"
     if &filetype == 'c'
@@ -572,7 +582,7 @@ function! CompileAndRunCode()
     endif
 endfunction
 " terminal
-noremap <F6> :call CompileAndRunCode2()<CR>
+noremap <silent> <F6> :call CompileAndRunCode2()<CR>
 function! CompileAndRunCode2()
     exec 'w'
     if &filetype == 'c'

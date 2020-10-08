@@ -8,5 +8,5 @@
 
 [settings.json](./settings.json) windows terminal相关配置
 
-[snippets.json](./snippets) vscode的snippets
+[snippets](./snippets) vscode的snippets
 
