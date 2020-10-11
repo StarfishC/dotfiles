@@ -53,13 +53,11 @@ nnoremap ]b :bn<CR>
 " 删除当前缓冲区
 nnoremap <leader>d :bdelete<CR>
 nnoremap <BS> :nohl<CR>
-" set termguicolors
 syntax on    "语法高亮
 syntax enable
 set hidden
 set nobackup
 set nowritebackup
-set cmdheight=1
 set updatetime=250
 set shortmess+=c
 set relativenumber      "显示行号
@@ -83,7 +81,6 @@ set backspace=2
 set ignorecase "搜索时忽略大小写
 set smartcase  "如果搜索包含大写字母，不忽略大小写
 set expandtab       "tab替换为空格键
-set showcmd
 set fileformat=unix   "保存文件格式
 set foldmethod=syntax
 set foldlevel=99
@@ -91,7 +88,6 @@ set foldlevelstart=0
 set tabstop=4   "tab宽度
 set softtabstop=4
 set shiftwidth=4
-set foldcolumn=0
 set fillchars=vert:‖
 set cursorline
 set wildmenu
