@@ -1,5 +1,3 @@
-set nocompatible
-
 " vim-Plug
 call plug#begin('~/.vim/plugged')
 
@@ -65,6 +63,7 @@ set number
 set incsearch
 set nowrap
 set showmatch
+set showcmd
 set scrolloff=3     "距离顶部和底部3行"
 set encoding=UTF-8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
@@ -120,21 +119,21 @@ endif
 " 对于py文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.py
-\ set textwidth=79
+\ setlocal textwidth=79
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于c/c++文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.c,*.cpp,*.[ch]
-\ set cindent
+\ setlocal cindent
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于md文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.md
-\ set textwidth=80 wrap
+\ setlocal textwidth=80 wrap
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -544,6 +543,7 @@ endfunc
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " delete win
+tnoremap <F4> <C-W>:bdelete!<CR>
 noremap <silent> <F4> :call OpenCloseWin()<CR>
 function OpenCloseWin()
     let s:winlist = []
@@ -582,12 +582,12 @@ noremap <silent> <F6> :call CompileAndRunCode2()<CR>
 function! CompileAndRunCode2()
     exec 'w'
     if &filetype == 'c'
-        exec 'AsyncRun! -mode=term -rows=8 -focus=0 clang % -o a.out; time ./a.out'
+        exec 'AsyncRun! -mode=term -rows=8 -focus=1 clang % -o a.out; time ./a.out'
     elseif &filetype == 'cpp'
-        exec 'AsyncRun! -mode=term -rows=8 -focus=0 clang++ % -o a.out; time ./a.out'
+        exec 'AsyncRun! -mode=term -rows=8 -focus=1 clang++ % -o a.out; time ./a.out'
     elseif &filetype == 'python'
-        exec 'AsyncRun! -mode=term -rows=8 -focus=0 -raw python3 %'
+        exec 'AsyncRun! -mode=term -rows=8 -focus=1 -raw python3 %'
     elseif &filetype == 'sh'
-        exec 'AsyncRun! -mode=term -rows=8 -focus=0 time zsh %'
+        exec 'AsyncRun! -mode=term -rows=8 -focus=1 time zsh %'
     endif
 endfunction
