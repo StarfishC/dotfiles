@@ -266,7 +266,7 @@ nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 "enable/disable coc integration >
 let g:airline#extensions#coc#enabled = 1
 "change error symbol:
-let airline#extensions#coc#error_symbol = '😭'
+let airline#extensions#coc#error_symbol = '😡'
 "change warning symbol:
 let airline#extensions#coc#warning_symbol = '😱'
 "change error format:
@@ -367,7 +367,7 @@ let g:airline#extensions#whitespace#symbol = '~'
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'conflicts' ]
 let g:airline#extensions#whitespace#skip_indent_check_ft = {'markdown': ['trailing']}
 let g:airline_left_alt_sep = ''
-let g:airline_right_alt_sep = "🙈"
+let g:airline_right_alt_sep = "💧"
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
@@ -578,6 +578,7 @@ function! CompileAndRunCode()
     endif
 endfunction
 " terminal
+tnoremap <silent> <F6> <C-W>:bdelete!<CR><ESC>:call CompileAndRunCode2()<CR>
 noremap <silent> <F6> :call CompileAndRunCode2()<CR>
 function! CompileAndRunCode2()
     exec 'w'
