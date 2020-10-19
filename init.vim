@@ -39,6 +39,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+inoremap gj <Up>
+inoremap gk <Down>
+inoremap gh <Left>
+inoremap gl <Right>
 inoremap jk <Esc>
 inoremap kj <Esc>
 
@@ -219,8 +223,14 @@ augroup end
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+nnoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<Right>"
+inoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<Left>"
 
 
 "跳转下一个代码段占位符
@@ -543,7 +553,7 @@ endfunc
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " delete win
-tnoremap <F4> <C-W>:bdelete!<CR>
+tnoremap <F4> <C-W>:bwipe!<CR>
 noremap <silent> <F4> :call OpenCloseWin()<CR>
 function OpenCloseWin()
     let s:winlist = []
@@ -555,7 +565,7 @@ function OpenCloseWin()
     endfor
     if s:winlist != []
         for i in s:winlist
-            exec 'bdelete! ' . i
+            exec 'bwipe! ' . i
         endfor
     else
         exec "call asyncrun#quickfix_toggle(8)"
@@ -578,17 +588,19 @@ function! CompileAndRunCode()
     endif
 endfunction
 " terminal
-tnoremap <silent> <F6> <C-W>:bdelete!<CR><ESC>:call CompileAndRunCode2()<CR>
+tnoremap <silent> <F6> <C-W>:bwipe!<CR><ESC>:call CompileAndRunCode2()<CR>
 noremap <silent> <F6> :call CompileAndRunCode2()<CR>
 function! CompileAndRunCode2()
-    exec 'w'
     if &filetype == 'c'
-        exec 'AsyncRun! -mode=term -rows=8 -focus=1 clang % -o a.out; time ./a.out'
+        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 clang % -o a.out; time ./a.out'
     elseif &filetype == 'cpp'
-        exec 'AsyncRun! -mode=term -rows=8 -focus=1 clang++ % -o a.out; time ./a.out'
+        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 clang++ % -o a.out; time ./a.out'
     elseif &filetype == 'python'
-        exec 'AsyncRun! -mode=term -rows=8 -focus=1 -raw python3 %'
+        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 -raw python3 %'
     elseif &filetype == 'sh'
-        exec 'AsyncRun! -mode=term -rows=8 -focus=1 time zsh %'
+        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 time zsh %'
+    elseif &buftype == 'terminal'
+        exec 'bwipe!'
+        exec 'call CompileAndRunCode2()'
     endif
 endfunction
