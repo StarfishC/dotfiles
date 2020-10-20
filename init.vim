@@ -402,6 +402,7 @@ map <F3> :Vista!!<CR>
 let g:vista_update_on_text_changed = 0
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
+autocmd bufenter * if winnr("$") == 1 && vista#sidebar#IsOpen() | execute "normal! :q!\<CR>" | endif
 
 
 
