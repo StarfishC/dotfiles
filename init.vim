@@ -557,15 +557,15 @@ endfunc
 tnoremap <F4> <C-W>:bwipe!<CR>
 noremap <silent> <F4> :call OpenCloseWin()<CR>
 function OpenCloseWin()
-    let s:winlist = []
-    let s:wininfo = getwininfo()            " vim支持term_list
-    for win in s:wininfo
+    let winlist = []
+    let wininfo = getwininfo()            " vim支持term_list
+    for win in wininfo
         if win['terminal']
-            call add(s:winlist, win['bufnr'])
+            call add(winlist, win['bufnr'])
         endif
     endfor
-    if s:winlist != []
-        for i in s:winlist
+    if winlist != []
+        for i in winlist
             exec 'bwipe! ' . i
         endfor
     else
