@@ -39,10 +39,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-inoremap gj <Up>
-inoremap gk <Down>
-inoremap gh <Left>
-inoremap gl <Right>
 inoremap jk <Esc>
 inoremap kj <Esc>
 
