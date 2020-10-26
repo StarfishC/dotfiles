@@ -166,7 +166,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd CursorHold * silent call CocActionAsync('showSignatureHelp')
 
 if exists('*complete_info')
-    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <expr> <cr> complete_info()["items"] != [] ? "\<C-y>" : "\<C-g>u\<CR>"
 else
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
