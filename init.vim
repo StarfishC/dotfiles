@@ -165,11 +165,8 @@ endif
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd CursorHold * silent call CocActionAsync('showSignatureHelp')
 
-if exists('*complete_info')
-    inoremap <expr> <cr> complete_info()["items"] != [] ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+" <cr> confirm completion
+inoremap <expr> <cr> complete_info()["items"] != [] ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
