@@ -571,15 +571,14 @@ endfunction
 " QucikFix
 noremap <silent> <F5> :call CompileAndRunCode()<CR>
 function! CompileAndRunCode()
-    exec "w"
     if &filetype == 'c'
-        exec 'AsyncRun! clang % -o a.out; time ./a.out'
+        exec 'AsyncRun! -save=1 clang % -o a.out; time ./a.out'
     elseif &filetype == 'cpp'
-        exec 'AsyncRun! clang++ % -o a.out; time ./a.out'
+        exec 'AsyncRun! -save=1 clang++ % -o a.out; time ./a.out'
     elseif &filetype == 'python'
-        exec 'AsyncRun! -raw python3 %'
+        exec 'AsyncRun! -save=1 -raw python3 %'
     elseif &filetype == 'sh'
-        exec 'AsyncRun! time zsh %'
+        exec 'AsyncRun! -save=1 time zsh %'
     elseif &filetype == 'markdown'
         exec 'call mkdp#util#toggle_preview()'
     endif
