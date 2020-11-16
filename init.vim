@@ -325,6 +325,7 @@ autocmd BufNewFile,BufReadPre *.json let g:indentLine_setConceal = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LeaderF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 使用rg需要安装ripgrep
 let g:Lf_ShortcutF = "<leader>ff"
 noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
