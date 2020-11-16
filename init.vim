@@ -166,7 +166,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd CursorHold * silent call CocActionAsync('showSignatureHelp')
 
 " <cr> confirm completion
-inoremap <expr> <cr> complete_info()["items"] != [] ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -440,8 +440,7 @@ let g:AutoPairsShortcutBackInsert = '<leader>bb'
 let g:AutoPairsMapCR = 1  " 换行并缩进
 let g:AutoPairsCenterLine = 1
 " 删除右括号
-imap <C-x> <Esc>lxa
-
+imap <C-x> <Esc>lxi
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
