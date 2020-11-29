@@ -280,7 +280,7 @@ let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-highlight',
                             \  'coc-git',
-                            \  'coc-python',
+                            \  'coc-pyright',
                             \  'coc-json',
                             \  'coc-sh',
                             \  'coc-snippets',
