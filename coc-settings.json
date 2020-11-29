@@ -1,7 +1,4 @@
 {
-  "python.jediEnabled": false,
-  "python.venvPath": "~/.virtualenvs",
-  "python.linting.enabled": true,
   "html.autoClosingTags": true,
   "signature.preferShownAbove": false,
   "suggest.timeout": 500,
