@@ -39,6 +39,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+nnoremap j gj
+nnoremap k gk
 inoremap jk <Esc>
 inoremap kj <Esc>
 
@@ -81,7 +83,7 @@ set ignorecase "搜索时忽略大小写
 set smartcase  "如果搜索包含大写字母，不忽略大小写
 set expandtab       "tab替换为空格键
 set fileformat=unix   "保存文件格式
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevel=99
 set foldlevelstart=0
 set tabstop=4   "tab宽度
@@ -91,7 +93,7 @@ set fillchars=vert:‖
 set cursorline
 set wildmenu
 set signcolumn=number
-colorscheme space-vim-dark
+colorscheme molokai
 " highlight cursorLineNr  ctermfg=12
 " highlight cursorLine    ctermbg=238
 " highlight Comment       ctermbg=NONE ctermfg=117
@@ -99,7 +101,6 @@ highlight Normal        ctermbg=NONE guibg=NONE
 highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight LineNr        ctermbg=NONE guibg=NONE
 highlight Terminal      ctermbg=NONE guibg=NONE
-highlight link CocFloating SignColumn
 highlight Pmenu ctermbg=NONE
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 if has('nvim')
@@ -147,6 +148,7 @@ autocmd BufRead,BufNewFile *.json
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-nvim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight link CocFloating SignColumn
 inoremap <silent><expr> <TAB>
         \ pumvisible() ? "\<C-n>" :
         \ <SID>check_back_space() ? "\<TAB>" :
@@ -171,16 +173,15 @@ inoremap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR
 "补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "使用'[g 和']g跳转诊断出
-nmap <silent> gp <Plug>(coc-diagnostic-prev)
-nmap <silent> gn <Plug>(coc-diagnostic-next)
-nmap <silent> gi <Plug>(coc-diagnostic-info)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " highlight link CocErrorSign GruvboxRed
 
 "跳转定义/声明等
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gc <Plug>(coc-declaration)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gl <Plug>(coc-implementation)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 "使用K预览窗口显示文档
@@ -192,9 +193,6 @@ function! s:show_documentation()
         call CocAction('doHover')
     endif
 endfunction
-
-" 跳转到第一个浮动窗口
-nnoremap <leader>aa <plug>(coc-float-jump)
 
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf <Plug>(coc-fix-current)
@@ -263,9 +261,6 @@ command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport
 " Use C to open coc config
 call SetupCommandAbbrs('C', 'CocConfig')
 
-"yank
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-
 "enable/disable coc integration >
 let g:airline#extensions#coc#enabled = 1
 "change error symbol:
@@ -296,6 +291,9 @@ let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-cmake'
                             \ ]
 
+" coc-yank
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
 " coc-bookmark
 nmap bj <Plug>(coc-bookmark-next)
 nmap bk <Plug>(coc-bookmark-prev)
@@ -306,8 +304,8 @@ nmap ba <Plug>(coc-bookmark-annotate)
 highlight DiffAdd       ctermbg=NONE ctermfg=green cterm=NONE
 highlight DiffDelete    ctermbg=NONE ctermfg=red cterm=NONE
 highlight DiffChange    ctermbg=NONE ctermfg=cyan cterm=NONE
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
+nmap [i <Plug>(coc-git-prevchunk)
+nmap ]i <Plug>(coc-git-nextchunk)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 
 
@@ -571,7 +569,7 @@ function! CompileAndRunCode()
     if &filetype == 'c'
         exec 'AsyncRun! -save=1 clang % -o a.out; time ./a.out'
     elseif &filetype == 'cpp'
-        exec 'AsyncRun! -save=1 clang++ % -o a.out; time ./a.out'
+        exec 'AsyncRun! -save=1 clang++ -std=c++11 % -o a.out; time ./a.out'
     elseif &filetype == 'python'
         exec 'AsyncRun! -save=1 -raw python3 %'
     elseif &filetype == 'sh'
@@ -587,7 +585,7 @@ function! CompileAndRunCode2()
     if &filetype == 'c'
         exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 clang % -o a.out; time ./a.out'
     elseif &filetype == 'cpp'
-        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 clang++ % -o a.out; time ./a.out'
+        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 clang++ -std=c++11 % -o a.out; time ./a.out'
     elseif &filetype == 'python'
         exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 -raw python3 %'
     elseif &filetype == 'sh'
