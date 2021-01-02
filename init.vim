@@ -11,7 +11,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'tmhedberg/SimpylFold'   "折叠插件
 Plug 'Yggdroot/indentLine'
-Plug 'Yggdroot/LeaderF', {'do': './install.sh'}
+Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -319,7 +319,7 @@ nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 let g:indentLine_enabled = 1
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_color_term = 175
-autocmd BufNewFile,BufReadPre *.json let g:indentLine_setConceal = 0
+autocmd BufNewFile,BufReadPre *.json,*.md let g:indentLine_setConceal = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -331,6 +331,8 @@ noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
 noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
+xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 let g:Lf_WindowHeight = 0.40
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
