@@ -39,8 +39,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-nnoremap j gj
-nnoremap k gk
+nnoremap <silent> j gj
+nnoremap <silent> k gk
 inoremap jk <Esc>
 inoremap kj <Esc>
 
@@ -508,7 +508,7 @@ let g:asyncrun_stdin = 1
 " let g:mkdp_browser = '/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '「${name}」'
-nmap <F9> <Plug>MarkdownPreviewToggle
+nmap <F7> <Plug>MarkdownPreviewToggle
 
 
 
@@ -549,7 +549,7 @@ endfunc
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " delete win
-tnoremap <F4> <C-W>:bwipe!<CR>
+tnoremap <silent> <F4> <C-W>:bwipe!<CR>
 noremap <silent> <F4> :call OpenCloseWin()<CR>
 function OpenCloseWin()
     let winlist = []
