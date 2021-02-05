@@ -285,7 +285,6 @@ let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-yank',
                             \  'coc-prettier',
                             \  'coc-markdownlint',
-                            \  'coc-bookmark',
                             \  'coc-emmet',
                             \  'coc-tsserver',
                             \  'coc-html',
@@ -295,12 +294,6 @@ let g:coc_global_extensions = ['coc-marketplace',
 
 " coc-yank
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-
-" coc-bookmark
-nmap bj <Plug>(coc-bookmark-next)
-nmap bk <Plug>(coc-bookmark-prev)
-nmap bm <Plug>(coc-bookmark-toggle)
-nmap ba <Plug>(coc-bookmark-annotate)
 
 " coc-git
 highlight DiffAdd       ctermbg=NONE ctermfg=green cterm=NONE
