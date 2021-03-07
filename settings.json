@@ -18,13 +18,14 @@
       "closeOnExit": true,
       "colorScheme": "Monokai Night",
       "cursorShape": "filledBox",
-      "fontFace": "Mononoki NF",
-      "fontSize": 13,
+      // "fontFace": "Mononoki NF",
+      "fontFace": "LiterationMono NF",
+      "fontSize": 12,
       "historySize": 9001,
       "snapOnInput": true,
       "startingDirectory": "D:/code/",
-      "backgroundImage": "",
-      "backgroundImageOpacity": 0.1,
+      "backgroundImage": "C:\\Users\\csh\\Pictures\\Saved Pictures\\back.png",
+      "backgroundImageOpacity": 0.1
     },
     "list": [
       {
