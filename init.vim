@@ -134,7 +134,7 @@ au BufNewFile,BufRead *.c,*.cpp,*.[ch]
 " 对于md文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.md
-\ setlocal textwidth=80 wrap
+\ setlocal wrap
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
