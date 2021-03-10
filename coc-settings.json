@@ -13,6 +13,8 @@
   "diagnostic.warningSign": "⚠️",
   "yank.enableCompletion": false,
   "git.addGBlameToVirtualText": true,
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
   "snippets.textmateSnippetsRoots": ["~/.config/snippets"],
   "suggest.completionItemKindLabels": {

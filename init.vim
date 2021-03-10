@@ -4,7 +4,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'liuchengxu/vista.vim'
@@ -165,7 +164,7 @@ else
     inoremap <silent><expr> <c-@> coc#refresh()
 endif
 autocmd CursorHold * silent call CocActionAsync('highlight')
-autocmd CursorHold * silent call CocActionAsync('showSignatureHelp')
+autocmd User CocJumpPlaceholder call CocActionAsync("showSignatureHelp")
 
 " <cr> confirm completion
 inoremap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -285,11 +284,8 @@ let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-yank',
                             \  'coc-prettier',
                             \  'coc-markdownlint',
-                            \  'coc-emmet',
-                            \  'coc-tsserver',
-                            \  'coc-html',
-                            \  'coc-css',
-                            \  'coc-cmake'
+                            \  'coc-cmake',
+                            \  'coc-explorer'
                             \ ]
 
 " coc-yank
@@ -303,6 +299,10 @@ nmap [i <Plug>(coc-git-prevchunk)
 nmap ]i <Plug>(coc-git-nextchunk)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 
+" coc-explorer
+nnoremap <F2> :CocCommand explorer<CR>
+nnoremap <space>ep :CocCommand explorer /
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -312,6 +312,7 @@ nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 let g:indentLine_enabled = 1
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_color_term = 175
+let g:indentLine_fileTypeExclude = ['coc-explorer', 'help']
 autocmd BufNewFile,BufReadPre *.json,*.md let g:indentLine_setConceal = 0
 
 
@@ -349,7 +350,6 @@ let g:airline_theme = 'violet'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-airline配置:优化vim界面"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline#extensions#nerdtree_status = 1
 let g:airline#extensions#vista#enabled = 1
 " 使用powerline打过补丁的字体
 let g:airline_powerline_fonts = 1
@@ -392,25 +392,6 @@ let g:vista_update_on_text_changed = 0
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
 autocmd bufenter * if winnr("$") == 1 && vista#sidebar#IsOpen() | execute "normal! :q!\<CR>" | endif
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"DTree 配置:F2快捷键显示当前目录树
-map <F2> :NERDTreeToggle<CR>
-let NERDTreeMinimalUI = 0 "去除第一行提示
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '__pycache__$']
-let NERDTreeWinSize = 25
-let NRRDChristmasTree = 1 "显示增强
-let NERDTreeAutoCenter = 1 "自动调整焦点
-let NERDTreeHighCursorline = 1  "高亮当前文件
-let NERDTreeShowLineNumbers = 1 "显示行号
-let NERDTreeShowFiles = 1 "显示文件
-let g:NERDTreeDirArrowExpandable = '→'
-let g:NERDTreeDirArrowCollapsible = '⇣'
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 
