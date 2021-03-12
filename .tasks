@@ -1,0 +1,29 @@
+# vim: set fenc=utf-8 ft=dosini:
+
+# define a new task named "file-build"
+[file1-build]
+command:cpp=clang++ "$(VIM_FILEPATH)" $(?arguments1) -std=c++11 -o ./a.out
+cwd=$(VIM_FILEDIR)
+output=quickfix
+errorformat=%f:%l:%m
+save=1
+
+
+[file2-build]
+command:cpp=clang++ "$(VIM_FILEPATH)" $(?arguments1) -std=c++11 -o ./a.out
+cwd=$(VIM_FILEDIR)
+output=quickfix
+errorformat=%f:%l:%m
+save=1
+
+
+[run_quicklist]
+command=time ./a.out
+cwd=$(VIM_FILEDIR)
+output=terminal
+
+
+[run-terminal]
+command=time ./a.out
+cwd=$(VIM_FILEDIR)
+output=terminal

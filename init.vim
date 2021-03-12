@@ -17,9 +17,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons' "图标
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PProvost/vim-ps1'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asynctasks.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
 Plug 'honza/vim-snippets'
 " Plug 'voldikss/vim-floaterm'
@@ -42,9 +42,9 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 inoremap jk <Esc>
 inoremap kj <Esc>
+inoremap <C-j> <Esc>O
+inoremap <C-k> <Esc>o
 
-inoremap <M-o> <Esc>o
-inoremap <M-p> <Esc>O
 
 " 映射切换buffer的键位
 nnoremap [b :bp<CR>
@@ -285,7 +285,8 @@ let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-prettier',
                             \  'coc-markdownlint',
                             \  'coc-cmake',
-                            \  'coc-explorer'
+                            \  'coc-explorer',
+                            \  'coc-tasks'
                             \ ]
 
 " coc-yank
@@ -302,6 +303,9 @@ nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 " coc-explorer
 nnoremap <F2> :CocCommand explorer<CR>
 nnoremap <space>ep :CocCommand explorer /
+
+" coc-tasks
+nnoremap <space>t :CocList tasks<CR>
 
 
 
@@ -399,8 +403,7 @@ autocmd bufenter * if winnr("$") == 1 && vista#sidebar#IsOpen() | execute "norma
 " nerdcommenter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDSpaceDelims = 1   "注释自动添加一个空格
-let g:NERDCompactSexyComs = 1
-let g:NERDDefaultAlign = 'left' "对齐方式
+let g:NERDDefaultAlign = 'start' "对齐方式
 let g:NERDCommentEmptyLines = 1
 let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
 
@@ -417,7 +420,7 @@ let g:AutoPairsShortcutBackInsert = '<leader>bb'
 let g:AutoPairsMapCR = 1  " 换行并缩进
 let g:AutoPairsCenterLine = 1
 " 删除右括号
-imap <C-x> <Esc>lxi
+imap <C-x> <Esc>lxa
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -471,6 +474,60 @@ let g:asyncrun_open = 8
 let g:asyncrun_status = ''
 let g:asyncrun_stdin = 1
 " let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AsyncRun
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Integration LeaderF
+function! s:lf_task_source(...)
+    let rows = asynctasks#source(&columns * 48 / 100)
+    let source = []
+    for row in rows
+        let name = row[0]
+        let source += [name . '  ' . row[1] . '  : ' . row[2]]
+    endfor
+    return source
+endfunction
+
+function! s:lf_task_accept(line, arg)
+    let pos = stridx(a:line, '<')
+    if pos < 0
+        return
+    endif
+    let name = strpart(a:line, 0, pos)
+    let name = substitute(name, '^\s*\(.\{-}\)\s*$', '\1', '')
+    if name != ''
+        exec "AsyncTask " . name
+    endif
+endfunction
+
+function! s:lf_task_digest(line, mode)
+    let pos = stridx(a:line, '<')
+    if pos < 0
+        return [a:line, 0]
+    endif
+    let name = strpart(a:line, 0, pos)
+    return [name, 0]
+endfunction
+
+function! s:lf_win_init(...)
+    setlocal nonumber
+    setlocal nowrap
+endfunction
+
+let g:Lf_Extensions = get(g:, 'Lf_Extensions', {})
+let g:Lf_Extensions.task = {
+            \ 'source': string(function('s:lf_task_source'))[10:-3],
+            \ 'accept': string(function('s:lf_task_accept'))[10:-3],
+            \ 'get_digest': string(function('s:lf_task_digest'))[10:-3],
+            \ 'highlights_def': {
+            \       'Lf_hl_funcScope': '^\S\+',
+            \       'Lf_hl_funcDirname': '^\S\+\s*\zs<.*>\ze\s*:',
+            \ 'help' : 'navigate available tasks from asynctasks.vim',
+            \ },
+        \ }
 
 
 
