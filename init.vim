@@ -478,8 +478,11 @@ let g:asyncrun_stdin = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AsyncRun
+" AsyncTasks
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:asynctasks_term_pos = 'bottom'
+let g:asynctasks_term_rows = 10
+let g:asynctasks_term_focus = 0
 " Integration LeaderF
 function! s:lf_task_source(...)
     let rows = asynctasks#source(&columns * 48 / 100)
@@ -525,8 +528,9 @@ let g:Lf_Extensions.task = {
             \ 'highlights_def': {
             \       'Lf_hl_funcScope': '^\S\+',
             \       'Lf_hl_funcDirname': '^\S\+\s*\zs<.*>\ze\s*:',
-            \ 'help' : 'navigate available tasks from asynctasks.vim',
             \ },
+            \ 'help' : 'navigate available tasks from asynctasks.vim',
+            \ 'after_enter': string(function('s:lf_win_init'))[10:-3]
         \ }
 
 
@@ -601,32 +605,18 @@ endfunction
 " QucikFix
 noremap <silent> <F5> :call CompileAndRunCode()<CR>
 function! CompileAndRunCode()
-    if &filetype == 'c'
-        exec 'AsyncRun! -save=1 clang % -o a.out; time ./a.out'
-    elseif &filetype == 'cpp'
-        exec 'AsyncRun! -save=1 clang++ -std=c++11 % -o a.out; time ./a.out'
-    elseif &filetype == 'python'
-        exec 'AsyncRun! -save=1 -raw python3 %'
-    elseif &filetype == 'sh'
-        exec 'AsyncRun! -save=1 time zsh %'
-    elseif &filetype == 'markdown'
-        exec 'call mkdp#util#toggle_preview()'
+    if &buftype == 'quickfix'
+        exec 'bwipe!'
     endif
+    exec 'AsyncTask quick-run-quicklist'
 endfunction
 " terminal
 tnoremap <silent> <F6> <C-W>:bwipe!<CR><ESC>:call CompileAndRunCode2()<CR>
 noremap <silent> <F6> :call CompileAndRunCode2()<CR>
 function! CompileAndRunCode2()
-    if &filetype == 'c'
-        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 clang % -o a.out; time ./a.out'
-    elseif &filetype == 'cpp'
-        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 clang++ -std=c++11 % -o a.out; time ./a.out'
-    elseif &filetype == 'python'
-        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 -raw python3 %'
-    elseif &filetype == 'sh'
-        exec 'AsyncRun! -mode=term -save=1 -rows=8 -focus=1 time zsh %'
-    elseif &buftype == 'terminal'
+    if &buftype == 'terminal'
         exec 'bwipe!'
         exec 'call CompileAndRunCode2()'
     endif
+    exec 'AsyncTask quick-run-terminal'
 endfunction
