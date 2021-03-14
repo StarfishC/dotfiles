@@ -285,8 +285,7 @@ let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-prettier',
                             \  'coc-markdownlint',
                             \  'coc-cmake',
-                            \  'coc-explorer',
-                            \  'coc-tasks'
+                            \  'coc-explorer'
                             \ ]
 
 " coc-yank
@@ -303,9 +302,6 @@ nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 " coc-explorer
 nnoremap <F2> :CocCommand explorer<CR>
 nnoremap <space>ep :CocCommand explorer /
-
-" coc-tasks
-nnoremap <space>t :CocList tasks<CR>
 
 
 
@@ -420,7 +416,8 @@ let g:AutoPairsShortcutBackInsert = '<leader>bb'
 let g:AutoPairsMapCR = 1  " 换行并缩进
 let g:AutoPairsCenterLine = 1
 " 删除右括号
-imap <C-x> <Esc>lxa
+imap <C-x> <Esc>la<BS>
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -480,9 +477,9 @@ let g:asyncrun_stdin = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AsyncTasks
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>fr :Leaderf --nowrap task<CR>
 let g:asynctasks_term_pos = 'bottom'
 let g:asynctasks_term_rows = 10
-let g:asynctasks_term_focus = 0
 " Integration LeaderF
 function! s:lf_task_source(...)
     let rows = asynctasks#source(&columns * 48 / 100)
@@ -590,7 +587,7 @@ function OpenCloseWin()
     let winlist = []
     let wininfo = getwininfo()            " vim支持term_list
     for win in wininfo
-        if win['terminal']
+        if win['terminal'] || win['quickfix']
             call add(winlist, win['bufnr'])
         endif
     endfor
@@ -608,7 +605,7 @@ function! CompileAndRunCode()
     if &buftype == 'quickfix'
         exec 'bwipe!'
     endif
-    exec 'AsyncTask quick-run-quicklist'
+    exec 'AsyncTask once-run-quickfix'
 endfunction
 " terminal
 tnoremap <silent> <F6> <C-W>:bwipe!<CR><ESC>:call CompileAndRunCode2()<CR>
@@ -616,7 +613,23 @@ noremap <silent> <F6> :call CompileAndRunCode2()<CR>
 function! CompileAndRunCode2()
     if &buftype == 'terminal'
         exec 'bwipe!'
-        exec 'call CompileAndRunCode2()'
     endif
-    exec 'AsyncTask quick-run-terminal'
+    exec 'AsyncTask once-run-terminal'
+endfunction
+
+
+" 退出VIM时关闭quickfix和terminal
+autocmd BufEnter * call ExitVim()
+function ExitVim()
+    let wininfo = getwininfo()
+    let close = 1
+    for win in wininfo
+        if !win['terminal'] && !win['quickfix']
+            let close = 0
+            break
+        endif
+    endfor
+    if close == 1
+        exec 'qall!'
+    endif
 endfunction
