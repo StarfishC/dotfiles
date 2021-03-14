@@ -5,7 +5,7 @@
 	// same ids are connected.
 	// Example:
 	"c": {
-		"prefix": "header",
+		"prefix": "hea",
 		"body": [
 			"// File:    $TM_FILENAME",
 			"// Author:  csh",

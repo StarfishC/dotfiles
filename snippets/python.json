@@ -5,7 +5,7 @@
 	// same ids are connected.
 	// Example:
 	"python": {
-		"prefix": "py",
+		"prefix": "hea",
 		"body": [
 			"\"\"\"",
 			"@File:      $TM_FILENAME",

@@ -409,11 +409,11 @@ let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
 " auto-pairs配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsMultilineClose = 1
-let g:AutoPairsShortcutJump = '<leader>nn'
-let g:AutoPairsShortcutBackInsert = '<leader>bb'
-let g:AutoPairsMapCR = 1  " 换行并缩进
+let g:AutoPairsShortcutToggle = '<leader>pt'
+let g:AutoPairsShortcutJump = '<leader>pj'
+let g:AutoPairsShortcutBackInsert = '<leader>pb'
+let g:AutoPairsShortcutFastWrap = '<leader>pf'
+let g:AutoPairsMapCh = 0
 let g:AutoPairsCenterLine = 1
 " 删除右括号
 imap <C-x> <Esc>la<BS>
@@ -451,7 +451,7 @@ let g:rainbow_conf = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-fugitive
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>df :Gvdiffsplit<CR>
+nmap <leader>gd :Gvdiffsplit<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -618,7 +618,10 @@ function! CompileAndRunCode2()
 endfunction
 
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 退出VIM时关闭quickfix和terminal
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufEnter * call ExitVim()
 function ExitVim()
     let wininfo = getwininfo()
