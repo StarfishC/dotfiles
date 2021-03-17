@@ -22,8 +22,9 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
 Plug 'honza/vim-snippets'
+Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'jaxbot/semantic-highlight.vim'
 " Plug 'voldikss/vim-floaterm'
-" Plug 'guns/xterm-color-table.vim'    "配色
 
 call plug#end()            " required
 
@@ -96,7 +97,7 @@ colorscheme molokai
 " highlight cursorLineNr  ctermfg=12
 " highlight cursorLine    ctermbg=238
 " highlight Comment       ctermbg=NONE ctermfg=117
-highlight Normal        ctermbg=NONE guibg=NONE
+" highlight Normal        ctermbg=NONE guibg=NONE
 highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight LineNr        ctermbg=NONE guibg=NONE
 highlight Terminal      ctermbg=NONE guibg=NONE
@@ -540,7 +541,6 @@ let g:Lf_Extensions.task = {
 " let g:mkdp_browser = '/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '「${name}」'
-nmap <F7> <Plug>MarkdownPreviewToggle
 
 
 
@@ -600,11 +600,8 @@ function OpenCloseWin()
     endif
 endfunction
 " QucikFix
-noremap <silent> <F5> :call CompileAndRunCode()<CR>
+noremap <silent> <F5> :AsyncTask once-run-quickfix<CR>
 function! CompileAndRunCode()
-    if &buftype == 'quickfix'
-        exec 'bwipe!'
-    endif
     exec 'AsyncTask once-run-quickfix'
 endfunction
 " terminal

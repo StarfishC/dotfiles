@@ -1,5 +1,4 @@
 {
-  "html.autoClosingTags": true,
   "signature.preferShownAbove": false,
   "suggest.timeout": 500,
   "suggest.autoTrigger": "always",
@@ -53,7 +52,7 @@
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "compile_commands.json"],
+      "rootPatterns": [".ccls-root", "compile_commands.json", ".git/"],
       "initializationOptions": {
         "cache": {
           "directory": "/home/ubuntu/.cache/.ccls-cache"
