@@ -97,7 +97,7 @@ colorscheme molokai
 " highlight cursorLineNr  ctermfg=12
 " highlight cursorLine    ctermbg=238
 " highlight Comment       ctermbg=NONE ctermfg=117
-" highlight Normal        ctermbg=NONE guibg=NONE
+highlight Normal        ctermbg=NONE guibg=NONE
 highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight LineNr        ctermbg=NONE guibg=NONE
 highlight Terminal      ctermbg=NONE guibg=NONE
