@@ -332,6 +332,7 @@ let g:Lf_WindowHeight = 0.40
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
 let g:Lf_ShowDevIcons = 1
+let g:Lf_WorkingDirectoryMode = 'ac'
 " let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_StlSeparator = { 'left': "\u2b80", 'right': "\u2b82" }
 let g:Lf_HideHelp = 1
@@ -380,8 +381,8 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>+ <Plug>AirlineSelectNextTab
+nmap <leader>= <Plug>AirlineSelectPrevTab
+nmap <leader>- <Plug>AirlineSelectNextTab
 
 
 
@@ -455,6 +456,7 @@ let g:rainbow_conf = {
 nmap <leader>gd :Gvdiffsplit<CR>
 
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -471,7 +473,6 @@ nmap <leader>ol  <Plug>(easymotion-overwin-line)
 let g:asyncrun_open = 8
 let g:asyncrun_status = ''
 let g:asyncrun_stdin = 1
-" let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
 
 
@@ -481,6 +482,7 @@ let g:asyncrun_stdin = 1
 nnoremap <leader>fr :Leaderf --nowrap task<CR>
 let g:asynctasks_term_pos = 'bottom'
 let g:asynctasks_term_rows = 10
+let g:asynctasks_term_reuse = 1
 " Integration LeaderF
 function! s:lf_task_source(...)
     let rows = asynctasks#source(&columns * 48 / 100)
@@ -544,39 +546,6 @@ let g:mkdp_page_title = '「${name}」'
 
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" c/c++文件表头
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" -- New file .h .c .cpp, add file header --
-autocmd BufNeWFile *.[ch],*.cpp,*.hpp exec ":call CFileHeader()"
-func CFileHeader()
-        call setline(1, "// File:    ".strftime(expand('%d')))
-        call append(line("."), "// Author:  csh")
-        call append(line(".")+1, "// Date:    " .strftime("%Y/%m/%d"))
-        call append(line(".")+2, "// ===================")
-        call append(line(".")+3, "")
-        call append(line(".")+4, "")
-        exec "$"
-endfunc
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" py文件表头
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" -- New file .py, add file header
-autocmd BufNeWFile *.py exec ":call PFileHeader()"
-func PFileHeader()
-        call setline(1, '"""')
-        call append(line("."), '@File:    '.strftime(expand('%d')))
-        call append(line(".")+1, "@Author:  csh")
-        call append(line(".")+2, "@Date:    " .strftime("%Y/%m/%d"))
-        call append(line(".")+3, '"""')
-        call append(line(".")+4, "")
-        call append(line(".")+5, "")
-        exec "$"
-endfunc
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -599,19 +568,11 @@ function OpenCloseWin()
         exec "call asyncrun#quickfix_toggle(8)"
     endif
 endfunction
-" QucikFix
-noremap <silent> <F5> :AsyncTask once-run-quickfix<CR>
-function! CompileAndRunCode()
-    exec 'AsyncTask once-run-quickfix'
-endfunction
 " terminal
-tnoremap <silent> <F6> <C-W>:bwipe!<CR><ESC>:call CompileAndRunCode2()<CR>
-noremap <silent> <F6> :call CompileAndRunCode2()<CR>
-function! CompileAndRunCode2()
-    if &buftype == 'terminal'
-        exec 'bwipe!'
-    endif
-    exec 'AsyncTask once-run-terminal'
+tnoremap <silent> <F5> <C-W>:bwipe!<CR><ESC>:call CompileAndRunCode()<CR>
+noremap <silent> <F5> :call CompileAndRunCode()<CR>
+function! CompileAndRunCode()
+    exec 'AsyncTask qucik-run'
 endfunction
 
 
