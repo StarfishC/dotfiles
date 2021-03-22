@@ -301,8 +301,13 @@ nmap ]i <Plug>(coc-git-nextchunk)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 
 " coc-explorer
-nnoremap <F2> :CocCommand explorer<CR>
-nnoremap <space>ep :CocCommand explorer /
+if has("nvim")
+    nnoremap <F2> :CocCommand explorer --position=floating<CR>
+    nnoremap <space>ep :CocCommand explorer --position=floating /
+else
+    nnoremap <F2> :CocCommand explorer<CR>
+    nnoremap <space>ep :CocCommand explorer /
+endif
 
 
 
@@ -572,7 +577,7 @@ endfunction
 tnoremap <silent> <F5> <C-W>:bwipe!<CR><ESC>:call CompileAndRunCode()<CR>
 noremap <silent> <F5> :call CompileAndRunCode()<CR>
 function! CompileAndRunCode()
-    exec 'AsyncTask qucik-run'
+    exec 'AsyncTask quick-run'
 endfunction
 
 
