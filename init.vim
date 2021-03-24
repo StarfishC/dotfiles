@@ -22,9 +22,8 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
 Plug 'honza/vim-snippets'
-Plug 'octol/vim-cpp-enhanced-highlight'
-" Plug 'jaxbot/semantic-highlight.vim'
-" Plug 'voldikss/vim-floaterm'
+Plug 'bfrg/vim-cpp-modern'
+" Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()            " required
 
@@ -126,7 +125,7 @@ au BufNewFile,BufRead *.py
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于c/c++文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufNewFile,BufRead *.c,*.cpp,*.[ch]
+au BufNewFile,BufRead *.[ch]pp,*.[ch]
 \ setlocal cindent
 
 
@@ -140,9 +139,15 @@ au BufNewFile,BufRead *.md
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于json
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufRead,BufNewFile *.json
-\ set filetype=jsonc syntax=json
+au BufNewFile,BufRead *.json
+\ setlocal filetype=jsonc syntax=json
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 对于quickfix
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType qf
+\ setlocal norelativenumber
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -173,9 +178,8 @@ inoremap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR
 "补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "使用'[g 和']g跳转诊断出
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" highlight link CocErrorSign GruvboxRed
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 "跳转定义/声明等
 nmap <silent> gd <Plug>(coc-definition)
@@ -231,7 +235,7 @@ let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = "<C-k>"
 
 " show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
 " Manage extensions
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
@@ -296,8 +300,10 @@ nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 highlight DiffAdd       ctermbg=NONE ctermfg=green cterm=NONE
 highlight DiffDelete    ctermbg=NONE ctermfg=red cterm=NONE
 highlight DiffChange    ctermbg=NONE ctermfg=cyan cterm=NONE
-nmap [i <Plug>(coc-git-prevchunk)
-nmap ]i <Plug>(coc-git-nextchunk)
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+nmap [c <Plug>(coc-git-preconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 
 " coc-explorer
@@ -428,15 +434,6 @@ imap <C-x> <Esc>la<BS>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-devicons
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:webdevicons_enable_nerdtree = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
-let g:webdevicons_enable_startify = 1
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SimplyFold配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:SimpylFold_docstring_preview=1   "看到折叠代码的文档字符串
@@ -447,11 +444,6 @@ let g:SimpylFold_docstring_preview=1   "看到折叠代码的文档字符串
 " vim-rainbow
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rainbow_active = 1        "set to 0 if you want to enable it later via :RainbowToggle"
-let g:rainbow_conf = {
-        \'separately': {
-    \       'nerdtree': 0,
-    \   }
-    \}
 
 
 
@@ -557,7 +549,7 @@ let g:mkdp_page_title = '「${name}」'
 " delete win
 tnoremap <silent> <F4> <C-W>:bwipe!<CR>
 noremap <silent> <F4> :call OpenCloseWin()<CR>
-function OpenCloseWin()
+function! OpenCloseWin()
     let winlist = []
     let wininfo = getwininfo()            " vim支持term_list
     for win in wininfo
@@ -586,7 +578,7 @@ endfunction
 " 退出VIM时关闭quickfix和terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufEnter * call ExitVim()
-function ExitVim()
+function! ExitVim()
     let wininfo = getwininfo()
     let close = 1
     for win in wininfo

@@ -12,6 +12,7 @@
   "diagnostic.warningSign": "⚠️",
   "yank.enableCompletion": false,
   "git.addGBlameToVirtualText": true,
+  "git.signPriority": 1000,
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
