@@ -10,7 +10,6 @@ Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'tmhedberg/SimpylFold'   "折叠插件
 Plug 'Yggdroot/indentLine'
-Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -18,11 +17,15 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons' "图标
 Plug 'PProvost/vim-ps1'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'skywind3000/asynctasks.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
 Plug 'honza/vim-snippets'
 Plug 'bfrg/vim-cpp-modern'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.extra'
+Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
+Plug 'voldikss/LeaderF-floaterm'
+Plug 'voldikss/vim-floaterm'
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()            " required
@@ -42,14 +45,26 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 inoremap jk <Esc>
 inoremap kj <Esc>
-inoremap <C-j> <Esc>O
-inoremap <C-k> <Esc>o
 
-
-" 映射切换buffer的键位
+" windows terminal 插入模式下，ctrl+v Alt+key查看要映射按键
+" <M-key>
+if &term =~ '^xterm'
+    inoremap o <Esc>o
+    inoremap O <Esc>O
+endif
+if has("nvim")
+    inoremap <M-k> <up>
+    inoremap <M-j> <down>
+    inoremap <M-h> <left>
+    inoremap <M-l> <right>
+else
+    inoremap k <up>
+    inoremap j <down>
+    inoremap h <left>
+    inoremap l <right>
+endif
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
-" 删除当前缓冲区
 nnoremap <leader>d :bdelete<CR>
 nnoremap <BS> :nohl<CR>
 syntax on    "语法高亮
@@ -60,6 +75,7 @@ set nowritebackup
 set updatetime=250
 set shortmess+=c
 set relativenumber      "显示行号
+set ttimeoutlen=0      "WT下VIM <ESC>有延迟"
 set number
 set incsearch
 set nowrap
@@ -309,10 +325,10 @@ nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 " coc-explorer
 if has("nvim")
     nnoremap <F2> :CocCommand explorer --position=floating<CR>
-    nnoremap <space>ep :CocCommand explorer --position=floating /
+    nnoremap e :CocCommand explorer --position=floating /
 else
     nnoremap <F2> :CocCommand explorer<CR>
-    nnoremap <space>ep :CocCommand explorer /
+    nnoremap e :CocCommand explorer /
 endif
 
 
@@ -419,7 +435,7 @@ let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" auto-pairs配置
+" auto-pairs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 let g:AutoPairsShortcutToggle = '<leader>pt'
@@ -428,6 +444,8 @@ let g:AutoPairsShortcutBackInsert = '<leader>pb'
 let g:AutoPairsShortcutFastWrap = '<leader>pf'
 let g:AutoPairsMapCh = 0
 let g:AutoPairsCenterLine = 1
+let g:AutoPairsMoveCharacter = ""
+au FileType markdown let b:AutoPairs = {"$":"$"}
 " 删除右括号
 imap <C-x> <Esc>la<BS>
 
@@ -477,9 +495,6 @@ let g:asyncrun_stdin = 1
 " AsyncTasks
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>fr :Leaderf --nowrap task<CR>
-let g:asynctasks_term_pos = 'bottom'
-let g:asynctasks_term_rows = 10
-let g:asynctasks_term_reuse = 1
 " Integration LeaderF
 function! s:lf_task_source(...)
     let rows = asynctasks#source(&columns * 48 / 100)
@@ -540,6 +555,24 @@ let g:Lf_Extensions.task = {
 " let g:mkdp_browser = '/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '「${name}」'
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" floaterm
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:floaterm_autoclose = 1
+nnoremap <leader>fe :Leaderf --nowrap floaterm<CR>
+nnoremap <silent> <F6>    :FloatermToggle<CR>
+tnoremap <silent> <F6>    <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent> <C-t>   :FloatermNew<CR>
+tnoremap <silent> <C-t>   <C-\><C-n><:FloatermNew<CR>
+nnoremap <silent> <C-p>   :FloatermPrev<CR>
+tnoremap <silent> <C-p>   <C-\><C-n>:FloatermPrev<CR>
+nnoremap <silent> <C-n>   :FloatermNext<CR>
+tnoremap <silent> <C-n>   <C-\><C-n>:FloatermNext<CR>
+nnoremap <silent> <C-q>   :FloatermKill<CR>
+tnoremap <silent> <C-q>   <C-\><C-n>:FloatermKill<CR>
 
 
 
