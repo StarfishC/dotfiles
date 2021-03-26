@@ -601,7 +601,7 @@ function! OpenCloseWin()
     endif
 endfunction
 " terminal
-tnoremap <silent> <F5> <C-W>:bwipe!<CR><ESC>:call CompileAndRunCode()<CR>
+tmap <silent> <F5> <C-q><Esc>:call CompileAndRunCode()<CR>
 noremap <silent> <F5> :call CompileAndRunCode()<CR>
 function! CompileAndRunCode()
     exec 'AsyncTask quick-run'
