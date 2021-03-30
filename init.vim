@@ -447,7 +447,7 @@ let g:AutoPairsShortcutFastWrap = '<leader>pf'
 let g:AutoPairsMapCh = 0
 let g:AutoPairsCenterLine = 1
 let g:AutoPairsMoveCharacter = ""
-au FileType markdown let b:AutoPairs = {"$":"$"}
+au FileType markdown let b:AutoPairs = {"$":"$", '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " 删除右括号
 imap <C-x> <Esc>la<BS>
 
