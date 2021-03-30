@@ -132,7 +132,8 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 wslip=$(hostname -I | awk '{print $1}')
 export hostip=$(cat /etc/resolv.conf | grep -oP '(?<=nameserver\ ).*')
 
-set_proxy(){
+set_proxy()
+{
     # export ALL_PROXY=socks5://$hostip:10809
     export ALL_PROXY=http://$hostip:10809
     export HTTP_PROXY=$ALL_PROXY
@@ -152,7 +153,8 @@ set_proxy(){
     # echo "set proxy success"
 }
 
-unset_proxy(){
+unset_proxy()
+{
     unset HTTP_PROXY
     unset http_proxy
     unset HTTPS_PROXY
@@ -166,7 +168,8 @@ unset_proxy(){
 
 
 # ssh_proxy
-ssh_proxy(){
+ssh_proxy()
+{
     ssh="$hostip:10808"
     oldip=`cat ~/.ssh/config | grep -o "[0-9].*[0-9]"`
     pcd=`cat ~/.ssh/config | grep "ProxyCommand"`
@@ -189,7 +192,21 @@ ssh_proxy(){
     fi
 }
 
-test_setting(){
+# apt proxy
+set_apt_proxy()
+{
+    echo -e "Acquire::http::Proxy \"$ALL_PROXY\";" | sudo tee -a /etc/apt/apt.conf.d/proxy.conf > /dev/null;
+    echo -e "Acquire::https::Proxy \"$ALL_PROXY\";" | sudo tee -a /etc/apt/apt.conf.d/proxy.conf > /dev/null;
+}
+
+unset_apt_proxy()
+{
+    sudo sed -i -e '/Acquire::http::Proxy/d' /etc/apt/apt.conf.d/proxy.conf;
+    sudo sed -i -e '/Acquire::https::Proxy/d' /etc/apt/apt.conf.d/proxy.conf;
+}
+
+test_setting()
+{
     echo "Host ip:" ${hostip}
     echo "Wsl ip:" ${wslip}
     echo "Current proxy": $https_proxy
