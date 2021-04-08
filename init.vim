@@ -5,7 +5,8 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdcommenter'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'   // 似乎不维护了
+Plug 'LunarWatcher/auto-pairs'
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'tmhedberg/SimpylFold'   "折叠插件
@@ -48,23 +49,6 @@ nnoremap <silent> k gk
 inoremap jk <Esc>
 inoremap kj <Esc>
 
-" windows terminal 插入模式下，ctrl+v Alt+key查看要映射按键
-" <M-key>
-if &term =~ '^xterm'
-    inoremap o <Esc>o
-    inoremap O <Esc>O
-endif
-if has("nvim")
-    inoremap <M-k> <up>
-    inoremap <M-j> <down>
-    inoremap <M-h> <left>
-    inoremap <M-l> <right>
-else
-    inoremap k <up>
-    inoremap j <down>
-    inoremap h <left>
-    inoremap l <right>
-endif
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
 nnoremap <leader>d :bdelete<CR>
@@ -77,7 +61,7 @@ set nowritebackup
 set updatetime=250
 set shortmess+=c
 set relativenumber      "显示行号
-set ttimeoutlen=0      "WT下VIM <ESC>有延迟"
+set ttimeoutlen=50
 set number
 set incsearch
 set nowrap
@@ -119,6 +103,7 @@ highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight LineNr        ctermbg=NONE guibg=NONE
 highlight Terminal      ctermbg=NONE guibg=NONE
 highlight Pmenu ctermbg=NONE
+" 不自动添加注释行
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 if has('nvim')
     set guicursor=n-v-c:block,i-ci-ve:hor100,r-cr:hor20,o:hor50,
@@ -182,16 +167,12 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use <c-space> to trigger completion.
-if has("nvim")
-    inoremap <silent><expr> <c-space> coc#refresh()
-else
-    inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-space> coc#refresh()
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd User CocJumpPlaceholder call CocActionAsync("showSignatureHelp")
 
-" <cr> confirm completion
-inoremap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
+" <CR> confirm completion
+inoremap <expr> <CR> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -218,11 +199,19 @@ function! s:show_documentation()
     endif
 endfunction
 
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf <Plug>(coc-fix-current)
 
 "重命名当前word
 nmap <leader>rn <Plug>(coc-rename)
+"openlink
+nmap <leader>ol <Plug>(coc-openlink)
 
 "格式化选中区域
 nmap <leader>fs <Plug>(coc-format-selected)
@@ -242,38 +231,41 @@ nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-nnoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<Right>"
-inoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<Left>"
-
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 "跳转下一个代码段占位符
 let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = "<C-k>"
 
 " show all diagnostics
-nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocList diagnostics<CR>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>e  :<C-u>CocList extensions<CR>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<CR>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>"
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 function! SetupCommandAbbrs(from, to)
     exec 'cnoreabbrev <expr> '.a:from
         \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
         \ .'? ("'.a:to.'") : ("'.a:from.'"))'
 endfunction
+" Use C to open coc config
+call SetupCommandAbbrs('C', 'CocConfig')
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -281,20 +273,6 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-
-" Use C to open coc config
-call SetupCommandAbbrs('C', 'CocConfig')
-
-"enable/disable coc integration >
-let g:airline#extensions#coc#enabled = 1
-"change error symbol:
-let airline#extensions#coc#error_symbol = '😡'
-"change warning symbol:
-let airline#extensions#coc#warning_symbol = '😱'
-"change error format:
-let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-"change warning format:
-let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
 let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-highlight',
@@ -312,7 +290,7 @@ let g:coc_global_extensions = ['coc-marketplace',
                             \ ]
 
 " coc-yank
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<CR>
 
 " coc-git
 highlight DiffAdd       ctermbg=NONE ctermfg=green cterm=NONE
@@ -324,6 +302,9 @@ nmap [c <Plug>(coc-git-preconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 
+
+" windows terminal 插入模式下，ctrl+v Alt+key查看要映射按键
+" <M-key> 会导致VIM 插入模式下<ESC>有延迟
 " coc-explorer
 if has("nvim")
     nnoremap <F2> :CocCommand explorer --position=floating<CR>
@@ -375,7 +356,7 @@ let g:Lf_WildIgnore = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline_theme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme = 'violet'
+let g:airline_theme = 'random'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -412,6 +393,16 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>= <Plug>AirlineSelectPrevTab
 nmap <leader>- <Plug>AirlineSelectNextTab
+"enable/disable coc integration >
+let g:airline#extensions#coc#enabled = 1
+"change error symbol:
+let airline#extensions#coc#error_symbol = '😡'
+"change warning symbol:
+let airline#extensions#coc#warning_symbol = '😱'
+"change error format:
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+"change warning format:
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
 
 
@@ -419,9 +410,10 @@ nmap <leader>- <Plug>AirlineSelectNextTab
 " Vista
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F3> :Vista!!<CR>
-let g:vista_update_on_text_changed = 0
+let g:vista_update_on_text_changed = 1
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
+let g:vista_echo_cursor_strategy = 'floating_win'
 autocmd bufenter * if winnr("$") == 1 && vista#sidebar#IsOpen() | execute "normal! :q!\<CR>" | endif
 
 
@@ -430,7 +422,7 @@ autocmd bufenter * if winnr("$") == 1 && vista#sidebar#IsOpen() | execute "norma
 " nerdcommenter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDSpaceDelims = 1   "注释自动添加一个空格
-let g:NERDDefaultAlign = 'start' "对齐方式
+let g:NERDDefaultAlign = 'left' "对齐方式
 let g:NERDCommentEmptyLines = 1
 let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
 
@@ -439,18 +431,13 @@ let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto-pairs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 let g:AutoPairsShortcutToggle = '<leader>pt'
 let g:AutoPairsShortcutJump = '<leader>pj'
 let g:AutoPairsShortcutBackInsert = '<leader>pb'
 let g:AutoPairsShortcutFastWrap = '<leader>pf'
-let g:AutoPairsMapCh = 0
-let g:AutoPairsCenterLine = 1
-let g:AutoPairsMoveCharacter = ""
 au FileType markdown let b:AutoPairs = {"$":"$", '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " 删除右括号
 imap <C-x> <Esc>la<BS>
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -477,10 +464,15 @@ nmap <leader>gd :Gvdiffsplit<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>oc  <Plug>(easymotion-overwin-f)
-nmap <leader>ot  <Plug>(easymotion-overwin-f2)
-nmap <leader>ow  <Plug>(easymotion-overwin-w)
-nmap <leader>ol  <Plug>(easymotion-overwin-line)
+map  <leader><leader>w <Plug>(easymotion-bd-w)
+nmap <leader><leader>w <Plug>(easymotion-overwin-w)
+map  <leader><leader>c <Plug>(easymotion-bd-f)
+nmap <leader><leader>c <Plug>(easymotion-overwin-f)
+nmap <leader><leader>t <Plug>(easymotion-overwin-f2)
+map  <leader><leader>l <Plug>(easymotion-bd-jk)
+nmap <leader><leader>l <Plug>(easymotion-overwin-line)
+autocmd User EasyMotionPromptBegin silent! CocDisable
+autocmd User EasyMotionPromptEnd   silent! CocEnable
 
 
 
@@ -488,7 +480,6 @@ nmap <leader>ol  <Plug>(easymotion-overwin-line)
 " AsyncRun
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:asyncrun_open = 8
-let g:asyncrun_status = ''
 let g:asyncrun_stdin = 1
 
 
@@ -582,7 +573,7 @@ tnoremap <silent> <C-q>   <C-\><C-n>:FloatermKill<CR>
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " delete win
-tnoremap <silent> <F4> <C-W>:bwipe!<CR>
+tnoremap <silent> <F4> <C-\><C-n>:bwipe!<CR>
 noremap <silent> <F4> :call OpenCloseWin()<CR>
 function! OpenCloseWin()
     let winlist = []
@@ -601,7 +592,7 @@ function! OpenCloseWin()
     endif
 endfunction
 " terminal
-tmap <silent> <F5> <C-q><Esc>:call CompileAndRunCode()<CR>
+tnoremap <silent> <F5> <C-\><C-n>:FloatermKill<CR> :call CompileAndRunCode()<CR>
 noremap <silent> <F5> :call CompileAndRunCode()<CR>
 function! CompileAndRunCode()
     exec 'AsyncTask quick-run'
