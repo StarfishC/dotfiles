@@ -5,8 +5,8 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdcommenter'
-" Plug 'jiangmiao/auto-pairs'   // 似乎不维护了
-Plug 'LunarWatcher/auto-pairs'
+Plug 'jiangmiao/auto-pairs'   " 似乎不维护了
+" Plug 'LunarWatcher/auto-pairs'
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'tmhedberg/SimpylFold'   "折叠插件
