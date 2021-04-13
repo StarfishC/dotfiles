@@ -573,7 +573,7 @@ tnoremap <silent> <C-q>   <C-\><C-n>:FloatermKill<CR>
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " delete win
-tnoremap <silent> <F4> <C-\><C-n>:bwipe!<CR>
+tnoremap <silent> <F4> <C-\><C-n>:FloatermKill<CR>
 noremap <silent> <F4> :call OpenCloseWin()<CR>
 function! OpenCloseWin()
     let winlist = []
