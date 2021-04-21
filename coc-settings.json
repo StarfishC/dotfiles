@@ -38,6 +38,9 @@
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "snippets.textmateSnippetsRoots": ["~/.config/snippets"],
+  "html.autoClosingTags": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.indentHandlebars": true,
   "markdownlint.config": {
     "MD033": false,
     "MD013": false,

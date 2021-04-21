@@ -5,8 +5,7 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdcommenter'
-Plug 'jiangmiao/auto-pairs'   " 似乎不维护了
-" Plug 'LunarWatcher/auto-pairs'
+Plug 'LunarWatcher/auto-pairs'
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'tmhedberg/SimpylFold'   "折叠插件
@@ -21,7 +20,7 @@ Plug 'PProvost/vim-ps1'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
@@ -144,6 +143,13 @@ au BufNewFile,BufRead *.md
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.json
 \ setlocal filetype=jsonc syntax=json
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 对于html
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufNewFile,BufRead *.html
+\ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -286,7 +292,10 @@ let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-prettier',
                             \  'coc-markdownlint',
                             \  'coc-cmake',
-                            \  'coc-explorer'
+                            \  'coc-explorer',
+                            \  'coc-html',
+                            \  'coc-htmlhint',
+                            \  'coc-emmet',
                             \ ]
 
 " coc-yank
@@ -431,11 +440,15 @@ let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto-pairs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:AutoPairsCompatibleMaps = 0
+let g:AutoPairsMapBS = 1
+let g:AutoPairsMultilineBackspace = 1
 let g:AutoPairsShortcutToggle = '<leader>pt'
 let g:AutoPairsShortcutJump = '<leader>pj'
 let g:AutoPairsShortcutBackInsert = '<leader>pb'
 let g:AutoPairsShortcutFastWrap = '<leader>pf'
 au FileType markdown let b:AutoPairs = {"$":"$", '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
+au FileType html let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " 删除右括号
 imap <C-x> <Esc>la<BS>
 
