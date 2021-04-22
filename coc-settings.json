@@ -1,8 +1,8 @@
 {
   "suggest.timeout": 500,
   "suggest.enablePreview": true,
-  "suggest.snippetIndicator": "🔰",
-  "suggest.maxCompleteItemCount": 20,
+  "suggest.snippetIndicator": "🚀",
+  "suggest.maxCompleteItemCount": 30,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",

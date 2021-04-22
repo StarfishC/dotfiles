@@ -45,13 +45,14 @@ nnoremap <C-H> <C-W><C-H>
 
 nnoremap <silent> j gj
 nnoremap <silent> k gk
-inoremap jk <Esc>
-inoremap kj <Esc>
-
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
 nnoremap <leader>d :bdelete<CR>
 nnoremap <BS> :nohl<CR>
+inoremap jk <Esc>
+inoremap kj <Esc>
+nmap = +
+
 syntax on    "语法高亮
 syntax enable
 set hidden
@@ -135,7 +136,7 @@ au BufNewFile,BufRead *.[ch]pp,*.[ch]
 " 对于md文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.md
-\ setlocal wrap
+\ setlocal wrap nofoldenable
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -162,21 +163,15 @@ au FileType qf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-nvim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-highlight link CocFloating SignColumn
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 inoremap <silent><expr> <TAB>
         \ pumvisible() ? "\<C-n>" :
         \ <SID>check_back_space() ? "\<TAB>" :
         \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-autocmd CursorHold * silent call CocActionAsync('highlight')
-autocmd User CocJumpPlaceholder call CocActionAsync("showSignatureHelp")
-
 " <CR> confirm completion
 inoremap <expr> <CR> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -222,6 +217,8 @@ nmap <leader>ol <Plug>(coc-openlink)
 "格式化选中区域
 nmap <leader>fs <Plug>(coc-format-selected)
 xmap <leader>fs <Plug>(coc-format-selected)
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup mygroup
     autocmd!
     " Setup formatexpr specified filetype(s).
@@ -279,6 +276,15 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+
+nmap <silent> <C-c> <Plug>(coc-cursors-position)
+nmap <expr> <silent> <C-d> <SID>select_current_word()
+function! s:select_current_word()
+  if !get(b:, 'coc_cursors_activated', 0)
+    return "\<Plug>(coc-cursors-word)"
+  endif
+  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfunc
 
 let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-highlight',
@@ -565,20 +571,23 @@ let g:mkdp_page_title = '「${name}」'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-markdown
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:tex_conceal = ""
+let g:vim_markdown_math = 1
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " floaterm
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:floaterm_autoclose = 1
+let g:floaterm_keymap_new  = '<C-t>'
+let g:floaterm_keymap_prev = '<C-p>'
+let g:floaterm_keymap_next = '<C-n>'
+let g:floaterm_keymap_kill = '<C-q>'
+let g:floaterm_keymap_toggle = '<F6>'
 nnoremap <leader>fe :Leaderf --nowrap floaterm<CR>
-nnoremap <silent> <F6>    :FloatermToggle<CR>
-tnoremap <silent> <F6>    <C-\><C-n>:FloatermToggle<CR>
-nnoremap <silent> <C-t>   :FloatermNew<CR>
-tnoremap <silent> <C-t>   <C-\><C-n><:FloatermNew<CR>
-nnoremap <silent> <C-p>   :FloatermPrev<CR>
-tnoremap <silent> <C-p>   <C-\><C-n>:FloatermPrev<CR>
-nnoremap <silent> <C-n>   :FloatermNext<CR>
-tnoremap <silent> <C-n>   <C-\><C-n>:FloatermNext<CR>
-nnoremap <silent> <C-q>   :FloatermKill<CR>
-tnoremap <silent> <C-q>   <C-\><C-n>:FloatermKill<CR>
 
 
 
