@@ -5,7 +5,7 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdcommenter'
-Plug 'LunarWatcher/auto-pairs'
+Plug 'LunarWatcher/auto-pairs', {'tag': '*'}
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'tmhedberg/SimpylFold'   "折叠插件
@@ -19,7 +19,7 @@ Plug 'ryanoasis/vim-devicons' "图标
 Plug 'PProvost/vim-ps1'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'honza/vim-snippets'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'skywind3000/asyncrun.vim'
@@ -456,7 +456,7 @@ let g:AutoPairsShortcutFastWrap = '<leader>pf'
 au FileType markdown let b:AutoPairs = {"$":"$", '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 au FileType html let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " 删除右括号
-imap <C-x> <Esc>la<BS>
+imap <C-x> <Esc>xa
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
