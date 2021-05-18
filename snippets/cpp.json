@@ -7,13 +7,16 @@
 	"c++ header": {
 		"prefix": "header",
 		"body": [
-			"// File:    $TM_FILENAME",
-			"// Author:  csh",
-			"// Date:    $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE",
-			"// ===================",
+            "/******************************************************************************",
+			" * File:           $TM_FILENAME",
+			" * Author:         caoshenghui <576365750@qq.com>",
+            " * Github:         https://github.com/caoshenghui",
+            " * Description:$1",
+            " * LICENSE:        MIT",
+            "******************************************************************************/",
 			"",
 			"",
-            ""
+            "$0"
 		],
 		"description": "c++ header files"
 	},

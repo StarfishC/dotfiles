@@ -28,6 +28,7 @@ Plug 'skywind3000/asyncrun.extra'
 Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'voldikss/LeaderF-floaterm'
 Plug 'voldikss/vim-floaterm'
+Plug 'caoshenghui/tasksystem'
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()            " required
@@ -47,7 +48,7 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
-nnoremap <leader>d :bdelete<CR>
+nnoremap <leader>d :bdelete!<CR>
 nnoremap <BS> :nohl<CR>
 inoremap jk <Esc>
 inoremap kj <Esc>
@@ -380,7 +381,7 @@ let g:Lf_WildIgnore = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline_theme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme = 'random'
+let g:airline_theme = 'violet'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
