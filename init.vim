@@ -38,24 +38,6 @@ call plug#end()            " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"split navigations切割窗口
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-nnoremap <silent> j gj
-nnoremap <silent> k gk
-nnoremap [b :bp<CR>
-nnoremap ]b :bn<CR>
-nnoremap <leader>d :bdelete!<CR>
-nnoremap <BS> :nohl<CR>
-inoremap jk <Esc>
-inoremap kj <Esc>
-nmap = +
-
-syntax on    "语法高亮
-syntax enable
 set hidden
 set nobackup
 set nowritebackup
@@ -83,11 +65,11 @@ set autowrite  "切换buffer时自动保存当前文件
 set backspace=2
 set ignorecase "搜索时忽略大小写
 set smartcase  "如果搜索包含大写字母，不忽略大小写
-set expandtab       "tab替换为空格键
 set fileformat=unix   "保存文件格式
 set foldmethod=indent
 set foldlevel=99
 set foldlevelstart=0
+set expandtab       "tab替换为空格键
 set tabstop=4   "tab宽度
 set softtabstop=4
 set shiftwidth=4
@@ -96,6 +78,24 @@ set cursorline
 set wildmenu
 set signcolumn=number
 colorscheme molokai
+let mapleader = " "
+
+"split navigations切割窗口
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
+nnoremap <leader>b :bwipe!<CR>
+nnoremap <BS> :nohl<CR>
+inoremap jk <Esc>
+inoremap kj <Esc>
+nmap = +
+
 " highlight cursorLineNr  ctermfg=12
 " highlight cursorLine    ctermbg=238
 " highlight Comment       ctermbg=NONE ctermfg=117
@@ -119,46 +119,30 @@ else
     endif
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于py文件
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.py
 \ setlocal textwidth=79
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于c/c++文件
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.[ch]pp,*.[ch]
 \ setlocal cindent
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于md文件
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.md
 \ setlocal wrap nofoldenable
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于json
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.json
 \ setlocal filetype=jsonc syntax=json
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于html
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.html
 \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 对于quickfix
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au FileType qf
 \ setlocal norelativenumber
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -175,10 +159,12 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " <CR> confirm completion
 inoremap <expr> <CR> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
+" trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
 
 "补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-"使用'[g 和']g跳转诊断出
+"使用'[d 和']d跳转诊断出
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
@@ -219,20 +205,14 @@ nmap <leader>ol <Plug>(coc-openlink)
 nmap <leader>fs <Plug>(coc-format-selected)
 xmap <leader>fs <Plug>(coc-format-selected)
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
-augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
+
+nmap <silent> ,h <Plug>(coc-float-hide)
+nmap <silent> ,j <Plug>(coc-float-jump)
 
 xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
@@ -242,6 +222,24 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
+
+nmap <silent> <C-c> <Plug>(coc-cursors-position)
+nmap <expr> <silent> <C-d> <SID>select_current_word()
+function! s:select_current_word()
+    if !get(b:, 'coc_cursors_activated', 0)
+        return "\<Plug>(coc-cursors-word)"
+    endif
+    return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfunc
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -261,16 +259,10 @@ nnoremap <silent> <space>d  :<C-u>CocList diagnostics<CR>
 nnoremap <silent> <space>e  :<C-u>CocList extensions<CR>
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<CR>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<CR>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 function! SetupCommandAbbrs(from, to)
     exec 'cnoreabbrev <expr> '.a:from
@@ -286,15 +278,6 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-
-nmap <silent> <C-c> <Plug>(coc-cursors-position)
-nmap <expr> <silent> <C-d> <SID>select_current_word()
-function! s:select_current_word()
-  if !get(b:, 'coc_cursors_activated', 0)
-    return "\<Plug>(coc-cursors-word)"
-  endif
-  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
-endfunc
 
 let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-highlight',
@@ -459,10 +442,10 @@ let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
 let g:AutoPairsCompatibleMaps = 0
 let g:AutoPairsMapBS = 1
 let g:AutoPairsMultilineBackspace = 1
-let g:AutoPairsShortcutToggle = '<leader>pt'
-let g:AutoPairsShortcutJump = '<leader>pj'
+let g:AutoPairsShortcutToggle = '\t'
+let g:AutoPairsShortcutJump = '\j'
 let g:AutoPairsShortcutBackInsert = '<leader>pb'
-let g:AutoPairsShortcutFastWrap = '<leader>pf'
+let g:AutoPairsShortcutFastWrap = '\f'
 au FileType markdown let b:AutoPairs = {"$":"$", '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 au FileType html let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " 删除右括号

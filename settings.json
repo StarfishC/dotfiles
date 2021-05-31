@@ -25,7 +25,11 @@
       "snapOnInput": true,
       "startingDirectory": "D:/code/",
       "backgroundImage": "C:\\Users\\csh\\Pictures\\Saved Pictures\\back.png",
-      "backgroundImageOpacity": 0.1
+      "backgroundImageOpacity": 0.1,
+      "unfocusedAppearance": {
+        "backgroundImage": "C:\\Users\\csh\\Pictures\\Saved Pictures\\SaberBlack.jpg",
+        "backgroundImageOpacity": 0.3
+      }
     },
     "list": [
       {
