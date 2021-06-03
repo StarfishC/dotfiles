@@ -22,9 +22,6 @@ Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'honza/vim-snippets'
 Plug 'bfrg/vim-cpp-modern'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'skywind3000/asynctasks.vim'
-Plug 'skywind3000/asyncrun.extra'
 Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'voldikss/LeaderF-floaterm'
 Plug 'voldikss/vim-floaterm'
@@ -201,10 +198,6 @@ nmap <leader>rn <Plug>(coc-rename)
 "openlink
 nmap <leader>ol <Plug>(coc-openlink)
 
-"格式化选中区域
-nmap <leader>fs <Plug>(coc-format-selected)
-xmap <leader>fs <Plug>(coc-format-selected)
-
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
@@ -255,8 +248,6 @@ let g:coc_snippet_prev = "<C-k>"
 
 " show all diagnostics
 nnoremap <silent> <space>d  :<C-u>CocList diagnostics<CR>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<CR>
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
 " Do default action for next item.
@@ -315,10 +306,10 @@ nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 " <M-key> 会导致VIM 插入模式下<ESC>有延迟
 " coc-explorer
 if has("nvim")
-    nnoremap <F2> :CocCommand explorer --position=floating<CR>
-    nnoremap e :CocCommand explorer --position=floating /
+    nnoremap <space>e :CocCommand explorer --position=floating<CR>
+    nnoremap <M-e> :CocCommand explorer --position=floating /
 else
-    nnoremap <F2> :CocCommand explorer<CR>
+    nnoremap <space>e :CocCommand explorer<CR>
     nnoremap e :CocCommand explorer /
 endif
 
@@ -460,7 +451,7 @@ let g:SimpylFold_docstring_preview=1   "看到折叠代码的文档字符串
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-rainbow
+" rainbow
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rainbow_active = 1        "set to 0 if you want to enable it later via :RainbowToggle"
 
@@ -485,70 +476,6 @@ map  <leader><leader>l <Plug>(easymotion-bd-jk)
 nmap <leader><leader>l <Plug>(easymotion-overwin-line)
 autocmd User EasyMotionPromptBegin silent! CocDisable
 autocmd User EasyMotionPromptEnd   silent! CocEnable
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AsyncRun
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:asyncrun_open = 8
-let g:asyncrun_stdin = 1
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AsyncTasks
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>fr :Leaderf --nowrap task<CR>
-" Integration LeaderF
-function! s:lf_task_source(...)
-    let rows = asynctasks#source(&columns * 48 / 100)
-    let source = []
-    for row in rows
-        let name = row[0]
-        let source += [name . '  ' . row[1] . '  : ' . row[2]]
-    endfor
-    return source
-endfunction
-
-function! s:lf_task_accept(line, arg)
-    let pos = stridx(a:line, '<')
-    if pos < 0
-        return
-    endif
-    let name = strpart(a:line, 0, pos)
-    let name = substitute(name, '^\s*\(.\{-}\)\s*$', '\1', '')
-    if name != ''
-        exec "AsyncTask " . name
-    endif
-endfunction
-
-function! s:lf_task_digest(line, mode)
-    let pos = stridx(a:line, '<')
-    if pos < 0
-        return [a:line, 0]
-    endif
-    let name = strpart(a:line, 0, pos)
-    return [name, 0]
-endfunction
-
-function! s:lf_win_init(...)
-    setlocal nonumber
-    setlocal nowrap
-endfunction
-
-let g:Lf_Extensions = get(g:, 'Lf_Extensions', {})
-let g:Lf_Extensions.task = {
-            \ 'source': string(function('s:lf_task_source'))[10:-3],
-            \ 'accept': string(function('s:lf_task_accept'))[10:-3],
-            \ 'get_digest': string(function('s:lf_task_digest'))[10:-3],
-            \ 'highlights_def': {
-            \       'Lf_hl_funcScope': '^\S\+',
-            \       'Lf_hl_funcDirname': '^\S\+\s*\zs<.*>\ze\s*:',
-            \ },
-            \ 'help' : 'navigate available tasks from asynctasks.vim',
-            \ 'after_enter': string(function('s:lf_win_init'))[10:-3]
-        \ }
 
 
 
@@ -588,7 +515,7 @@ nnoremap <leader>fe :Leaderf --nowrap floaterm<CR>
 " Quickly Run
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " delete win
-tnoremap <silent> <F4> <C-\><C-n>:FloatermKill<CR>
+tnoremap <silent> <F4> <C-\><C-n>:FloatermKill!<CR>
 noremap <silent> <F4> :call OpenCloseWin()<CR>
 function! OpenCloseWin()
     let winlist = []
@@ -603,14 +530,14 @@ function! OpenCloseWin()
             exec 'bwipe! ' . i
         endfor
     else
-        exec "call asyncrun#quickfix_toggle(8)"
+        exec "copen"
     endif
 endfunction
 " terminal
 tnoremap <silent> <F5> <C-\><C-n>:FloatermKill<CR> :call CompileAndRunCode()<CR>
 noremap <silent> <F5> :call CompileAndRunCode()<CR>
 function! CompileAndRunCode()
-    exec 'AsyncTask quick-run'
+    exec 'Tasksystem quick-run'
 endfunction
 
 
