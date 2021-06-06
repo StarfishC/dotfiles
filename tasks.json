@@ -9,7 +9,7 @@
     },
     "tasks": [
         {
-            "label": "quick",
+            "label": "quick-run",
             "type": "floaterm",
             "options": {
                 "position": "bottomright",
@@ -33,7 +33,7 @@
                         "${fileWorkspaceFolder}${pathSeparator}a.out"
                     ],
                     "dependsOn": ["execute"],
-                    "dependsType": "reverse",
+                    "dependsType": "postLaunch",
                     "dependsOrder": "sequent"
                 },
                 "vim": {
