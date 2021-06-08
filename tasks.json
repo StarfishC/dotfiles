@@ -11,6 +11,7 @@
         {
             "label": "quick-run",
             "type": "floaterm",
+            "save": "current",
             "options": {
                 "position": "bottomright",
                 "autoclose": 0
