@@ -35,45 +35,47 @@ call plug#end()            " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set hidden
-set nobackup
-set nowritebackup
-set updatetime=250
-set shortmess+=c
-set relativenumber      "显示行号
-set ttimeoutlen=50
-set number
-set incsearch
-set nowrap
-set showmatch
-set showcmd
-set scrolloff=3     "距离顶部和底部3行"
-set encoding=UTF-8
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set fenc=UTF-8       "编码
-set smartindent
-set mouse=a        "启用鼠标
-set hlsearch
-set linebreak
-"set clipboard+=unnamed  "共享系统剪切板
 set autoread
-set autowrite  "切换buffer时自动保存当前文件
+set autowrite
 set backspace=2
-set ignorecase "搜索时忽略大小写
-set smartcase  "如果搜索包含大写字母，不忽略大小写
-set fileformat=unix   "保存文件格式
+set cursorline
+"set clipboard+=unnamed  "共享系统剪切板
+set encoding=UTF-8
+set expandtab       "tab替换为空格键
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set fenc=UTF-8
+set fileformat=unix
 set foldmethod=indent
 set foldlevel=99
 set foldlevelstart=0
-set expandtab       "tab替换为空格键
-set tabstop=4   "tab宽度
+set formatoptions-=c formatoptions-=r formatoptions-=o  " 不自动添加注释行
+set fillchars=vert:‖
+set hidden
+set hlsearch
+set incsearch
+set ignorecase
+set linebreak
+set nobackup
+set nowritebackup
+set nowrap
+set number
+set mouse=a
+set relativenumber
+set shortmess+=c
+set smartindent
+set smartcase
+set showmatch
+set showcmd
+set scrolloff=3     "距离顶部和底部3行"
 set softtabstop=4
 set shiftwidth=4
-set fillchars=vert:‖
-set cursorline
-set wildmenu
 set signcolumn=number
+set ttimeout
+set ttimeoutlen=50
+set termencoding=utf-8
+set tabstop=4
+set updatetime=250
+set wildmenu
 colorscheme molokai
 let mapleader = " "
 
@@ -101,8 +103,6 @@ highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight LineNr        ctermbg=NONE guibg=NONE
 highlight Terminal      ctermbg=NONE guibg=NONE
 highlight Pmenu ctermbg=NONE
-" 不自动添加注释行
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 if has('nvim')
     set guicursor=n-v-c:block,i-ci-ve:hor100,r-cr:hor20,o:hor50,
             \a:blinkwait0-blinkoff400-blinkon250-Cursor/lCursor,
