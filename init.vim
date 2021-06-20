@@ -117,27 +117,27 @@ else
 endif
 
 " 对于py文件
-au BufNewFile,BufRead *.py
+autocmd BufNewFile,BufRead *.py
 \ setlocal textwidth=79
 
 " 对于c/c++文件
-au BufNewFile,BufRead *.[ch]pp,*.[ch]
+autocmd BufNewFile,BufRead *.[ch]pp,*.[ch]
 \ setlocal cindent
 
 " 对于md文件
-au BufNewFile,BufRead *.md
+autocmd BufNewFile,BufRead *.md
 \ setlocal wrap nofoldenable
 
 " 对于json
-au BufNewFile,BufRead *.json
+autocmd BufNewFile,BufRead *.json
 \ setlocal filetype=jsonc syntax=json
 
 " 对于html
-au BufNewFile,BufRead *.html
+autocmd BufNewFile,BufRead *.html
 \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " 对于quickfix
-au FileType qf
+autocmd FileType qf
 \ setlocal norelativenumber
 
 
@@ -157,7 +157,11 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " <CR> confirm completion
 inoremap <expr> <CR> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
 " trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
+if has("nvim")
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 "补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -433,14 +437,17 @@ let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
 let g:AutoPairsCompatibleMaps = 0
 let g:AutoPairsMapBS = 1
 let g:AutoPairsMultilineBackspace = 1
+let g:AutoPairsMultilineClose = 1
+let g:AutoPairsShortcutToggleMultilineClose = "<c-]>"
 let g:AutoPairsShortcutToggle = '\t'
 let g:AutoPairsShortcutJump = '\j'
-let g:AutoPairsShortcutBackInsert = '<leader>pb'
+let g:AutoPairsShortcutBackInsert = '\b'
 let g:AutoPairsShortcutFastWrap = '\f'
-au FileType markdown let b:AutoPairs = {"$":"$", '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
-au FileType html let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
+autocmd FileType markdown let b:AutoPairs = {"$":"$", '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
+autocmd FileType html let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " 删除右括号
 imap <C-x> <Esc>xa
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
