@@ -2,7 +2,7 @@
 
 - [.zshrc](./.zshrc)  
   wsl 相关配置，包括 socks5,http 代理
-- [init.vim](./init.vim)  
+- [vimrc](./vimrc)  
   vim/neovim 相关配置
   - [tasks.json](./tasks.json)
     vim 插件 tasksystem 的全局任务配置
