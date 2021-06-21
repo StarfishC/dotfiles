@@ -48,7 +48,6 @@ set fileformat=unix
 set foldmethod=indent
 set foldlevel=99
 set foldlevelstart=0
-set formatoptions-=c formatoptions-=r formatoptions-=o  " 不自动添加注释行
 set fillchars=vert:‖
 set hidden
 set hlsearch
@@ -73,7 +72,6 @@ set signcolumn=number
 set ttimeout
 set ttimeoutlen=50
 set termencoding=utf-8
-set tabstop=4
 set updatetime=250
 set wildmenu
 colorscheme molokai
@@ -115,6 +113,9 @@ else
         let &t_SI .= "\<Esc>[3 q"
     endif
 endif
+
+" 移除换行自动注释
+au VimEnter * setlocal formatoptions&
 
 " 对于py文件
 autocmd BufNewFile,BufRead *.py
