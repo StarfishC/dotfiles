@@ -131,7 +131,7 @@ autocmd BufNewFile,BufRead *.md
 
 " 对于json
 autocmd BufNewFile,BufRead *.json
-\ setlocal filetype=jsonc syntax=json
+\ setlocal filetype=jsonc syntax=json softtabstop=2
 
 " 对于html
 autocmd BufNewFile,BufRead *.html
