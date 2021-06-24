@@ -338,7 +338,6 @@ autocmd BufNewFile,BufReadPre *.json,*.md let g:indentLine_setConceal = 0
 let g:Lf_ShortcutF = "<leader>ff"
 noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
 noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
@@ -440,7 +439,7 @@ let g:AutoPairsMapBS = 1
 let g:AutoPairsMultilineBackspace = 1
 let g:AutoPairsMultilineClose = 1
 let g:AutoPairsShortcutToggleMultilineClose = "<c-]>"
-let g:AutoPairsShortcutToggle = '\t'
+let g:AutoPairsShortcutToggle = '\pt'
 let g:AutoPairsShortcutJump = '\j'
 let g:AutoPairsShortcutBackInsert = '\b'
 let g:AutoPairsShortcutFastWrap = '\f'
@@ -515,7 +514,7 @@ let g:floaterm_keymap_prev = '<C-p>'
 let g:floaterm_keymap_next = '<C-n>'
 let g:floaterm_keymap_kill = '<C-q>'
 let g:floaterm_keymap_toggle = '<F6>'
-nnoremap <leader>fe :Leaderf --nowrap floaterm<CR>
+nnoremap <leader>ft :Leaderf --nowrap floaterm<CR>
 
 
 
