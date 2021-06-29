@@ -115,7 +115,7 @@ else
 endif
 
 " 移除换行自动注释
-au VimEnter * setlocal formatoptions&
+au VimEnter * setlocal formatoptions=tcq
 
 " 对于py文件
 autocmd BufNewFile,BufRead *.py
@@ -440,9 +440,9 @@ let g:AutoPairsMultilineBackspace = 1
 let g:AutoPairsMultilineClose = 1
 let g:AutoPairsShortcutToggleMultilineClose = "<c-]>"
 let g:AutoPairsShortcutToggle = '\pt'
-let g:AutoPairsShortcutJump = '\j'
-let g:AutoPairsShortcutBackInsert = '\b'
-let g:AutoPairsShortcutFastWrap = '\f'
+let g:AutoPairsShortcutJump = '\pj'
+let g:AutoPairsShortcutBackInsert = '\pb'
+let g:AutoPairsShortcutFastWrap = '\pf'
 autocmd FileType markdown let b:AutoPairs = {"$":"$", '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 autocmd FileType html let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " 删除右括号
