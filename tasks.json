@@ -52,11 +52,11 @@
       "command": "time",
       "args": ["${fileWorkspaceFolder}${pathSeparator}a.out"]
     },
-    // {
-    //   "label": "project-build",
-    //   "command": "rm build -r;mkdir build && cd build && cmake",
-    //   "args": ["-DECMAKE_EXPORT_COMPILE_COMMANDS=1", ".."]
-    // },
+    {
+      "label": "project-build",
+      "command": "rm build -r;mkdir build && cd build && cmake",
+      "args": ["-DECMAKE_EXPORT_COMPILE_COMMANDS=1", ".."]
+    },
     {
       "label": "project-cmake",
       "command": "cmake",

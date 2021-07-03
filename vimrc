@@ -508,7 +508,7 @@ let g:vim_markdown_math = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tasksystem
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:tasksystem_listLeaderF = 1
+let g:tasksystem_usingLeaderF = 1
 noremap <leader>fr :Leaderf --nowrap task<CR>
 
 
