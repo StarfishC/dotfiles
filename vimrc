@@ -115,7 +115,7 @@ else
 endif
 
 " 移除换行自动注释
-au VimEnter * setlocal formatoptions=tcq
+au BufNewFile,BufRead * setlocal formatoptions=tcq
 
 " 对于py文件
 autocmd BufNewFile,BufRead *.py
