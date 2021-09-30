@@ -5,17 +5,16 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdcommenter'
-Plug 'LunarWatcher/auto-pairs', {'tag': '*'}
+Plug 'LunarWatcher/auto-pairs'
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
-Plug 'tmhedberg/SimpylFold'   "折叠插件
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons' "图标
+Plug 'ryanoasis/vim-devicons'
 Plug 'PProvost/vim-ps1'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
@@ -363,19 +362,15 @@ let g:airline_theme = 'violet'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-airline配置:优化vim界面"
+" vim-airline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#vista#enabled = 1
-" 使用powerline打过补丁的字体
 let g:airline_powerline_fonts = 1
-" 开启tabline
 let g:airline#extensions#tabline#enabled = 1
-" tabline中buffer显示编号
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-" 是否监测空格错误
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '~'
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'conflicts' ]
@@ -396,16 +391,12 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>= <Plug>AirlineSelectPrevTab
 nmap <leader>- <Plug>AirlineSelectNextTab
-"enable/disable coc integration >
 let g:airline#extensions#coc#enabled = 1
-"change error symbol:
 let airline#extensions#coc#error_symbol = '😡'
-"change warning symbol:
 let airline#extensions#coc#warning_symbol = '😱'
-"change error format:
 let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-"change warning format:
 let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+let g:airline#extensions#hunks#coc_git = 1
 
 
 
@@ -426,7 +417,7 @@ autocmd bufenter * if winnr("$") == 1 && vista#sidebar#IsOpen() | execute "norma
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDSpaceDelims = 1   "注释自动添加一个空格
 let g:NERDDefaultAlign = 'left' "对齐方式
-let g:NERDCommentEmptyLines = 1
+let g:NERDCommentEmptyLines = 0
 let g:NERDToggleCheckAllLines = 1 "允许检查是否注释
 
 
@@ -447,13 +438,6 @@ autocmd FileType markdown let b:AutoPairs = {"$":"$", '(':')', '[':']', '{':'}',
 autocmd FileType html let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " 删除右括号
 imap <C-x> <Esc>xa
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SimplyFold配置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SimpylFold_docstring_preview=1   "看到折叠代码的文档字符串
 
 
 
