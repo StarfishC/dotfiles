@@ -27,7 +27,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'caoshenghui/tasksystem'
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
 
-call plug#end()            " required
+call plug#end()
 
 
 
@@ -38,9 +38,9 @@ set autoread
 set autowrite
 set backspace=2
 set cursorline
-"set clipboard+=unnamed  "共享系统剪切板
+"set clipboard+=unnamed
 set encoding=UTF-8
-set expandtab       "tab替换为空格键
+set expandtab
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set fenc=UTF-8
 set fileformat=unix
@@ -64,7 +64,7 @@ set smartindent
 set smartcase
 set showmatch
 set showcmd
-set scrolloff=3     "距离顶部和底部3行"
+set scrolloff=3
 set softtabstop=4
 set shiftwidth=4
 set signcolumn=number
@@ -76,7 +76,6 @@ set wildmenu
 colorscheme molokai
 let mapleader = " "
 
-"split navigations切割窗口
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -403,7 +402,7 @@ let g:airline#extensions#hunks#coc_git = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vista
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F3> :Vista!!<CR>
+map <space>v :Vista!!<CR>
 let g:vista_update_on_text_changed = 1
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
