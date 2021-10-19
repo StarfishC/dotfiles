@@ -321,7 +321,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:indentLine_char = '¦'
 let g:indentLine_enabled = 1
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_color_term = 175
@@ -443,7 +442,7 @@ imap <C-x> <Esc>xa
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rainbow
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:rainbow_active = 1        "set to 0 if you want to enable it later via :RainbowToggle"
+let g:rainbow_active = 1
 
 
 
