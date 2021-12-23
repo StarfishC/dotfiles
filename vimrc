@@ -337,11 +337,13 @@ noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
+noremap <leader>fh :<C-U>Leaderf! rg --recall<CR>
 xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 let g:Lf_WindowHeight = 0.40
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
 let g:Lf_ShowDevIcons = 1
+let g:Lf_IngoreCurrentBufferName = 1
 let g:Lf_WorkingDirectoryMode = 'ac'
 " let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_StlSeparator = { 'left': "\u2b80", 'right': "\u2b82" }
@@ -504,6 +506,7 @@ let g:floaterm_keymap_prev = '<C-p>'
 let g:floaterm_keymap_next = '<C-n>'
 let g:floaterm_keymap_kill = '<C-q>'
 let g:floaterm_keymap_toggle = '<F6>'
+hi FloatermBorder ctermfg = cyan
 nnoremap <leader>ft :Leaderf --nowrap floaterm<CR>
 
 
