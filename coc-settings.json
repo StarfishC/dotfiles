@@ -35,6 +35,7 @@
   "diagnostic.warningSign": "‼",
   "signature.preferShownAbove": false,
   "coc.preferences.extensionUpdateCheck": "weekly",
+  "yank.enableCompletion": false,
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "snippets.textmateSnippetsRoots": ["~/.config/snippets"],
