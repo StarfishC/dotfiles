@@ -20,12 +20,12 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'honza/vim-snippets'
-Plug 'bfrg/vim-cpp-modern'
+" Plug 'bfrg/vim-cpp-modern'
 Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'voldikss/LeaderF-floaterm'
 Plug 'voldikss/vim-floaterm'
 Plug 'caoshenghui/tasksystem'
-" Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()
 
@@ -289,6 +289,7 @@ let g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-html',
                             \  'coc-htmlhint',
                             \  'coc-emmet',
+                            \  'coc-clangd',
                             \ ]
 
 " coc-yank

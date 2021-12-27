@@ -1,7 +1,7 @@
 {
   "suggest.timeout": 500,
   "suggest.enablePreview": true,
-  "suggest.snippetIndicator": "🚀",
+  "suggest.snippetIndicator": "",
   "suggest.maxCompleteItemCount": 30,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
@@ -41,25 +41,10 @@
   "html.autoClosingTags": true,
   "html.format.indentInnerHtml": true,
   "html.format.indentHandlebars": true,
+  "clangd.semanticHighlighting": true,
   "markdownlint.config": {
     "MD033": false,
     "MD013": false,
     "MD027": false
-  },
-  "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "compile_commands.json", ".git/"],
-      "initializationOptions": {
-        "cache": {
-          "directory": "/home/ubuntu/.cache/.ccls-cache"
-        },
-        "client": {
-          "snippetSupport": true
-        },
-        "highlight": {"lsRanges": true}
-      }
-    }
   }
 }
