@@ -25,7 +25,6 @@ Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'voldikss/LeaderF-floaterm'
 Plug 'voldikss/vim-floaterm'
 Plug 'caoshenghui/tasksystem'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()
 
@@ -304,6 +303,7 @@ nmap ]g <Plug>(coc-git-nextchunk)
 nmap [c <Plug>(coc-git-preconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
+let g:coc_default_semantic_highlight_groups = 1
 
 
 " windows terminal 插入模式下，ctrl+v Alt+key查看要映射按键

@@ -42,7 +42,6 @@
   "html.autoClosingTags": true,
   "html.format.indentInnerHtml": true,
   "html.format.indentHandlebars": true,
-  "clangd.semanticHighlighting": true,
   "markdownlint.config": {
     "MD033": false,
     "MD013": false,
