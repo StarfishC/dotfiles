@@ -217,3 +217,4 @@ alias unsetproxy=unset_proxy
 alias testproxy=test_setting
 
 set_proxy
+set_apt_proxy
