@@ -534,7 +534,7 @@ function! OpenCloseWin()
     endif
 endfunction
 " terminal
-tnoremap <silent> <F5> <C-\><C-n>:FloatermKill<CR> :call CompileAndRunCode()<CR>
+tnoremap <silent> <F5> <C-\><C-n>:FloatermHide<CR> :call CompileAndRunCode()<CR>
 noremap <silent> <F5> :call CompileAndRunCode()<CR>
 function! CompileAndRunCode()
     exec 'TaskRun quick-run'
