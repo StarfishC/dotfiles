@@ -118,37 +118,28 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# export hostip=$(cat /etc/resolv.conf | grep -oP '(?<=nameserver\ ).*')
-
-# export ALL_PROXY=socks5://$hostip:10808
-# export HTTP_PROXY=$ALL_PROXY
-# export HTTPS_PROXY=$ALL_PROXY
-
-# 设置git的代理
-# if [ "`git config --global --get proxy.https`" != "socks5://$hostip:10808"  ]; then
-#         git config --global proxy.https socks5://$hostip:10808
-# fi
-
+# proxy
 wslip=$(hostname -I | awk '{print $1}')
 export hostip=$(cat /etc/resolv.conf | grep -oP '(?<=nameserver\ ).*')
+httpport=10808
+socksport=10809
 
 set_proxy()
 {
     # export ALL_PROXY=socks5://$hostip:10809
-    export ALL_PROXY=http://$hostip:10809
+    export ALL_PROXY=http://$hostip:$httpport
     export HTTP_PROXY=$ALL_PROXY
     export http_proxy=$ALL_PROXY
     export HTTPS_PROXY=$ALL_PROXY
     export https_proxy=$ALL_PROXY
 
-    if [ "`git config --global --get http.proxy`" != "socks5://$hostip:10808"    ];
+    if [ "`git config --global --get http.proxy`" != "socks5://$hostip:$httpport"    ];
     then
-        git config --global https.proxy socks5://$hostip:10808
-        git config --global http.proxy socks5://$hostip:10808
+        git config --global https.proxy socks5://$hostip:$socksport
+        git config --global http.proxy socks5://$hostip:$socksport
     fi
 
     ssh_proxy
-
     # echo $ALL_PROXY
     # echo "set proxy success"
 }
@@ -170,7 +161,7 @@ unset_proxy()
 # ssh_proxy
 ssh_proxy()
 {
-    ssh="$hostip:10808"
+    ssh="$hostip:$socksport"
     oldip=`cat ~/.ssh/config | grep -o "[0-9].*[0-9]"`
     pcd=`cat ~/.ssh/config | grep "ProxyCommand"`
 
