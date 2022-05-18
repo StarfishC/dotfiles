@@ -37,6 +37,18 @@
           "dependsType": "postLaunch",
           "dependsOrder": "sequent"
         },
+        "c": {
+          "command": "clang++",
+          "args": [
+            "${file}",
+            "-std=c++11",
+            "-o",
+            "${fileWorkspaceFolder}${pathSeparator}a.out"
+          ],
+          "dependsOn": ["execute"],
+          "dependsType": "postLaunch",
+          "dependsOrder": "sequent"
+        },
         "vim": {
           "command": "so ${file}",
           "type": "ex"
