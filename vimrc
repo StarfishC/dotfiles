@@ -124,11 +124,11 @@ autocmd BufNewFile,BufRead *.[ch]pp,*.[ch]
 
 " 对于md文件
 autocmd BufNewFile,BufRead *.md
-\ setlocal wrap nofoldenable
+\ setlocal wrap nofoldenable tabstop=2 softtabstop=2 shiftwidth=2
 
 " 对于json
 autocmd BufNewFile,BufRead *.json
-\ setlocal filetype=jsonc syntax=json softtabstop=2
+\ setlocal filetype=jsonc syntax=json tabstop=2 softtabstop=2 shiftwidth=2
 
 " 对于html
 autocmd BufNewFile,BufRead *.html
