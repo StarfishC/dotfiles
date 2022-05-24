@@ -38,10 +38,10 @@
           "dependsOrder": "sequent"
         },
         "c": {
-          "command": "clang++",
+          "command": "clang",
           "args": [
             "${file}",
-            "-std=c++11",
+            "-std=c11",
             "-o",
             "${fileWorkspaceFolder}${pathSeparator}a.out"
           ],
