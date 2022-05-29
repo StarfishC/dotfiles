@@ -2,6 +2,7 @@
   "suggest.timeout": 500,
   "suggest.enablePreview": true,
   "suggest.snippetIndicator": "",
+  "suggest.floatEnable": true,
   "suggest.maxCompleteItemCount": 30,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
@@ -34,7 +35,10 @@
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "‼",
   "signature.preferShownAbove": false,
+  "notification.preferMenuPicker": true,
+  "coc.preferences.enableMessageDialog": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.preferences.snippetHighlight": true,
   "semanticTokens.filetypes": ["*"],
   "yank.enableCompletion": false,
   "explorer.width": 30,

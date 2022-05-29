@@ -67,7 +67,7 @@ set showcmd
 set scrolloff=3
 set softtabstop=4
 set shiftwidth=4
-set signcolumn=number
+set signcolumn=yes
 set ttimeout
 set ttimeoutlen=50
 set termencoding=utf-8
