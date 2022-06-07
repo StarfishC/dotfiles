@@ -24,7 +24,7 @@ Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': [
 Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'voldikss/LeaderF-floaterm'
 Plug 'voldikss/vim-floaterm'
-Plug 'caoshenghui/tasksystem'
+Plug 'caoshenghui/vim-tasks'
 
 call plug#end()
 
@@ -325,7 +325,7 @@ endif
 let g:indentLine_enabled = 1
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_color_term = 175
-let g:indentLine_fileTypeExclude = ['coc-explorer', 'help']
+let g:indentLine_fileTypeExclude = ['coc-explorer', 'help', 'startify']
 autocmd BufNewFile,BufReadPre *.json,*.md let g:indentLine_setConceal = 0
 
 
@@ -430,7 +430,6 @@ let g:AutoPairsCompatibleMaps = 0
 let g:AutoPairsMapBS = 1
 let g:AutoPairsMultilineBackspace = 1
 let g:AutoPairsMultilineClose = 1
-let g:AutoPairsShortcutToggleMultilineClose = "<c-]>"
 let g:AutoPairsShortcutToggle = '\pt'
 let g:AutoPairsShortcutJump = '\pj'
 let g:AutoPairsShortcutBackInsert = '\pb'
@@ -491,9 +490,9 @@ let g:vim_markdown_math = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tasksystem
+" vim-tasks
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:tasksystem_usingLeaderF = 1
+let g:Tasks_UsingLeaderF = 1
 noremap <leader>fr :Leaderf --nowrap task<CR>
 
 

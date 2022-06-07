@@ -17,7 +17,7 @@
         "autoclose": 0
       },
       "presentation": {
-        "focus": 0,
+        "focus": false,
         "panel": "shared"
       },
       "filetype": {
