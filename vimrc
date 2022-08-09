@@ -96,9 +96,9 @@ highlight Normal        ctermbg=NONE guibg=NONE
 highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight LineNr        ctermbg=NONE guibg=NONE
 highlight Terminal      ctermbg=NONE guibg=NONE
-highlight PmenuSel      ctermfg=251 ctermbg=97
-highlight Search        ctermfg=0 ctermbg=222 cterm=NONE
-# highlight Pmenu ctermbg=NONE
+highlight Pmenu         ctermbg=NONE ctermfg=10
+# highlight PmenuSel      ctermfg=251 ctermbg=97
+# highlight Search        ctermfg=0 ctermbg=222 cterm=NONE
 
 if &term =~ '^xterm'
     # normal mode
@@ -149,7 +149,8 @@ inoremap <silent><expr> <TAB>
         \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 # <CR> confirm completion
-inoremap <expr> <CR> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr><CR> coc#pum#visible() ? coc#pum#confirm()
+                            \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 # trigger completion
 inoremap <silent><expr> <c-@> coc#refresh()
 
@@ -169,12 +170,10 @@ nmap <silent> gr <Plug>(coc-references)
 # 使用K预览窗口显示文档
 nnoremap <silent> K :call <SID>Show_documentation()<CR>
 def Show_documentation(): void
-    if (index(['vim', 'help'], &filetype) >= 0)
-        execute 'h ' .. expand('<cword>')
-    elseif (coc#rpc#ready())
+    if CocAction('hasProvider', 'hover')
         g:CocActionAsync('doHover')
     else
-        execute '!' .. &keywordprg .. " " .. expand('<cword>')
+        feedkeys('K', in)
     endif
 enddef
 
@@ -258,9 +257,9 @@ enddef
 call SetupCommandAbbrs('C', 'CocConfig')
 
 # Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format :call CocActionAsync('format')
 # Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocActionAsync('fold', <f-args>)
 # Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
