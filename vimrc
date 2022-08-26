@@ -108,6 +108,13 @@ if &term =~ '^xterm'
     &t_SI ..= "\<Esc>[3 q"
 endif
 
+if system("uname -r") =~ "microsoft"
+    augroup Yank
+        autocmd!
+        autocmd TextYankPost * : call system('clip.exe', @")
+    augroup END
+endif
+
 # 移除换行自动注释
 au BufNewFile,BufRead * setlocal formatoptions=tcq
 
