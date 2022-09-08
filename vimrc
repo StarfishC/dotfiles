@@ -335,6 +335,7 @@ noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 noremap <leader>fh :<C-U>Leaderf! rg --recall<CR>
 xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
+g:Lf_UseCache = 0
 g:Lf_WindowHeight = 0.40
 g:Lf_WindowPosition = 'popup'
 g:Lf_PreviewInPopup = 1
