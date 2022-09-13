@@ -178,10 +178,10 @@ nmap <silent> gr <Plug>(coc-references)
 # 使用K预览窗口显示文档
 nnoremap <silent> K :call <SID>Show_documentation()<CR>
 def Show_documentation(): void
-    if CocAction('hasProvider', 'hover')
+    if g:CocAction('hasProvider', 'hover')
         g:CocActionAsync('doHover')
     else
-        feedkeys('K', in)
+        feedkeys('K', 'in')
     endif
 enddef
 
