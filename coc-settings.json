@@ -3,6 +3,7 @@
   "suggest.noselect": true,
   "suggest.snippetIndicator": "",
   "suggest.maxCompleteItemCount": 30,
+  "suggest.virtualText": true,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
@@ -31,12 +32,12 @@
     "default": "\uf29c"
   },
   "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.virtualText": true,
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "‼",
   "signature.preferShownAbove": false,
   "coc.preferences.enableMessageDialog": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
-  "coc.preferences.snippetHighlight": true,
   "semanticTokens.filetypes": ["*"],
   "yank.enableCompletion": false,
   "explorer.width": 30,
