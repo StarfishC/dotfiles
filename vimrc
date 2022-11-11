@@ -98,8 +98,9 @@ highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight LineNr        ctermbg=NONE guibg=NONE
 highlight Terminal      ctermbg=NONE guibg=NONE
 highlight Pmenu         ctermbg=NONE ctermfg=10
+highlight Search        ctermbg=222  ctermfg=NONE cterm=NONE
+highlight CursorColumn  ctermbg=242  ctermfg=NONE
 # highlight PmenuSel      ctermfg=251 ctermbg=97
-# highlight Search        ctermfg=0 ctermbg=222 cterm=NONE
 
 if &term =~ '^xterm'
     # normal mode
