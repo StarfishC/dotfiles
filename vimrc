@@ -1,13 +1,13 @@
 vim9script
 # vim-Plug
-plug#begin('~/.vim/plugged')
+var path = has("win32") ? '~/vimfiles/plugged' : '~/.vim/plugged'
+plug#begin(path)
 
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdcommenter'
 Plug 'LunarWatcher/auto-pairs'
-Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
@@ -39,9 +39,7 @@ set clipboard+=unnamed
 set expandtab
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set fenc=UTF-8
-set foldmethod=indent
-set foldlevel=99
-set foldlevelstart=0
+set nofoldenable
 set backspace=2
 set hidden
 set hlsearch
@@ -69,8 +67,14 @@ set ttimeoutlen=50
 set termencoding=utf-8
 set updatetime=250
 set wildmenu
+set sessionoptions+=globals
 colorscheme abstract
 g:mapleader = " "
+if has("gui_running")
+    g:floaterm_shell = "pwsh.exe"
+    set guioptions-=LT
+    set guifont=JetBrainsMono_Nerd_Font_Mono:h12:W500:cANSI:qDRAFT
+endif
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -87,8 +91,6 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 nmap = +
 
-# highlight cursorLine    ctermbg=238
-# highlight Comment       ctermbg=NONE ctermfg=117
 highlight cursorLineNr  cterm=NONE
 highlight VertSplit     ctermbg=NONE guibg=NONE
 highlight Normal        ctermbg=NONE guibg=NONE
@@ -96,9 +98,8 @@ highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight LineNr        ctermbg=NONE guibg=NONE
 highlight Terminal      ctermbg=NONE guibg=NONE
 highlight Pmenu         ctermbg=NONE ctermfg=10
-highlight Search        ctermbg=222  ctermfg=NONE cterm=NONE
+# highlight Search        ctermbg=222  ctermfg=NONE cterm=NONE
 highlight CursorColumn  ctermbg=242  ctermfg=NONE
-# highlight PmenuSel      ctermfg=251 ctermbg=97
 
 if &term =~ '^xterm'
     # normal mode
@@ -140,6 +141,10 @@ autocmd BufNewFile,BufRead *.html
 # 对于quickfix
 autocmd FileType qf
 \ setlocal norelativenumber
+
+# 对于tsl、tsf
+autocmd BufNewFile,BufRead *.tsl,*.tsf
+\ setlocal noexpandtab
 
 
 
@@ -207,6 +212,8 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 nmap <silent> ,h <Plug>(coc-float-hide)
 nmap <silent> ,j <Plug>(coc-float-jump)
 
+nmap ,cl <Plug>(coc-codelens-action)
+
 xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
@@ -246,13 +253,9 @@ vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(
 g:coc_snippet_next = '<C-j>'
 g:coc_snippet_prev = "<C-k>"
 
-# show all diagnostics
 nnoremap <silent> <space>d  :<C-u>CocList diagnostics<CR>
-# Show commands
 nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
-# Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-# Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 
 def SetupCommandAbbrs(from: string, to: string): void
@@ -262,6 +265,17 @@ def SetupCommandAbbrs(from: string, to: string): void
 enddef
 # Use C to open coc config
 call SetupCommandAbbrs('C', 'CocConfig')
+
+def ToggleOutline(): void
+    var winid = coc#window#find('cocViewId', 'OUTLINE')
+    if winid == -1
+        g:CocActionAsync('showOutline', 1)
+    else
+        g:coc#window#close(winid)
+    endif
+enddef
+nnoremap <silent><nowait> <space>o  :call <SID>ToggleOutline()<CR>
+
 
 # Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocActionAsync('format')
@@ -283,9 +297,6 @@ g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-markdownlint',
                             \  'coc-cmake',
                             \  'coc-explorer',
-                            \  'coc-html',
-                            \  'coc-htmlhint',
-                            \  'coc-emmet',
                             \  'coc-clangd',
                             \ ]
 
@@ -308,7 +319,6 @@ nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 # coc-explorer
 nnoremap <space>e :CocCommand explorer<CR>
 nnoremap e :CocCommand explorer /
-autocmd bufenter * if winnr("$") == 1 && &filetype == 'coc-explorer' | execute "normal! :q!\<CR>" | endif
 
 
 
@@ -317,8 +327,8 @@ autocmd bufenter * if winnr("$") == 1 && &filetype == 'coc-explorer' | execute "
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 g:indentLine_enabled = 1
 g:indentLine_char_list = ['|', '¦', '┆', '┊']
-g:indentLine_color_term = 175
-g:indentLine_fileTypeExclude = ['coc-explorer', 'help', 'startify']
+# g:indentLine_color_term = 175
+g:indentLine_fileTypeExclude = ['coc-explorer', 'help', 'startify', 'coctree']
 g:vim_json_conceal = 0
 g:markdown_syntax_conceal = 0
 
@@ -327,15 +337,9 @@ g:markdown_syntax_conceal = 0
 # LeaderF
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # 使用rg需要安装ripgrep
-g:Lf_ShortcutF = "<leader>ff"
-noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
-noremap <leader>fg :<C-U>Leaderf! rg --recall<CR>
-xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 g:Lf_UseCache = 0
+g:Lf_HideHelp = 1
+g:Lf_ShortcutF = "<leader>ff"
 g:Lf_WindowHeight = 0.40
 g:Lf_WindowPosition = 'popup'
 g:Lf_PreviewInPopup = 1
@@ -344,11 +348,17 @@ g:Lf_IngoreCurrentBufferName = 1
 g:Lf_WorkingDirectoryMode = 'ac'
 g:Lf_StlColorscheme = 'powerline'
 g:Lf_StlSeparator = { 'left': "\u2b80", 'right': "\u2b82" }
-g:Lf_HideHelp = 1
 g:Lf_WildIgnore = {
             \ 'dir': ['.svn', '.git', '.hg'],
             \ 'file': ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
             \}
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
+noremap <leader>fg :<C-U>Leaderf! rg --recall<CR>
+xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 
 
 
@@ -356,14 +366,9 @@ g:Lf_WildIgnore = {
 # vim-airline
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 g:airline_experimental = 1
-g:airline#extensions#vista#enabled = 1
 # g:airline_powerline_fonts = 1
 g:airline#extensions#tabline#enabled = 1
-g:airline#extensions#tabline#show_splits = 1
-g:airline#extensions#tabline#show_buffers = 1
 g:airline#extensions#tabline#buffer_nr_show = 0
-g:airline#extensions#tabline#show_tabs = 1
-g:airline#extensions#tabline#show_tab_nr = 1
 g:airline#extensions#tabline#show_tab_count = 1
 g:airline#extensions#tabline#show_tab_type = 1
 g:airline#extensions#tabline#formatter = 'unique_tail_improved'
@@ -384,23 +389,10 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>= <Plug>AirlineSelectPrevTab
 nmap <leader>- <Plug>AirlineSelectNextTab
 g:airline#extensions#coc#enabled = 1
+g:airline#extensions#coc#show_coc_status = 1
 g:airline#extensions#coc#error_symbol = '😡'
 g:airline#extensions#coc#warning_symbol = '😱'
-g:airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-g:airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 g:airline#extensions#hunks#coc_git = 1
-
-
-
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Vista
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <space>v :Vista!!<CR>
-g:vista_update_on_text_changed = 1
-g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-g:vista_default_executive = 'coc'
-g:vista_echo_cursor_strategy = 'floating_win'
-autocmd bufenter * if winnr("$") == 1 && vista#sidebar#IsOpen() | execute "normal! :q!\<CR>" | endif
 
 
 
@@ -411,6 +403,7 @@ g:NERDSpaceDelims = 1
 g:NERDDefaultAlign = 'left'
 g:NERDCommentEmptyLines = 0
 g:NERDToggleCheckAllLines = 1
+g:NERDCustomDelimiters = {'tsf': {'left': '//', 'right': ''}}
 
 
 
@@ -536,15 +529,26 @@ noremap <silent> <F5> :call <SID>CompileAndRunCode()<CR>
 #"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufEnter * call ExitVim()
 def ExitVim(): void
-    var wininfo = getwininfo()
-    var close = 1
-    for win in wininfo
-        if !win['terminal'] && !win['quickfix']
-            close = 0
-            break
+    if winnr('$') == 1 && &filetype == 'startify'
+        execute "qall!"
+    else
+        var wininfo = getwininfo()
+        var ftlist = ["terminal", "quickfix", "coc-explorer", "coctree"]
+        var close = 1
+        for win in wininfo
+            var ft = getwinvar(win['winid'], '&filetype')
+            if index(ftlist, ft) < 0
+                close = 0
+                break
+            endif
+        endfor
+        if close == 1
+            if has("gui_running")
+                execute "bufdo bd"
+                execute "Startify"
+            else
+                execute "qall!"
+            endif
         endif
-    endfor
-    if close == 1
-        exec 'qall!'
     endif
 enddef
