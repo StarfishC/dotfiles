@@ -68,14 +68,29 @@ set termencoding=utf-8
 set updatetime=250
 set wildmenu
 set sessionoptions+=globals
-colorscheme abstract
-g:mapleader = " "
+set termguicolors
+colorscheme sonokai
+
+highlight cursorLineNr  cterm=NONE
+highlight Search        cterm=bold ctermfg=16 ctermbg=76 gui=bold guifg=#292b2e guibg=#86dc2f
+highlight Normal        ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+highlight SignColumn    ctermbg=NONE guibg=NONE
+# highlight Terminal      ctermbg=NONE guibg=NONE
+highlight CocInlayHint  cterm=Italic ctermfg=12 gui=Italic guifg=#15aabf
+highlight EndOfBuffer   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+highlight CocHighlightText ctermfg=223 ctermbg=239 guifg=#ebdbb2 guibg=#242a32
+
 if has("gui_running")
     g:floaterm_shell = "pwsh.exe"
-    set guioptions-=LT
+    set background=dark
+    set guioptions-=L
+    set guioptions-=T
+    set guioptions-=m
+    set guioptions-=r
     set guifont=JetBrainsMono_Nerd_Font_Mono:h12:W500:cANSI:qDRAFT
 endif
 
+g:mapleader = " "
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -90,16 +105,6 @@ nnoremap <BS> :nohl<CR>
 inoremap jk <Esc>
 inoremap kj <Esc>
 nmap = +
-
-highlight cursorLineNr  cterm=NONE
-highlight VertSplit     ctermbg=NONE guibg=NONE
-highlight Normal        ctermbg=NONE guibg=NONE
-highlight SignColumn    ctermbg=NONE guibg=NONE
-highlight LineNr        ctermbg=NONE guibg=NONE
-highlight Terminal      ctermbg=NONE guibg=NONE
-highlight Pmenu         ctermbg=NONE ctermfg=10
-# highlight Search        ctermbg=222  ctermfg=NONE cterm=NONE
-highlight CursorColumn  ctermbg=242  ctermfg=NONE
 
 if &term =~ '^xterm'
     # normal mode
@@ -142,9 +147,7 @@ autocmd BufNewFile,BufRead *.html
 autocmd FileType qf
 \ setlocal norelativenumber
 
-# 对于tsl、tsf
-autocmd BufNewFile,BufRead *.tsl,*.tsf
-\ setlocal noexpandtab
+autocmd BufNewFile,BufRead *.tsl,*.tsf setf tsl
 
 
 
@@ -153,7 +156,7 @@ autocmd BufNewFile,BufRead *.tsl,*.tsf
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def Check_back_space(): bool
     var col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+    return !col || getline('.')[col - 1] =~# '\s'
 enddef
 inoremap <silent><expr> <TAB>
         \ coc#pum#visible() ? coc#pum#next(1) :
@@ -531,6 +534,8 @@ autocmd BufEnter * call ExitVim()
 def ExitVim(): void
     if winnr('$') == 1 && &filetype == 'startify'
         execute "qall!"
+    elseif winnr('$') == 1 && has("gui_running") && &filetype == ''
+        execute "Startify"
     else
         var wininfo = getwininfo()
         var ftlist = ["terminal", "quickfix", "coc-explorer", "coctree"]
@@ -552,3 +557,4 @@ def ExitVim(): void
         endif
     endif
 enddef
+
