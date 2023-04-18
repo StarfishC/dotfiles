@@ -19,7 +19,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'PProvost/vim-ps1'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'voldikss/LeaderF-floaterm'
 Plug 'voldikss/vim-floaterm'
@@ -79,6 +78,8 @@ highlight SignColumn    ctermbg=NONE guibg=NONE
 highlight CocInlayHint  cterm=Italic ctermfg=12 gui=Italic guifg=#15aabf
 highlight EndOfBuffer   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 highlight CocHighlightText ctermfg=223 ctermbg=239 guifg=#ebdbb2 guibg=#242a32
+highlight Lf_hl_cursorline ctermfg=107 guifg=#9ed072
+highlight link HighlightedyankRegion IncSearch
 
 if has("gui_running")
     g:floaterm_shell = "pwsh.exe"
@@ -113,7 +114,7 @@ if &term =~ '^xterm'
     &t_SI ..= "\<Esc>[3 q"
 endif
 
-if system("uname -r") =~ "microsoft"
+if has("unix") && system("uname -r") =~ "microsoft"
     augroup Yank
         autocmd!
         autocmd TextYankPost * : call system('clip.exe', @")
@@ -301,6 +302,8 @@ g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-cmake',
                             \  'coc-explorer',
                             \  'coc-clangd',
+                            \  'coc-webview',
+                            \  'coc-markdown-preview-enhanced',
                             \ ]
 
 # coc-yank
@@ -452,17 +455,6 @@ map  <leader><leader>l <Plug>(easymotion-bd-jk)
 nmap <leader><leader>l <Plug>(easymotion-overwin-line)
 autocmd User EasyMotionPromptBegin silent! CocDisable
 autocmd User EasyMotionPromptEnd   silent! CocEnable
-
-
-
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# markdown-preview
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# sudo ln -s /mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe /usr/bin/msedge
-# let g:mkdp_browser = 'msedge'
-# let g:mkdp_browser = '/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
-g:mkdp_auto_close = 0
-g:mkdp_page_title = '「${name}」'
 
 
 
