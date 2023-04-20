@@ -11,19 +11,24 @@ syn case ignore
 syn keyword tslStatement	begin end then
 syn keyword tslStatement	return with
 syn keyword tslStatement	class function type nextgroup=tslFunction skipwhite
+syn keyword tslStatement	this
+syn keyword tslAccess           public protected private
+syn keyword tslModifier         override overload virtual property
 syn keyword tslLabel		case of
-syn keyword tslLabel            override overload public private
 syn keyword tslConditional	else if
-syn keyword tslRepeat		for while do
+syn keyword tslRepeat		for while do downto
 syn keyword tslOperator		and in is not or
 syn keyword tslOperator		new
-syn keyword tslOperator		property write read
-syn keyword tslOperator		union
+syn keyword tslOperator		write read
+syn keyword tslOperator		union minus
 syn keyword tslException	except raise try
 syn keyword tslBoolean          false true
 syn keyword tslBranch           break continue
 syn keyword tslNil		nil
 syn keyword tslType             string integer
+syn keyword tslSql              from where group by
+syn keyword tslBuiltins         select vselect sselect update delete thisrowindex
+syn keyword tslBuiltins         echo mtic mtoc self this
 
 syn match   tslFunction	"\h\w*" display contained
 
@@ -60,24 +65,28 @@ syn match   tslNumber
 
 " The default highlight links.  Can be overridden later.
 hi def link tslStatement	Statement
-hi def link tslConditional	Conditional
-hi def link tslRepeat		Repeat
-hi def link tslOperator		Operator
-hi def link tslException	Exception
+hi def link tslAccess           Statement
+hi def link tslSql              Statement
 hi def link tslFunction		Function
-hi def link tslComment		Comment
-hi def link tslTodo		Todo
+hi def link tslFunc             Function
+hi def link tslConditional	Conditional
+hi def link tslBranch           Conditional
 hi def link tslString		String
 hi def link tslRawString	String
 hi def link tslQuotes		String
+hi def link tslType	        Type
+hi def link tslModifier         Type
+hi def link tslRepeat		Repeat
+hi def link tslOperator		Operator
+hi def link tslException	Exception
+hi def link tslComment		Comment
+hi def link tslTodo		Todo
 hi def link tslEscape		Special
 hi def link tslNumber           Number
 hi def link tslLabel            Label
 hi def link tslNil              Keyword
-hi def link tslBranch           Conditional
 hi def link tslBoolean          Boolean
-hi def link tslFunc             Function
-hi def link tslType	        Type
+hi def link tslBuiltins         Identifier
 
 let b:current_syntax = "tsl"
 

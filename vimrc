@@ -68,6 +68,7 @@ set updatetime=250
 set wildmenu
 set sessionoptions+=globals
 set termguicolors
+set formatoptions=tcq
 colorscheme sonokai
 
 highlight cursorLineNr  cterm=NONE
@@ -120,9 +121,6 @@ if has("unix") && system("uname -r") =~ "microsoft"
         autocmd TextYankPost * : call system('clip.exe', @")
     augroup END
 endif
-
-# 移除换行自动注释
-au BufNewFile,BufRead * setlocal formatoptions=tcq
 
 # 对于py文件
 autocmd BufNewFile,BufRead *.py
@@ -433,6 +431,9 @@ imap <C-x> <Esc>xa
 # rainbow
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 g:rainbow_active = 1
+g:rainbow_conf = {
+    'separately': {'cmake': 0}
+}
 
 
 
@@ -522,7 +523,7 @@ noremap <silent> <F5> :call <SID>CompileAndRunCode()<CR>
 #"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # 退出VIM时关闭quickfix和terminal
 #"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufEnter * call ExitVim()
+autocmd BufEnter * ExitVim()
 def ExitVim(): void
     if winnr('$') == 1 && &filetype == 'startify'
         execute "qall!"
