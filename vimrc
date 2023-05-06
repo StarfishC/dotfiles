@@ -68,12 +68,10 @@ set updatetime=250
 set wildmenu
 set sessionoptions+=globals
 set termguicolors
-set formatoptions=tcq
 colorscheme sonokai
 
 highlight cursorLineNr  cterm=NONE
 highlight Search        cterm=bold ctermfg=16 ctermbg=76 gui=bold guifg=#292b2e guibg=#86dc2f
-highlight Normal        ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 highlight SignColumn    ctermbg=NONE guibg=NONE
 # highlight Terminal      ctermbg=NONE guibg=NONE
 highlight CocInlayHint  cterm=Italic ctermfg=12 gui=Italic guifg=#15aabf
@@ -84,12 +82,13 @@ highlight link HighlightedyankRegion IncSearch
 
 if has("gui_running")
     g:floaterm_shell = "pwsh.exe"
-    set background=dark
     set guioptions-=L
     set guioptions-=T
     set guioptions-=m
     set guioptions-=r
     set guifont=JetBrainsMono_Nerd_Font_Mono:h12:W500:cANSI:qDRAFT
+else
+    highlight Normal        ctermbg=NONE ctermfg=NONE guibg=NONE
 endif
 
 g:mapleader = " "
@@ -121,6 +120,8 @@ if has("unix") && system("uname -r") =~ "microsoft"
         autocmd TextYankPost * : call system('clip.exe', @")
     augroup END
 endif
+
+autocmd FileType * setlocal formatoptions=tcq
 
 # 对于py文件
 autocmd BufNewFile,BufRead *.py
@@ -480,10 +481,11 @@ noremap <leader>fr :Leaderf --nowrap task<CR>
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 g:floaterm_autoclose = 1
 g:floaterm_keymap_new  = '<C-t>'
-g:floaterm_keymap_prev = '<C-p>'
-g:floaterm_keymap_next = '<C-n>'
-g:floaterm_keymap_kill = '<C-q>'
+g:floaterm_keymap_prev = '<C-,>'
+g:floaterm_keymap_next = '<C-.>'
+g:floaterm_keymap_kill = '<C-k>'
 g:floaterm_keymap_toggle = '<F6>'
+tnoremap <C-N> <C-\><C-N>
 hi FloatermBorder ctermfg = cyan
 nnoremap <leader>ft :Leaderf --nowrap floaterm<CR>
 

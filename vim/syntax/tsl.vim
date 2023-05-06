@@ -29,6 +29,7 @@ syn keyword tslType             string integer
 syn keyword tslSql              from where group by
 syn keyword tslBuiltins         select vselect sselect update delete thisrowindex
 syn keyword tslBuiltins         echo mtic mtoc self this
+syn keyword tslBuiltins         inf nan
 
 syn match   tslFunction	"\h\w*" display contained
 
