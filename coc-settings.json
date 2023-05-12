@@ -45,7 +45,6 @@
   "yank.enableCompletion": false,
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
-  "explorer.openAction.strategy": "previousBuffer",
   "snippets.textmateSnippetsRoots": ["~/.config/snippets"],
   "snippet.highlight": true,
   "colors.enable": true,

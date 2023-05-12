@@ -80,7 +80,7 @@ highlight CocHighlightText ctermfg=223 ctermbg=239 guifg=#ebdbb2 guibg=#242a32
 highlight Lf_hl_cursorline ctermfg=107 guifg=#9ed072
 highlight link HighlightedyankRegion IncSearch
 
-if has("gui_running")
+if has("win32")
     g:floaterm_shell = "pwsh.exe"
     set guioptions-=L
     set guioptions-=T
@@ -533,7 +533,7 @@ def ExitVim(): void
         execute "Startify"
     else
         var wininfo = getwininfo()
-        var ftlist = ["terminal", "quickfix", "coc-explorer", "coctree"]
+        var ftlist = ["terminal", "quickfix", "coc-explorer", "coctree", "floaterm"]
         var close = 1
         for win in wininfo
             var ft = getwinvar(win['winid'], '&filetype')
