@@ -80,8 +80,7 @@ highlight CocHighlightText ctermfg=223 ctermbg=239 guifg=#ebdbb2 guibg=#242a32
 highlight Lf_hl_cursorline ctermfg=107 guifg=#9ed072
 highlight link HighlightedyankRegion IncSearch
 
-if has("win32")
-    g:floaterm_shell = "pwsh.exe"
+if has("gui_running")
     set guioptions-=L
     set guioptions-=T
     set guioptions-=m
@@ -89,6 +88,9 @@ if has("win32")
     set guifont=JetBrainsMono_Nerd_Font_Mono:h12:W500:cANSI:qDRAFT
 else
     highlight Normal        ctermbg=NONE ctermfg=NONE guibg=NONE
+endif
+if has("win32")
+    set shell="pwsh.exe"
 endif
 
 g:mapleader = " "
