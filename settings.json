@@ -11,6 +11,10 @@
             "keys": "ctrl+shift+c"
         },
         {
+            "command": "paste",
+            "keys": "ctrl+shift+v"
+        },
+        {
             "command": 
             {
                 "action": "switchToTab",
@@ -19,8 +23,12 @@
             "keys": "alt+4"
         },
         {
-            "command": "paste",
-            "keys": "ctrl+shift+v"
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 0
+            },
+            "keys": "alt+1"
         },
         {
             "command": 
@@ -29,14 +37,6 @@
                 "index": 4
             },
             "keys": "alt+5"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 0
-            },
-            "keys": "alt+1"
         },
         {
             "command": "toggleFocusMode",
@@ -108,45 +108,48 @@
     ],
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+    "defaultProfile": "{af5a6296-38b4-4be8-9e9f-4b82d8a7fc49}",
     "multiLinePasteWarning": false,
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": 
     {
         "defaults": 
         {
-            "backgroundImage": "C:\\Users\\csh\\Pictures\\Saved Pictures\\back.png",
-            "backgroundImageOpacity": 0.2,
             "bellStyle": "none",
-            "colorScheme": "Dracula",
+            "colorScheme": "One Half Dark",
             "cursorShape": "filledBox",
+            "experimental.retroTerminalEffect": false,
             "font": 
             {
-                "face": "CaskaydiaCove NF",
+                "face": "JetBrainsMono Nerd Font Mono",
                 "size": 12.0
             },
             "historySize": 9001,
-            "opacity": 55,
+            "opacity": 98,
             "snapOnInput": true,
             "startingDirectory": "D:/code/",
-            "unfocusedAppearance": 
-            {
-                "backgroundImage": "C:\\Users\\csh\\Pictures\\Saved Pictures\\SaberBlack.jpg",
-                "backgroundImageOpacity": 0.4
-            },
             "useAcrylic": true
         },
         "list": 
         [
             {
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "commandline": "C:\\ProgramFiles\\PowerShell\\7\\pwsh.exe",
+                "guid": "{af5a6296-38b4-4be8-9e9f-4b82d8a7fc49}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "icon": "C:\\ProgramFiles\\PowerShell\\7\\assets\\Powershell_av_colors.ico",
+                "name": "Powershell"
             },
             {
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
+                "source": "Windows.Terminal.Wsl",
+                "startingDirectory": "~/code"
             },
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -154,16 +157,50 @@
                 "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
             },
             {
-                "commandline": "D:\\Program Files\\msys64\\msys2_shell.cmd -ucrt64 -defterm -no-start -here -use-full-path",
+                "commandline": "C:\\ProgramFiles\\msys64\\msys2_shell.cmd -ucrt64 -defterm -no-start -here -use-full-path",
                 "guid": "{cf75ba52-b1c0-4011-8ee0-daaf2dffebf3}",
                 "hidden": false,
-                "icon": "D:\\Program Files\\msys64\\ucrt64.ico",
+                "icon": "C:\\ProgramFiles\\msys64\\ucrt64.ico",
                 "name": "ucrt"
+            },
+            {
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
+                "hidden": true,
+                "name": "Visual Studio Debug Console",
+                "source": "VSDebugConsole"
             }
         ]
     },
     "schemes": 
     [
+        {
+            "background": "#0E1019",
+            "black": "#232323",
+            "blue": "#008DF8",
+            "brightBlack": "#444444",
+            "brightBlue": "#0092FF",
+            "brightCyan": "#67FFF0",
+            "brightGreen": "#ABE15B",
+            "brightPurple": "#9A5FEB",
+            "brightRed": "#FF2740",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#FFD242",
+            "cursorColor": "#FF0018",
+            "cyan": "#00D8EB",
+            "foreground": "#FFFAF4",
+            "green": "#8CE10B",
+            "name": "Argonaut",
+            "purple": "#6D43A6",
+            "red": "#FF000F",
+            "selectionBackground": "#002A3B",
+            "white": "#FFFFFF",
+            "yellow": "#FFB900"
+        },
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
@@ -303,6 +340,29 @@
             "yellow": "#C18301"
         },
         {
+            "background": "#0E0E0E",
+            "black": "#000000",
+            "blue": "#2472C8",
+            "brightBlack": "#666666",
+            "brightBlue": "#3B8EEA",
+            "brightCyan": "#29B8DB",
+            "brightGreen": "#23D18B",
+            "brightPurple": "#D861D8",
+            "brightRed": "#FA4B4B",
+            "brightWhite": "#FAFAFA",
+            "brightYellow": "#FCFC5C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#33A0BB",
+            "foreground": "#E4E4E4",
+            "green": "#0DBC79",
+            "name": "OneStar",
+            "purple": "#C42CC4",
+            "red": "#D13B3B",
+            "selectionBackground": "#FFFFFF",
+            "white": "#F1F1F1",
+            "yellow": "#DFDF44"
+        },
+        {
             "background": "#002B36",
             "black": "#002B36",
             "blue": "#268BD2",
@@ -395,6 +455,29 @@
             "yellow": "#C4A000"
         },
         {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
             "background": "#000000",
             "black": "#000000",
             "blue": "#000080",
@@ -418,7 +501,52 @@
             "yellow": "#808000"
         }
     ],
+    "showTerminalTitleInTitlebar": true,
     "theme": "dark",
-    "themes": [],
+    "themes": 
+    [
+        {
+            "name": "legacyDark",
+            "tab": 
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window": 
+            {
+                "applicationTheme": "dark",
+                "useMica": false
+            }
+        },
+        {
+            "name": "legacyLight",
+            "tab": 
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window": 
+            {
+                "applicationTheme": "light",
+                "useMica": false
+            }
+        },
+        {
+            "name": "legacySystem",
+            "tab": 
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window": 
+            {
+                "applicationTheme": "system",
+                "useMica": false
+            }
+        }
+    ],
     "useAcrylicInTabRow": true
 }

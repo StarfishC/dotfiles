@@ -73,10 +73,8 @@ colorscheme sonokai
 highlight cursorLineNr  cterm=NONE
 highlight Search        cterm=bold ctermfg=16 ctermbg=76 gui=bold guifg=#292b2e guibg=#86dc2f
 highlight SignColumn    ctermbg=NONE guibg=NONE
-# highlight Terminal      ctermbg=NONE guibg=NONE
-highlight CocInlayHint  cterm=Italic ctermfg=12 gui=Italic guifg=#15aabf
+highlight Terminal      ctermbg=NONE guibg=NONE
 highlight EndOfBuffer   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
-highlight CocHighlightText ctermfg=223 ctermbg=239 guifg=#ebdbb2 guibg=#242a32
 highlight Lf_hl_cursorline ctermfg=107 guifg=#9ed072
 highlight link HighlightedyankRegion IncSearch
 
@@ -307,6 +305,9 @@ g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-markdown-preview-enhanced',
                             \ ]
 
+highlight CocInlayHint  cterm=Italic ctermfg=12 gui=Italic guifg=#15aabf
+highlight CocHighlightText ctermfg=223 ctermbg=239 guifg=#ebdbb2 guibg=#242a32
+
 # coc-yank
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<CR>
 
@@ -319,7 +320,6 @@ nmap ]g <Plug>(coc-git-nextchunk)
 nmap [c <Plug>(coc-git-preconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
-
 
 # windows terminal 插入模式下，ctrl+v Alt+key查看要映射按键
 # <M-key> 会导致VIM 插入模式下<ESC>有延迟
