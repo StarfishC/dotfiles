@@ -8,9 +8,7 @@ set_proxy()
 {
     # export ALL_PROXY=socks5://$hostip:10809
     export ALL_PROXY=http://$hostip:$httpport
-    export HTTP_PROXY=$ALL_PROXY
     export http_proxy=$ALL_PROXY
-    export HTTPS_PROXY=$ALL_PROXY
     export https_proxy=$ALL_PROXY
 
     if [ "`git config --global --get http.proxy`" != "socks://$hostip:$httpport"    ];
@@ -19,16 +17,14 @@ set_proxy()
         git config --global http.proxy socks://$hostip:$socksport
     fi
 
-    ssh_proxy
+    # ssh_proxy
     # echo $ALL_PROXY
     # echo "set proxy success"
 }
 
 unset_proxy()
 {
-    unset HTTP_PROXY
     unset http_proxy
-    unset HTTPS_PROXY
     unset https_proxy
     unset ALL_PROXY
 
