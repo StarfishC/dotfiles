@@ -49,9 +49,6 @@
   "snippet.highlight": true,
   "colors.enable": true,
   "git.addGBlameToVirtualText": true,
-  "html.autoClosingTags": true,
-  "html.format.indentInnerHtml": true,
-  "html.format.indentHandlebars": true,
   "markdownlint.config": {
     "MD033": false,
     "MD013": false,

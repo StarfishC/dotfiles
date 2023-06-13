@@ -121,7 +121,7 @@
         "defaults": 
         {
             "bellStyle": "none",
-            "colorScheme": "One Half Dark",
+            "colorScheme": "OneStar",
             "cursorShape": "filledBox",
             "experimental.retroTerminalEffect": false,
             "font": 
@@ -145,8 +145,17 @@
                 "name": "Powershell"
             },
             {
+                "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+                "hidden": false,
+                "icon": "C:\\Users\\csh05\\assets\\arch2.ico",
+                "name": "Arch",
+                "source": "Windows.Terminal.Wsl",
+                "startingDirectory": "~/code"
+            },
+            {
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
+                "icon": "C:\\Users\\csh05\\assets\\ubuntu2.ico",
                 "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl",
                 "startingDirectory": "~/code"
@@ -154,7 +163,7 @@
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
-                "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
+                "name": "cmd"
             },
             {
                 "commandline": "C:\\ProgramFiles\\msys64\\msys2_shell.cmd -ucrt64 -defterm -no-start -here -use-full-path",
