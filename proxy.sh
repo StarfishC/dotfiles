@@ -17,7 +17,7 @@ set_proxy()
         git config --global http.proxy socks://$hostip:$socksport
     fi
 
-    # ssh_proxy
+    ssh_proxy
     # echo $ALL_PROXY
     # echo "set proxy success"
 }
@@ -41,6 +41,7 @@ ssh_proxy()
     oldip=`cat ~/.ssh/config | grep -o "[0-9].*[0-9]"`
     pcd=`cat ~/.ssh/config | grep "ProxyCommand"`
 
+    # nc -> openbsd-netcat
     if [ "$pcd" = "" ]; then
         echo "Host github.com" >> ~/.ssh/config
         echo "    HostName github.com" >> ~/.ssh/config
