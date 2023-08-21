@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "type": "floaterm",
+  "options": {
+    "cwd": "${fileWorkspaceFolder}"
+  },
+  "presentation": {
+    "panel": "shared"
+  },
+  "tasks": [
+    {
+      "label": "quick-run",
+      "type": "floaterm",
+      "save": "current",
+      "options": {
+        "position": "bottomright",
+        "autoclose": 0
+      },
+      "presentation": {
+        "focus": false,
+        "panel": "shared"
+      },
+      "filetype": {
+        "python": {
+          "command": "python3",
+          "args": ["${file}"]
+        },
+        "cpp": {
+          "command": "clang++",
+          "args": [
+            "${file}",
+            "-std=c++11",
+            "-o",
+            "${fileWorkspaceFolder}${pathSeparator}a.out"
+          ],
+          "dependsOn": ["execute"],
+          "dependsType": "postLaunch",
+          "dependsOrder": "sequent"
+        },
+        "c": {
+          "command": "clang",
+          "args": [
+            "${file}",
+            "-std=c11",
+            "-o",
+            "${fileWorkspaceFolder}${pathSeparator}a.out"
+          ],
+          "dependsOn": ["execute"],
+          "dependsType": "postLaunch",
+          "dependsOrder": "sequent"
+        },
+        "vim": {
+          "command": "so ${file}",
+          "type": "ex"
+        },
+        "markdown": {
+          "command": "MarkdownPreviewToggle",
+          "type": "ex"
+        }
+      }
+    },
+    {
+      "label": "execute",
+      "command": "time",
+      "args": ["${fileWorkspaceFolder}${pathSeparator}a.out"]
+    },
+    {
+      "label": "project-build",
+      "command": "rm build -r;mkdir build && cd build && cmake",
+      "args": ["-DCMAKE_EXPORT_COMPILE_COMMANDS=1", ".."]
+    },
+    {
+      "label": "project-cmake",
+      "command": "cmake",
+      "args": ["--build", "build"]
+    },
+    {
+      "label": "project-run",
+      "command": "build${pathSeparator}${workspaceFolderBasename}"
+    },
+    {
+      "label": "project",
+      "dependsOrder": "sequent",
+      "dependsOn": ["project-build", "project-cmake", "project-run"]
+    }
+  ]
+}
