@@ -72,6 +72,13 @@ set termguicolors
 g:sonokai_style = 'andromeda'
 colorscheme sonokai
 
+# 设置alt映射M
+for i in range(97, 122)
+    var c = nr2char(i)
+    var cmd: string = "set <M-" .. c .. ">=\e" .. c
+    silent! execute cmd
+endfor
+
 # highlight cursorLineNr  cterm=NONE
 # highlight Search        cterm=bold ctermfg=16 ctermbg=76 gui=bold guifg=#292b2e guibg=#86dc2f
 # highlight SignColumn    ctermbg=NONE guibg=NONE
@@ -80,15 +87,6 @@ highlight EndOfBuffer   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 highlight Lf_hl_cursorline ctermfg=107 guifg=#77d5f0
 highlight link HighlightedyankRegion IncSearch
 
-if has("gui_running")
-    set guioptions-=L
-    set guioptions-=T
-    set guioptions-=m
-    set guioptions-=r
-    set guifont=JetBrainsMono_Nerd_Font_Mono:h12:W500:cANSI:qDRAFT
-else
-    highlight Normal        ctermbg=NONE ctermfg=NONE guibg=NONE
-endif
 if has("win32")
     set shell="pwsh.exe"
 endif
@@ -429,9 +427,6 @@ g:AutoPairsMultilineClose = 1
 g:AutoPairsShortcutToggle = '<M-t>'
 g:AutoPairsShortcutJump = '<M-n>'
 g:AutoPairsShortcutFastWrap = '<M-f>'
-# 删除右括号
-imap <M-x> <Esc>lxa
-
 
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -487,9 +482,9 @@ noremap <leader>fr :Leaderf --nowrap task<CR>
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 g:floaterm_autoclose = 1
 g:floaterm_keymap_new  = '<C-t>'
-g:floaterm_keymap_prev = '<C-,>'
-g:floaterm_keymap_next = '<C-.>'
-g:floaterm_keymap_kill = '<C-k>'
+g:floaterm_keymap_prev = '<C-j>'
+g:floaterm_keymap_next = '<C-k>'
+g:floaterm_keymap_kill = '<C-q>'
 g:floaterm_keymap_toggle = '<F6>'
 tnoremap <C-N> <C-\><C-N>
 hi FloatermBorder ctermfg = cyan
@@ -533,29 +528,18 @@ noremap <silent> <F5> :call <SID>CompileAndRunCode()<CR>
 #"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufEnter * ExitVim()
 def ExitVim(): void
-    if winnr('$') == 1 && &filetype == 'startify'
-        execute "qall!"
-    elseif winnr('$') == 1 && has("gui_running") && &filetype == ''
-        execute "Startify"
-    else
-        var wininfo = getwininfo()
-        var ftlist = ["terminal", "quickfix", "coc-explorer", "coctree", "floaterm"]
-        var close = 1
-        for win in wininfo
-            var ft = getwinvar(win['winid'], '&filetype')
-            if index(ftlist, ft) < 0
-                close = 0
-                break
-            endif
-        endfor
-        if close == 1
-            if has("gui_running")
-                execute "bufdo bd"
-                execute "Startify"
-            else
-                execute "qall!"
-            endif
+    var wininfo = getwininfo()
+    var ftlist = ["terminal", "quickfix", "coc-explorer", "coctree", "floaterm"]
+    var close = 1
+    for win in wininfo
+        var ft = getwinvar(win['winid'], '&filetype')
+        if index(ftlist, ft) < 0
+            close = 0
+            break
         endif
+    endfor
+    if close == 1
+        execute "qall!"
     endif
 enddef
 
