@@ -32,6 +32,7 @@
     "default": "\uf29c"
   },
   "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.enableMessage": "never",
   "diagnostic.virtualText": true,
   "diagnostic.errorSign": "\uea87",
   "diagnostic.warningSign": "\ue654",

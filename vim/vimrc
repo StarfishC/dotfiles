@@ -24,6 +24,7 @@ Plug 'Yggdroot/LeaderF-marks'
 Plug 'voldikss/LeaderF-floaterm'
 Plug 'voldikss/vim-floaterm'
 Plug 'caoshenghui/vim-tasks'
+Plug 'zhenyangze/vim-bitoai'
 
 plug#end()
 
@@ -34,10 +35,9 @@ set nocompatible
 set autoread
 set autowrite
 set cursorline
-set clipboard+=unnamed
 set expandtab
+set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-set fenc=UTF-8
 set nofoldenable
 set backspace=2
 set hidden
@@ -66,6 +66,7 @@ set ttimeoutlen=50
 set termencoding=utf-8
 set updatetime=250
 set wildmenu
+set wildoptions=pum
 set sessionoptions+=globals
 set termguicolors
 
@@ -74,7 +75,7 @@ colorscheme sonokai
 
 # 设置alt映射M
 for i in range(97, 122)
-    var c = nr2char(i)
+    var c: string = nr2char(i)
     var cmd: string = "set <M-" .. c .. ">=\e" .. c
     silent! execute cmd
 endfor
@@ -155,13 +156,13 @@ autocmd BufNewFile,BufRead *.tsl,*.tsf setlocal noexpandtab
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # coc-nvim
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-def Check_back_space(): bool
+def CheckBackspace(): bool
     var col = col('.') - 1
     return !col || getline('.')[col - 1] =~# '\s'
 enddef
 inoremap <silent><expr> <TAB>
         \ coc#pum#visible() ? coc#pum#next(1) :
-        \ <SID>Check_back_space() ? "\<TAB>" :
+        \ <SID>CheckBackspace() ? "\<TAB>" :
         \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 # <CR> confirm completion
@@ -182,10 +183,10 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 # 使用K预览窗口显示文档
-nnoremap <silent> K :call <SID>Show_documentation()<CR>
-def Show_documentation(): void
+nnoremap <silent> K :call <SID>ShowDocumentation()<CR>
+def ShowDocumentation(): void
     if g:CocAction('hasProvider', 'hover')
-        g:CocActionAsync('doHover')
+        g:CocActionAsync('definitionHover')
     else
         feedkeys('K', 'in')
     endif
@@ -232,14 +233,9 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-nmap <silent> <C-c> <Plug>(coc-cursors-position)
-nmap <expr> <silent> <C-d> <SID>Select_current_word()
-def Select_current_word(): string
-    if !get(b:, 'coc_cursors_activated', 0)
-        return "\<Plug>(coc-cursors-word)"
-    endif
-    return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
-enddef
+map <silent> <C-c> <Plug>(coc-cursors-position)
+map <silent> <C-d> <Plug>(coc-cursors-word)
+xmap <silent> <C-d> <Plug>(coc-cursors-word)
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup mygroup
@@ -262,10 +258,10 @@ vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(
 g:coc_snippet_next = '<C-j>'
 g:coc_snippet_prev = "<C-k>"
 
-nnoremap <silent> <space>d  :<C-u>CocList diagnostics<CR>
-nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<CR>
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 
 def SetupCommandAbbrs(from: string, to: string): void
     exec 'cnoreabbrev <expr> ' .. from
@@ -311,8 +307,8 @@ g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-markdown-preview-enhanced',
                             \ ]
 
-highlight CocInlayHint  cterm=Italic ctermfg=12 gui=Italic guifg=#15aabf
-highlight CocHighlightText ctermfg=223 ctermbg=239 guifg=#ebdbb2 guibg=#242a32
+highlight CocInlayHint ctermfg=240 guifg=#5a5e7a cterm=Italic gui=Italic 
+highlight CocHighlightText guifg=#ebdbb2 guibg=#242a32
 
 # coc-yank
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<CR>
