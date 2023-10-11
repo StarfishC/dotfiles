@@ -16,7 +16,7 @@ syn keyword tslAccess           public protected private
 syn keyword tslModifier         override overload virtual property
 syn keyword tslLabel		case of
 syn keyword tslConditional	else if
-syn keyword tslRepeat		for while do downto
+syn keyword tslRepeat		for while do downto step until repeat
 syn keyword tslOperator		and in is not or
 syn keyword tslOperator		new
 syn keyword tslOperator		write read
@@ -26,7 +26,7 @@ syn keyword tslBoolean          false true
 syn keyword tslBranch           break continue
 syn keyword tslNil		nil
 syn keyword tslType             string integer
-syn keyword tslSql              from where group by
+syn keyword tslSql              from where group by to values
 syn keyword tslBuiltins         select vselect sselect update delete thisrowindex
 syn keyword tslBuiltins         echo mtic mtoc self this
 syn keyword tslBuiltins         inf nan
