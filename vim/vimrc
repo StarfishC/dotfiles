@@ -10,7 +10,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'LunarWatcher/auto-pairs'
 Plug 'luochen1990/rainbow'
 Plug 'Yggdroot/indentLine'
-Plug 'easymotion/vim-easymotion'
+Plug 'monkoose/vim9-stargate'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -34,6 +34,7 @@ plug#end()
 set nocompatible
 set autoread
 set autowrite
+set clipboard=unnamed
 set cursorline
 set expandtab
 set fileencoding=utf-8
@@ -307,7 +308,7 @@ g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-markdown-preview-enhanced',
                             \ ]
 
-highlight CocInlayHint ctermfg=240 guifg=#5a5e7a cterm=Italic gui=Italic 
+highlight CocInlayHint ctermfg=240 guifg=#5a5e7a cterm=Italic gui=Italic
 highlight CocHighlightText guifg=#ebdbb2 guibg=#242a32
 
 # coc-yank
@@ -443,17 +444,10 @@ nmap <leader>gd :Gvdiffsplit<CR>
 
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# easymotion
+# stargate
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map  <leader><leader>w <Plug>(easymotion-bd-w)
-nmap <leader><leader>w <Plug>(easymotion-overwin-w)
-map  <leader><leader>c <Plug>(easymotion-bd-f)
-nmap <leader><leader>c <Plug>(easymotion-overwin-f)
-nmap <leader><leader>t <Plug>(easymotion-overwin-f2)
-map  <leader><leader>l <Plug>(easymotion-bd-jk)
-nmap <leader><leader>l <Plug>(easymotion-overwin-line)
-autocmd User EasyMotionPromptBegin silent! CocDisable
-autocmd User EasyMotionPromptEnd   silent! CocEnable
+noremap <leader><leader>c <Cmd>call stargate#OKvim(1)<CR>
+noremap <leader><leader>w <Cmd>call stargate#OKvim(2)<CR>
 
 
 
