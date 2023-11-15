@@ -45,7 +45,7 @@
   "coc.preferences.extensionUpdateCheck": "weekly",
   "cmake.lsp.enable": true,
   "yank.enableCompletion": false,
-  "yank.highlight.enable": false,
+  "yank.highlight.enable": true,
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "snippets.textmateSnippetsRoots": ["~/.config/snippets"],

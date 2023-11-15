@@ -87,7 +87,7 @@ endfor
 # highlight Terminal      ctermbg=NONE guibg=NONE
 highlight EndOfBuffer   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 highlight Lf_hl_cursorline ctermfg=107 guifg=#77d5f0
-highlight link HighlightedyankRegion IncSearch
+highlight link HighlightedyankRegion Search
 
 if has("win32")
     set shell="pwsh.exe"
@@ -101,8 +101,8 @@ nnoremap <C-H> <C-W><C-H>
 
 nnoremap <silent> j gj
 nnoremap <silent> k gk
-nnoremap [b :bp<CR>
-nnoremap ]b :bn<CR>
+nnoremap <S-h> :bp<CR>
+nnoremap <S-l> :bn<CR>
 nnoremap <leader>b :bwipe!<CR>
 nnoremap <BS> :nohl<CR>
 inoremap jk <Esc>
@@ -289,7 +289,6 @@ command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=? Fold :call CocActionAsync('fold', <f-args>)
 # Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-
 g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-highlight',
                             \  'coc-git',

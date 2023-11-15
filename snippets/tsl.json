@@ -1,0 +1,34 @@
+{
+  // Place your snippets for C++ here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  "function1": {
+    "prefix": "func1",
+    "body": [
+      "Function $1($2);$0"
+    ]
+  },
+  "function2": {
+    "prefix": "func2",
+    "body": [
+      "Function $1($2);",
+      "Begin",
+      "    $0",
+      "End;"
+    ]
+  },
+  "property1": {
+    "prefix": "pro1",
+    "body": [
+      "property $1 read Read$2;$0"
+    ]
+  },
+  "property2": {
+    "prefix": "pro2",
+    "body": [
+      "property $1 read Read$2 write Write$3;$0"
+    ]
+  }
+}

@@ -12,6 +12,7 @@ syn keyword tslStatement	begin end then
 syn keyword tslStatement	return with
 syn keyword tslStatement	class function type nextgroup=tslFunction skipwhite
 syn keyword tslStatement	this
+syn keyword tslStatement        unit uses implementation interface
 syn keyword tslAccess           public protected private
 syn keyword tslModifier         override overload virtual property
 syn keyword tslLabel		case of
