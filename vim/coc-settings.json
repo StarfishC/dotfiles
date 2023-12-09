@@ -4,6 +4,8 @@
   "suggest.snippetIndicator": "",
   "suggest.maxCompleteItemCount": 30,
   "suggest.virtualText": true,
+  "suggest.pumFloatConfig": {"border": true, "rounded": true},
+  "suggest.floatConfig": {"border": true, "rounded": true},
   "suggest.completionItemKindLabels": {
     "text": "\ue612",
     "method": "\uea8c",
