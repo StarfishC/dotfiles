@@ -20,9 +20,6 @@ SAVEHIST=10000
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export ALL_PROXY=http://127.0.0.1:10809
-export http_proxy=$ALL_PROXY
-export https_proxy=$ALL_PROXY
 source ~/shell_title.sh
 
 
