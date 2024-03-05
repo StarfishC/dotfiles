@@ -1,5 +1,3 @@
-base
-filesystem
 mingw-w64-ucrt-x86_64-binutils
 mingw-w64-ucrt-x86_64-boost
 mingw-w64-ucrt-x86_64-clang
@@ -17,18 +15,11 @@ mingw-w64-ucrt-x86_64-gdb
 mingw-w64-ucrt-x86_64-gdb-multiarch
 mingw-w64-ucrt-x86_64-headers-git
 mingw-w64-ucrt-x86_64-libgccjit
-mingw-w64-ucrt-x86_64-libjpeg-turbo
 mingw-w64-ucrt-x86_64-libmangle-git
-mingw-w64-ucrt-x86_64-libpng
-mingw-w64-ucrt-x86_64-libtiff
 mingw-w64-ucrt-x86_64-libwinpthread-git
 mingw-w64-ucrt-x86_64-make
-mingw-w64-ucrt-x86_64-nodejs
 mingw-w64-ucrt-x86_64-pkgconf
 mingw-w64-ucrt-x86_64-ripgrep
 mingw-w64-ucrt-x86_64-tools-git
 mingw-w64-ucrt-x86_64-winpthreads-git
 mingw-w64-ucrt-x86_64-winstorecompat-git
-msys2-runtime
-python
-zsh
