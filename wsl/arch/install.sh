@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_path=$(readlink -f "$0")
+script_path=$(readlink -f ${BASH_SOURCE[0]})
 script_dir=$(dirname "$script_path")
 
 if ! grep -q "^\[archlinuxcn\]" /etc/pacman.conf || ! grep -q "^Server = https://mirrors.ustc.edu.cn/archlinuxcn/\$arch" /etc/pacman.conf; then
@@ -23,9 +23,10 @@ if [[ $choice == "Y" ]]; then
 fi
 
 if type zsh >/dev/null 2>&1; then
-    sudo chsh zsh
+    chsh -s /usr/bin/zsh
     sudo ln -s "$script_dir/zshrc" ~/.zshrc
-    sudo ln -s "$script_dir/shell_title" ~/.shell_title
+    sudo ln -s "$script_dir/shell_title" ~/shell_title.zsh
+    sudo ln -s "$script_dir/p10k.zsh" ~/.p10k.zsh
 fi
 
 cp "$script_dir/../clang-format" ~/.clang-format

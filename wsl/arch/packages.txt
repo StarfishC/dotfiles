@@ -1,5 +1,4 @@
 arch-install-scripts
-archlinuxcn-keyring
 base
 boost
 clang

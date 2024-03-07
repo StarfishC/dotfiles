@@ -5,7 +5,7 @@ if ! type vim >/dev/null 2>&1;then
     exit 1
 fi
 
-script_path=$(readlink -f "$0")
+script_path=$(readlink -f ${BASH_SOURCE[0]})
 script_dir=$(dirname "$script_path")
 
 mkdir -p ~/.vim

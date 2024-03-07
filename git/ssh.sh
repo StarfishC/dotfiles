@@ -1,5 +1,6 @@
 #!/bin/bash
-if [ -z "$1" ] then
+
+if [ -z "$1" ]; then
     echo "Please enter your git email"
     exit 1
 fi
