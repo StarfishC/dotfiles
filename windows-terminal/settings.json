@@ -6,9 +6,25 @@
         {
             "command": 
             {
+                "action": "switchToTab",
+                "index": 4
+            },
+            "keys": "alt+5"
+        },
+        {
+            "command": 
+            {
                 "action": "copy"
             },
             "keys": "ctrl+shift+c"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 0
+            },
+            "keys": "alt+1"
         },
         {
             "command": "paste",
@@ -18,9 +34,9 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 0
+                "index": 3
             },
-            "keys": "alt+1"
+            "keys": "alt+4"
         },
         {
             "command": 
@@ -37,22 +53,6 @@
                 "index": 2
             },
             "keys": "alt+3"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 3
-            },
-            "keys": "alt+4"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 4
-            },
-            "keys": "alt+5"
         },
         {
             "command": 
@@ -97,10 +97,8 @@
     ],
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{af5a6296-38b4-4be8-9e9f-4b82d8a7fc49}",
+    "defaultProfile": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
     "multiLinePasteWarning": false,
-    "showTerminalTitleInTitlebar": true,
-    "useAcrylicInTabRow": true,
     "newTabMenu": 
     [
         {
@@ -130,28 +128,40 @@
         "list": 
         [
             {
+                "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+                "hidden": false,
+                "icon": "ms-appdata:///roaming/assets/arch2.png",
+                "name": "Arch",
+                "source": "Windows.Terminal.Wsl",
+                "tabColor": "#1A8BFC"
+            },
+            {
                 "commandline": "pwsh.exe",
                 "guid": "{af5a6296-38b4-4be8-9e9f-4b82d8a7fc49}",
                 "hidden": false,
-                "icon": "C:\\Programs\\PowerShell\\7\\assets\\Powershell_av_colors.ico",
-                "name": "Powershell"
-            },
-            {
-                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-                "hidden": false,
-                "name": "cmd"
+                "icon": "ms-appdata:///roaming/assets/powershell1.ico",
+                "name": "Powershell",
+                "tabColor": "#942EAD"
             },
             {
                 "commandline": "C:\\Programs\\msys64\\msys2_shell.cmd -ucrt64 -defterm -no-start -here -use-full-path",
                 "guid": "{cf75ba52-b1c0-4011-8ee0-daaf2dffebf3}",
                 "hidden": false,
-                "icon": "C:\\Programs\\msys64\\ucrt64.ico",
-                "name": "ucrt"
+                "icon": "ms-appdata:///roaming/assets/ucrt64.ico",
+                "name": "ucrt",
+                "tabColor": "#B2471C"
+            },
+            {
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "cmd",
+                "tabColor": "#0C4620"
             },
             {
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "name": "Windows PowerShell",
+                "tabColor": "#912B20"
             }
         ]
     },
@@ -479,5 +489,8 @@
             "white": "#C0C0C0",
             "yellow": "#808000"
         }
-    ]
+    ],
+    "showTerminalTitleInTitlebar": true,
+    "themes": [],
+    "useAcrylicInTabRow": true
 }
