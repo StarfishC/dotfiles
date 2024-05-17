@@ -19,7 +19,7 @@
       "command": "g++",
       "args": [
         "${file}",
-        "-std=c++11",
+        "-std=c++17",
         "-o",
         "${fileWorkspaceFolder}${pathSeparator}a.out",
         "&& time ${fileWorkspaceFolder}${pathSeparator}a.out"

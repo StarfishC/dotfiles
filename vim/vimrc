@@ -110,7 +110,6 @@ nnoremap <S-l> :bn<CR>
 nnoremap <leader>b :bwipe!<CR>
 nnoremap <BS> :nohl<CR>
 inoremap jk <Esc>
-inoremap kj <Esc>
 nmap = +
 
 if &term =~ '^xterm'
@@ -169,7 +168,8 @@ inoremap <silent><expr> <TAB>
         \ coc#pum#visible() ? coc#pum#next(1) :
         \ <SID>CheckBackspace() ? "\<TAB>" :
         \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+# inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? "<cmd>call coc#pum#_navigate(0,1)\<cr>" : "\<C-h>"
 # <CR> confirm completion
 inoremap <silent><expr><CR> coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm()
                             \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -216,27 +216,13 @@ nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 # 重命名当前word
 nmap <leader>rn <Plug>(coc-rename)
 # openlink
-nmap <leader>ol <Plug>(coc-openlink)
+nmap <leader>l <Plug>(coc-openlink)
 
 # Use <TAB> for selections ranges.
 # NOTE: Requires 'textDocument/selectionRange' support from the language server.
 # coc-tsserver, coc-python are the examples of servers that support it.
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
-
-nmap <silent> ,h <Plug>(coc-float-hide)
-nmap <silent> ,j <Plug>(coc-float-jump)
-
-nmap ,cl <Plug>(coc-codelens-action)
-
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
 
 map <silent> <C-c> <Plug>(coc-cursors-position)
 map <silent> <C-d> <Plug>(coc-cursors-word)
@@ -265,8 +251,6 @@ g:coc_snippet_prev = "<C-k>"
 
 nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<CR>
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 
 def SetupCommandAbbrs(from: string, to: string): void
     exec 'cnoreabbrev <expr> ' .. from
@@ -324,8 +308,6 @@ nmap [c <Plug>(coc-git-preconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 
-# windows terminal 插入模式下，ctrl+v Alt+key查看要映射按键
-# <M-key> 会导致VIM 插入模式下<ESC>有延迟
 # coc-explorer
 nnoremap <space>e :CocCommand explorer<CR>
 nnoremap <M-e> :CocCommand explorer /
@@ -337,8 +319,7 @@ nnoremap <M-e> :CocCommand explorer /
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 g:indentLine_enabled = 1
 g:indentLine_char_list = ['|', '¦', '┆', '┊']
-# g:indentLine_color_term = 175
-g:indentLine_fileTypeExclude = ['coc-explorer', 'help', 'startify', 'coctree']
+g:indentLine_fileTypeExclude = ['coc-explorer', 'help', 'coctree']
 g:vim_json_conceal = 0
 g:markdown_syntax_conceal = 0
 
@@ -347,7 +328,7 @@ g:markdown_syntax_conceal = 0
 # LeaderF
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # 使用rg需要安装ripgrep
-g:Lf_UseCache = 0
+g:Lf_UseCache = 1
 g:Lf_HideHelp = 1
 g:Lf_ShortcutF = "<leader>ff"
 g:Lf_WindowPosition = 'popup'
@@ -421,9 +402,8 @@ g:AutoPairsCompatibleMaps = 0
 g:AutoPairsMapBS = 1
 g:AutoPairsMultilineBackspace = 1
 g:AutoPairsMultilineClose = 1
-g:AutoPairsShortcutToggle = '<M-t>'
-g:AutoPairsShortcutJump = '<M-n>'
-g:AutoPairsShortcutFastWrap = '<M-f>'
+g:AutoPairsShortcutToggle = '<M-p>'
+g:AutoPairsShortcutJump = '<M-]>'
 
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -471,10 +451,10 @@ noremap <silent><leader>fr :Leaderf --nowrap task<CR>
 # floaterm
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 g:floaterm_autoclose = 1
-g:floaterm_keymap_new  = '<C-t>'
-g:floaterm_keymap_prev = '<C-j>'
-g:floaterm_keymap_next = '<C-k>'
-g:floaterm_keymap_kill = '<C-q>'
+g:floaterm_keymap_new  = '<M-t>'
+g:floaterm_keymap_prev = '<M-j>'
+g:floaterm_keymap_next = '<M-k>'
+g:floaterm_keymap_kill = '<M-q>'
 g:floaterm_keymap_toggle = '<F6>'
 tnoremap <C-N> <C-\><C-N>
 hi FloatermBorder ctermfg = cyan
