@@ -340,12 +340,12 @@ g:Lf_WildIgnore = {
             \ 'dir': ['.svn', '.git', '.hg'],
             \ 'file': ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
             \}
-noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
-noremap <leader>fg :<C-U>Leaderf! rg --recall<CR>
+nnoremap <silent><leader>fb :Leaderf buffer<CR>
+nnoremap <silent><leader>fm :Leaderf mru<CR>
+nnoremap <silent><leader>fl :Leaderf line<CR>
+nnoremap <silent><leader>fk :Leaderf marks<CR>
+nnoremap <silent><leader>fg :Leaderf! rg --recall<CR>
+nnoremap <silent><leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 
 
