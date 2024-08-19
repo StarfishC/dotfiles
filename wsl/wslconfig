@@ -1,10 +1,7 @@
 [wsl2]
 networkingMode=mirrored
-firewall=true
-dnsTunneling=true
-autoProxy=true
+firewall=false
 
 [experimental]
 autoMemoryReclaim=gradual
 sparseVhd=true
-useWindowsDnsCache=false
