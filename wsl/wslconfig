@@ -1,7 +1,9 @@
 [wsl2]
-networkingMode=mirrored
-firewall=false
+networkingMode = mirrored
+firewall = false
 
 [experimental]
-autoMemoryReclaim=gradual
-sparseVhd=true
+autoMemoryReclaim = gradual
+sparseVhd = true
+useWindowsDnsCache = false
+dnsTunnelingIpAddress = "172.19.0.2"
