@@ -1,6 +1,5 @@
 [wsl2]
 networkingMode = mirrored
-firewall = false
 
 [experimental]
 autoMemoryReclaim = gradual
