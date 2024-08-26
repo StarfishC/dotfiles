@@ -37,6 +37,7 @@ set autowrite
 set clipboard=unnamed
 set cursorline
 set expandtab
+set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set nofoldenable
@@ -73,7 +74,9 @@ set termguicolors
 
 # g:sonokai_style = 'andromeda'
 # colorscheme sonokai
-colorscheme ayu
+# colorscheme ayu
+set background=dark
+colorscheme gruvbox
 
 # 设置alt映射M
 for i in range(97, 122)
@@ -86,11 +89,12 @@ endfor
 # highlight Search        cterm=bold ctermfg=16 ctermbg=76 gui=bold guifg=#292b2e guibg=#86dc2f
 # highlight SignColumn    ctermbg=NONE guibg=NONE
 # highlight Terminal      ctermbg=NONE guibg=NONE
+highlight Visual cterm=NONE
 highlight EndOfBuffer   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 highlight Lf_hl_cursorline ctermfg=107 guifg=#77d5f0
 highlight CocInlayHint ctermfg=240 guifg=#5a5e7a cterm=Italic gui=Italic
 highlight link HighlightedyankRegion Search
-highlight link CocHighlightText Visual
+highlight link CocHighlightText cursorLineNr
 
 
 if has("win32")
@@ -153,8 +157,6 @@ autocmd FileType qf
 \ setlocal norelativenumber
 
 autocmd BufNewFile,BufRead *.tsl,*.tsf setf tsl
-autocmd BufNewFile,BufRead *.tsl,*.tsf setlocal noexpandtab
-
 
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -341,10 +343,12 @@ g:Lf_WildIgnore = {
             \ 'file': ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
             \}
 nnoremap <silent><leader>fb :Leaderf buffer<CR>
-nnoremap <silent><leader>fm :Leaderf mru<CR>
-nnoremap <silent><leader>fl :Leaderf line<CR>
-nnoremap <silent><leader>fk :Leaderf marks<CR>
 nnoremap <silent><leader>fg :Leaderf! rg --recall<CR>
+nnoremap <silent><leader>fh :Leaderf cmdHistory<CR>
+nnoremap <silent><leader>fi :Leaderf file --no-ignore<CR>
+nnoremap <silent><leader>fk :Leaderf marks<CR>
+nnoremap <silent><leader>fl :Leaderf line<CR>
+nnoremap <silent><leader>fm :Leaderf mru<CR>
 nnoremap <silent><leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 
