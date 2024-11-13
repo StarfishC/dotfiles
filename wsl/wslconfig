@@ -4,5 +4,4 @@ networkingMode = mirrored
 [experimental]
 autoMemoryReclaim = gradual
 sparseVhd = true
-useWindowsDnsCache = false
 dnsTunnelingIpAddress = "172.19.0.2"

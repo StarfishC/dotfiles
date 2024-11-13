@@ -23,7 +23,7 @@ Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'Yggdroot/LeaderF-marks'
 Plug 'voldikss/LeaderF-floaterm'
 Plug 'voldikss/vim-floaterm'
-Plug 'caoshenghui/vim-tasks'
+Plug 'StarfishC/vim-tasks'
 Plug 'zhenyangze/vim-bitoai'
 
 plug#end()
@@ -72,11 +72,11 @@ set wildoptions=pum
 set sessionoptions+=globals
 set termguicolors
 
-# g:sonokai_style = 'andromeda'
-# colorscheme sonokai
+g:sonokai_style = 'andromeda'
+colorscheme sonokai
 # colorscheme ayu
-set background=dark
-colorscheme gruvbox
+# set background=dark
+# colorscheme gruvbox
 
 # 设置alt映射M
 for i in range(97, 122)
@@ -94,7 +94,7 @@ highlight EndOfBuffer   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 highlight Lf_hl_cursorline ctermfg=107 guifg=#77d5f0
 highlight CocInlayHint ctermfg=240 guifg=#5a5e7a cterm=Italic gui=Italic
 highlight link HighlightedyankRegion Search
-highlight link CocHighlightText cursorLineNr
+highlight link CocHighlightText StatusLineNC
 
 
 if has("win32")
