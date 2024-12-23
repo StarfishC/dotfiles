@@ -40,7 +40,7 @@
   "diagnostic.errorSign": "\uea87",
   "diagnostic.warningSign": "\ue654",
   "inlayHint.refreshOnInsertMode": true,
-  "inlayHint.enable": false,
+  "inlayHint.enable": true,
   "list.floatPreview": true,
   "semanticTokens.enable": true,
   "signature.preferShownAbove": false,

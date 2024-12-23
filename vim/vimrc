@@ -24,7 +24,7 @@ Plug 'Yggdroot/LeaderF-marks'
 Plug 'voldikss/LeaderF-floaterm'
 Plug 'voldikss/vim-floaterm'
 Plug 'StarfishC/vim-tasks'
-Plug 'zhenyangze/vim-bitoai'
+Plug 'github/copilot.vim'
 
 plug#end()
 
@@ -90,7 +90,7 @@ endfor
 # highlight SignColumn    ctermbg=NONE guibg=NONE
 # highlight Terminal      ctermbg=NONE guibg=NONE
 highlight Visual cterm=NONE
-highlight EndOfBuffer   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 highlight Lf_hl_cursorline ctermfg=107 guifg=#77d5f0
 highlight CocInlayHint ctermfg=240 guifg=#5a5e7a cterm=Italic gui=Italic
 highlight link HighlightedyankRegion Search
@@ -466,9 +466,19 @@ nnoremap <silent><leader>ft :Leaderf --nowrap floaterm<CR>
 
 
 
-#"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+# copilot.vim
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+imap <silent><expr> <C-S> copilot#Accept("\<CR>")
+g:copilot_no_tab_map = true
+imap <C-,> <Plug>(copilot-next)
+imap <C-.> <Plug>(copilot-previous)
+
+
+
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # 退出VIM时关闭quickfix和terminal
-#"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufEnter * ExitVim()
 def ExitVim(): void
     var wininfo = getwininfo()
