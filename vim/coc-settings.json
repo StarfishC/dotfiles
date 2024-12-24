@@ -6,6 +6,7 @@
   "suggest.virtualText": true,
   "suggest.pumFloatConfig": {"border": true, "rounded": true},
   "suggest.floatConfig": {"border": true, "rounded": true},
+  "suggest.labelMaxLength": 70,
   "suggest.completionItemKindLabels": {
     "text": "\ue612",
     "method": "\uea8c",

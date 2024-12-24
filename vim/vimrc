@@ -175,6 +175,7 @@ inoremap <expr><S-TAB> coc#pum#visible() ? "<cmd>call coc#pum#_navigate(0,1)\<cr
 # <CR> confirm completion
 inoremap <silent><expr><CR> coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm()
                             \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr><C-l> coc#refresh()
 
 # 补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -295,6 +296,7 @@ g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-clangd',
                             \  'coc-webview',
                             \  'coc-markdown-preview-enhanced',
+                            \  '@hexuhua/coc-copilot'
                             \ ]
 
 # coc-yank
@@ -469,10 +471,10 @@ nnoremap <silent><leader>ft :Leaderf --nowrap floaterm<CR>
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # copilot.vim
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-imap <silent><expr> <C-S> copilot#Accept("\<CR>")
 g:copilot_no_tab_map = true
-imap <C-,> <Plug>(copilot-next)
-imap <C-.> <Plug>(copilot-previous)
+imap <silent><expr> <C-A> copilot#Accept("\<CR>")
+imap <C-N> <Plug>(copilot-next)
+imap <C-P> <Plug>(copilot-previous)
 
 
 
