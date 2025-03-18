@@ -21,7 +21,7 @@ syn keyword tslBranch           break continue
 syn keyword tslReturn		return debugreturn debugrunenv debugrunenvdo
 syn keyword tslLabel		case of goto label
 syn keyword tslOperator		write read
-syn keyword tslOperator		union minus
+syn keyword tslOperator		union minus union2
 syn keyword tslException	except raise try finally exceptobject
 syn keyword tslBoolean          false true
 syn keyword tslNil		nil
@@ -32,7 +32,7 @@ syn keyword tslBuiltins		external const out var
 syn keyword tslShiftOperator	ror rol shr shl
 syn keyword tslLogicOperator	and in is not or
 syn keyword tslArithmOperator   div mod
-syn keyword tslSql		select vselect sselect update delete mselect
+syn keyword tslSql		select vselect sselect update delete mselect set
 syn keyword tslSqlOperator	sqlin from where group by like
 syn keyword tslBuiltinVar	likeeps likeepsrate
 syn keyword tslOther		setuid sudo
@@ -46,10 +46,11 @@ syn keyword tslTodo		FIXME NOTE NOTES TODO XXX contained
 
 syn match   tslClassName  "\h\w*\ze\." display contained
 syn match   tslTypeName	  "\h\w\*" display contained
-syn match   tslType	  ":\s*\zs[a-zA-Z_][^=;,()\[\]]*\ze[=;)]"
+syn match   tslType	  "\([^?:]*[^?: \t]\):\s*\zs[a-zA-Z_][^=;,()\[\]]*\ze[=;)]"
 syn match   tslDot	  "\.\zs\w\+"
 syn match   tslFunc	  "\w\+\ze\s*("
 " TODO: tslClassName  func.abc(ax)  obj.abc()
+syn match   tslComment	  "{.\{-}}" containedin=ALL contains=@NoSpell
 syn match   tslComment	  "//.*$" contains=tslTodo,@Spell
 syn region  tslComment	  start="(\*" end="\*)"
 
