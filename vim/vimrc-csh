@@ -72,14 +72,11 @@ set wildoptions=pum
 set sessionoptions+=globals
 set termguicolors
 
-# g:sonokai_style = 'andromeda'
-# colorscheme sonokai
-colorscheme challenger_deep
-# g:purify_italic = 0
-# colorscheme purify
+g:sonokai_style = 'andromeda'
+colorscheme sonokai
+# colorscheme ayu
 # set background=dark
 # colorscheme gruvbox
-# colorscheme molokai
 
 # 设置alt映射M
 for i in range(97, 122)
@@ -129,7 +126,7 @@ endif
 if has("unix") && system("uname -r") =~ "microsoft"
     augroup Yank
         autocmd!
-        autocmd TextYankPost * : call system('wl-copy', @")
+        autocmd TextYankPost * : call system('clip.exe', @")
     augroup END
 endif
 
@@ -152,7 +149,7 @@ autocmd BufNewFile,BufRead *.json
 \ setlocal filetype=jsonc syntax=json tabstop=2 softtabstop=2 shiftwidth=2
 
 # 对于html
-autocmd BufNewFile,BufRead *.html,*.[jt]s
+autocmd BufNewFile,BufRead *.html
 \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 # 对于quickfix
@@ -178,7 +175,6 @@ inoremap <expr><S-TAB> coc#pum#visible() ? "<cmd>call coc#pum#_navigate(0,1)\<cr
 # <CR> confirm completion
 inoremap <silent><expr><CR> coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm()
                             \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr><C-l> coc#refresh()
 
 # 补全结束后退出预览窗口
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -287,7 +283,6 @@ g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-highlight',
                             \  'coc-git',
                             \  'coc-pyright',
-                            \  'coc-tsserver',
                             \  'coc-json',
                             \  'coc-sh',
                             \  'coc-snippets',
@@ -300,7 +295,6 @@ g:coc_global_extensions = ['coc-marketplace',
                             \  'coc-clangd',
                             \  'coc-webview',
                             \  'coc-markdown-preview-enhanced',
-                            \  '@hexuhua/coc-copilot'
                             \ ]
 
 # coc-yank
@@ -336,7 +330,7 @@ g:markdown_syntax_conceal = 0
 # LeaderF
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # 使用rg需要安装ripgrep
-g:Lf_UseCache = 0
+g:Lf_UseCache = 1
 g:Lf_HideHelp = 1
 g:Lf_ShortcutF = "<leader>ff"
 g:Lf_WindowPosition = 'popup'
@@ -355,7 +349,6 @@ nnoremap <silent><leader>fi :Leaderf file --no-ignore<CR>
 nnoremap <silent><leader>fk :Leaderf marks<CR>
 nnoremap <silent><leader>fl :Leaderf line<CR>
 nnoremap <silent><leader>fm :Leaderf mru<CR>
-nnoremap <silent><leader>fs :Leaderf self<CR>
 nnoremap <silent><leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 
@@ -422,10 +415,7 @@ g:AutoPairsShortcutJump = '<M-]>'
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 g:rainbow_active = 1
 g:rainbow_conf = {
-    'separately': {
-        'cmake': 0,
-        'tsl': {'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/']},
-    },
+    'separately': {'cmake': 0}
 }
 
 
@@ -473,16 +463,6 @@ g:floaterm_keymap_toggle = '<F6>'
 tnoremap <C-N> <C-\><C-N>
 hi FloatermBorder ctermfg = cyan
 nnoremap <silent><leader>ft :Leaderf --nowrap floaterm<CR>
-
-
-
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# copilot.vim
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-g:copilot_no_tab_map = true
-imap <silent><expr> <C-A> copilot#Accept("\<CR>")
-imap <C-N> <Plug>(copilot-next)
-imap <C-P> <Plug>(copilot-previous)
 
 
 

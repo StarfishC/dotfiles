@@ -44,31 +44,33 @@ syn keyword tslConstruct	create destroy operator
 syn keyword tslAccess           public protected private published
 syn keyword tslTodo		FIXME NOTE NOTES TODO XXX contained
 
+" 类型和类名
 syn match   tslClassName  "\h\w*\ze\." display contained
 syn match   tslTypeName	  "\h\w\*" display contained
 syn match   tslType	  "\([^?:]*[^?: \t]\):\s*\zs[a-zA-Z_][^=;,()\[\]]*\ze[=;)]"
+
+" 操作符和函数调用
 syn match   tslDot	  "\.\zs\w\+"
 syn match   tslFunc	  "\w\+\ze\s*("
-" TODO: tslClassName  func.abc(ax)  obj.abc()
+
+" 注释
 syn match   tslComment	  "{.\{-}}" containedin=ALL contains=@NoSpell
 syn match   tslComment	  "//.*$" contains=tslTodo,@Spell
 syn region  tslComment	  start="(\*" end="\*)"
 
-syn region  tslString
-      \ start=+[uU]\=\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
-syn region  tslRawString
-      \ start=+[uU]\=[rR]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+" 字符串
+syn region  tslString	  start=+[uU]\=\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+syn region  tslRawString  start=+[uU]\=[rR]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
 
-syn match   tslNumber	"\<0[oO]\=\o\+[Ll]\=\>"
-syn match   tslNumber	"\<0[xX]\x\+[Ll]\=\>"
-syn match   tslNumber	"\<0[bB][01]\+[Ll]\=\>"
-syn match   tslNumber	"\<\%([1-9]\d*\|0\)[Ll]\=\>"
-syn match   tslNumber	"\<\d\+[jJ]\>"
-syn match   tslNumber	"\<\d\+[eE][+-]\=\d\+[jJ]\=\>"
-syn match   tslNumber
-      \ "\<\d\+\.\%([eE][+-]\=\d\+\)\=[jJ]\=\%(\W\|$\)\@="
-syn match   tslNumber
-      \ "\%(^\|\W\)\zs\d*\.\d\+\%([eE][+-]\=\d\+\)\=[jJ]\=\>"
+" 数字
+syn match   tslNumber	  "\<0[oO]\=\o\+[Ll]\=\>"
+syn match   tslNumber	  "\<0[xX]\x\+[Ll]\=\>"
+syn match   tslNumber	  "\<0[bB][01]\+[Ll]\=\>"
+syn match   tslNumber	  "\<\%([1-9]\d*\|0\)[Ll]\=\>"
+syn match   tslNumber	  "\<\d\+[jJ]\>"
+syn match   tslNumber	  "\<\d\+[eE][+-]\=\d\+[jJ]\=\>"
+syn match   tslNumber	  "\<\d\+\.\%([eE][+-]\=\d\+\)\=[jJ]\=\%(\W\|$\)\@="
+syn match   tslNumber	  "\%(^\|\W\)\zs\d*\.\d\+\%([eE][+-]\=\d\+\)\=[jJ]\=\>"
 
 " The default highlight links.  Can be overridden later.
 hi def link tslHeader		Statement
