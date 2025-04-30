@@ -1,7 +1,2 @@
 [wsl2]
-networkingMode = mirrored
-
-[experimental]
-autoMemoryReclaim = gradual
-sparseVhd = true
-dnsTunnelingIpAddress = "172.19.0.2"
+networkingMode=mirrored

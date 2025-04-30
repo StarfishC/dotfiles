@@ -1,120 +1,53 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
-    [
+    "actions": [],
+    "copyFormatting": "none",
+    "copyOnSelect": true,
+    "defaultProfile": "{af5a6296-38b4-4be8-9e9f-4b82d8a7fc49}",
+    "keybindings": [
         {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 4
-            },
-            "keys": "alt+5"
-        },
-        {
-            "command": 
-            {
-                "action": "copy"
-            },
-            "keys": "ctrl+shift+c"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 0
-            },
+            "id": "Terminal.SwitchToTab0",
             "keys": "alt+1"
         },
         {
-            "command": "paste",
-            "keys": "ctrl+shift+v"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 3
-            },
-            "keys": "alt+4"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 1
-            },
+            "id": "Terminal.SwitchToTab1",
             "keys": "alt+2"
         },
         {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 2
-            },
+            "id": "Terminal.SwitchToTab2",
             "keys": "alt+3"
         },
         {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 5
-            },
+            "id": "Terminal.SwitchToTab3",
+            "keys": "alt+4"
+        },
+        {
+            "id": "Terminal.SwitchToTab4",
+            "keys": "alt+5"
+        },
+        {
+            "id": "Terminal.SwitchToTab5",
             "keys": "alt+6"
         },
         {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "right"
-            },
-            "keys": "alt+d"
-        },
-        {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "up"
-            },
-            "keys": "alt+w"
-        },
-        {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "down"
-            },
-            "keys": "alt+s"
-        },
-        {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "left"
-            },
-            "keys": "alt+a"
+            "id": "Terminal.SwitchToTab7",
+            "keys": "alt+6"
         }
     ],
-    "copyFormatting": "none",
-    "copyOnSelect": true,
-    "defaultProfile": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
     "multiLinePasteWarning": false,
-    "newTabMenu": 
-    [
+    "newTabMenu": [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
-    {
-        "defaults": 
-        {
+    "profiles": {
+        "defaults": {
             "bellStyle": "none",
             "colorScheme": "OneStar",
             "cursorShape": "filledBox",
             "experimental.retroTerminalEffect": false,
-            "font": 
-            {
+            "font": {
                 "face": "JetBrainsMonoNL Nerd Font Mono",
                 "size": 12.0,
                 "weight": "semi-light"
@@ -125,14 +58,13 @@
             "startingDirectory": "D:/Code/",
             "useAcrylic": true
         },
-        "list": 
-        [
+        "list": [
             {
-                "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+                "guid": "{5d75a00a-3daa-564c-8fe4-58cc22a676d4}",
                 "hidden": false,
                 "icon": "ms-appdata:///roaming/assets/arch2.png",
                 "name": "Arch",
-                "source": "Windows.Terminal.Wsl",
+                "source": "Microsoft.WSL",
                 "tabColor": "#1A8BFC"
             },
             {
@@ -144,7 +76,7 @@
                 "tabColor": "#942EAD"
             },
             {
-                "commandline": "C:\\Programs\\msys64\\msys2_shell.cmd -ucrt64 -defterm -no-start -here -use-full-path",
+                "commandline": "C:\\Programs\\MSYS2\\msys2_shell.cmd -ucrt64 -defterm -no-start -here -use-full-path",
                 "guid": "{cf75ba52-b1c0-4011-8ee0-daaf2dffebf3}",
                 "hidden": false,
                 "icon": "ms-appdata:///roaming/assets/ucrt64.ico",
@@ -165,8 +97,7 @@
             }
         ]
     },
-    "schemes": 
-    [
+    "schemes": [
         {
             "background": "#0E1019",
             "black": "#232323",
