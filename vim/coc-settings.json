@@ -4,8 +4,8 @@
   "suggest.snippetIndicator": "",
   "suggest.maxCompleteItemCount": 30,
   "suggest.virtualText": true,
-  "suggest.pumFloatConfig": {"border": true, "rounded": true},
-  "suggest.floatConfig": {"border": true, "rounded": true},
+  "suggest.pumFloatConfig": { "border": true, "rounded": true },
+  "suggest.floatConfig": { "border": true, "rounded": true },
   "suggest.labelMaxLength": 70,
   "suggest.completionItemKindLabels": {
     "text": "\ue612",
@@ -46,7 +46,6 @@
   "semanticTokens.enable": true,
   "signature.preferShownAbove": false,
   "coc.preferences.enableMessageDialog": true,
-  "coc.preferences.extensionUpdateCheck": "weekly",
   "cmake.lsp.enable": true,
   "yank.enableCompletion": false,
   "yank.highlight.enable": false,
@@ -61,5 +60,11 @@
     "MD033": false,
     "MD013": false,
     "MD027": false
+  },
+  "languageserver": {
+    "tsl-server": {
+      "command": "tsl-server",
+      "filetypes": ["tsl", "tsf"]
+    }
   }
 }
