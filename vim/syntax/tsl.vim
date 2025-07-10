@@ -13,14 +13,14 @@ syn case ignore
 # Keywords
 # 程序结构声明
 syn keyword tslProgramStructure program function procedure nextgroup=tslFuncName skipwhite
-syn keyword tslModuleStructure unit uses implementation interface initalization finalization
+syn keyword tslModuleStructure unit uses implementation interface initialization finalization
 
 # 数据类型
 syn keyword tslPrimitiveType string integer boolean int64 real array
 
 # 类型系统和面向对象
 syn keyword tslClassType type class fakeclass new
-syn keyword tslClassModifier override overload virtual property self inherited
+syn keyword tslClassModifier override overload virtual property inherited self
 syn keyword tslAccessModifier public protected private published
 syn keyword tslConstructor create destroy operator
 syn keyword tslReferenceModifier weakref autoref
@@ -66,15 +66,17 @@ syn keyword tslBoolean false true
 syn keyword tslNull nil
 syn keyword tslMathConstant inf nan
 
+# todo
 syn keyword tslTodo FIXME NOTE NOTES TODO XXX contained
 
 # Function definitions
-syn match tslFuncName       '\%(\h\w*\.\)\?\h\w*' contained nextgroup=tslFuncParams skipwhite contains=tslTypeNameInFunc,tslDotInFunc,tslFuncNamePart
-syn match tslTypeNameInFunc '\h\w*\ze\.\h\w*' contained
-syn match tslDotInFunc      '\.' contained
-syn match tslFuncName       '\.\@<=\h\w*' contained
+syn match tslFuncName        '\%(\h\w*\.\)\?\h\w*' contained nextgroup=tslFuncParams skipwhite contains=tslTypeNameInFunc,tslDotInFunc
+syn match tslTypeNameInFunc  '\h\w*\ze\.\h\w*' contained
+syn match tslDotInFunc       '\.' contained
+syn match tslFuncName        '\.\@<=\h\w*' contained
 
 syn region tslFuncParams
+    \ matchgroup=Delimiter
     \ start='('
     \ end=')'
     \ contained
@@ -87,39 +89,48 @@ syn match tslReturnType     ':\s*[^;]*' contained contains=tslColon
 syn match tslParamSep       '[;,]' contained
 syn match tslColon          ':' contained
 
-syn match tslVarDecl        '\(?\s\)\@<!\h\w\s:=\@!\s[^;?];' contains=tslVarName,tslVarType
-syn match tslVarName        '\(?\s\)\@<!\h\w\ze\s:=\@!' contained
-syn match tslVarType        ':=\@!\s[^;?]' contained contains=tslColon
-
-# 匹配完整的属性链
-syn match tslPropertyChain  '\h\w*\%(\.\h\w*\)\+' contains=tslObjectName,tslPropertyDot,tslPropertyName
+# property chain
+syn match tslPropertyChain  '\h\w*\%(\.\h\w*\)\+\>' contains=tslObjectName,tslPropertyDot,tslPropertyName
 syn match tslObjectName     '\h\w*\ze\.\h\w*' contained
 syn match tslPropertyDot    '\.' contained
 syn match tslPropertyName   '\.\@<=\h\w*\%(\ze\.\|\ze\s*[^(]\|\ze\s*$\)' contained
 
 # Function calls
 syn match tslFuncCallName   '\%(\<\%(function\|procedure\)\s\+\%(\h\w*\.\)\?\)\@<!\h\w*\ze\s*('
-    \ containedin=ALLBUT,tslFuncParams,tslPropertyChain,tslFunction,tslFuncName,tslFuncNamePart
+    \ containedin=ALLBUT,tslFuncParams,tslPropertyChain,tslFunction,tslFuncName,tslFuncNamePart,tslComment,tslString,tslRawString
 
 syn region tslFuncCall
-    \ start='\%(\<\h\w*\s*(\)'
-    \ end=')'
-    \ contains=tslCallParams,tslCallSep,tslCallValue,tslCallParam,tslString,tslNumber,tslIdentifier,tslOperator
+    \ start='\h\w*\s*(\zs'
+    \ end='\ze)'
+    \ contains=tslFuncCallName,tslFuncCall,tslNamedParam,tslPositionalParam,tslString,tslRawString,tslNumber,tslIdentifier,tslOperator,tslParamSep
     \ transparent
 
-syn region tslCallParams
-    \ start='\%(\<\h\w*\s*(\)\zs'
-    \ end='\ze)'
-    \ contained
-    \ contains=tslCallParam,tslCallValue,tslCallSep,tslString,tslNumber,tslIdentifier,tslOperator,tslFuncCall
+syn match tslNamedParam     '\%((\|;\s*\)\zs\h\w*\s*:\s*[^;,)]*' contained
+    \ contains=tslParamName,tslParamColon,tslParamValue
 
-syn match tslCallParam      '\h\w*\ze\s*:' contained
-syn match tslCallValue      ':\s*\zs[^;)]*' contained
-syn match tslCallValue
-    \ ':\s*\zs\\%([^;,)]\+\|.\{-}\%([;,)]\|$\))'
-    \ contained
-    \ contains=tslString,tslNumber,tslIdentifier,tslOperator,tslFunctionCall
-syn match tslCallSep        '[;,]' contained
+syn match tslParamName      '\h\w*\ze\s*:' contained
+syn match tslParamColon     ':' contained
+syn match tslParamValue     ':\s*\zs[^;,)]*' contained
+    \ contains=tslString,tslNumber,tslIdentifier,tslOperator,tslFuncCall,tslFuncCallName
+
+syn match tslPositionalParam '[^;,():]*' contained
+    \ contains=tslString,tslNumber,tslIdentifier,tslOperator,tslFuncCall,tslFuncCallName
+
+# variable declaration
+syn match tslVarDeclWithTag '\]\@<=\s*\h\w*'
+    \ nextgroup=tslVarTypeDecl skipwhite
+    \ contains=tslVarName
+
+syn match tslVarDeclStart   '\%(^\s*\|;\s*\)\zs\h\w*\%(\s*\[\)\@!'
+    \ nextgroup=tslVarTypeDecl skipwhite
+    \ contains=tslVarName
+
+syn match tslVarName        '\h\w*' contained
+syn region tslVarTypeDecl 
+    \ matchgroup=tslVarDelimiter start=':\%(=\)\@!' end=';'
+    \ contained keepend oneline
+    \ contains=tslVarType
+syn match tslVarType '[^;]*' contained
 
 # Operators and delimiters
 syn match tslOperator       '[+\-*/<>=!&|^~%]'
@@ -143,6 +154,7 @@ syn match tslNumber '\<\d\+[jJ]\>'
 syn match tslNumber '\<\d\+[eE][+-]\=\d\+[jJ]\=\>'
 syn match tslNumber '\<\d\+\.\%([eE][+-]\=\d\+\)\=[jJ]\=\%(\W\|$\)\@='
 syn match tslNumber '\%(^\|\W\)\zs\d*\.\d\+\%([eE][+-]\=\d\+\)\=[jJ]\=\>'
+
 
 # Highlight links
 hi def link tslProgramStructure Statement
@@ -179,8 +191,8 @@ hi def link tslNull Constant
 hi def link tslMathConstant Number
 
 # 其他元素的高亮链接保持不变
-hi def link tslClassName Type
-hi def link tslDot Operator
+hi def link tslObjectName Type
+hi def link tslPropertyDot Operator
 hi def link tslPropertyName Special
 
 hi def link tslFuncName Function

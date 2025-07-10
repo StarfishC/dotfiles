@@ -47,6 +47,7 @@
   "signature.preferShownAbove": false,
   "coc.preferences.enableMessageDialog": true,
   "cmake.lsp.enable": true,
+  "cmake.lsp.serverPath": "cmake-language-server",
   "yank.enableCompletion": false,
   "yank.highlight.enable": false,
   "explorer.width": 30,
@@ -64,6 +65,7 @@
   "languageserver": {
     "tsl-server": {
       "command": "tsl-server",
+      "args": ["--log=info", "--log-stderr"],
       "filetypes": ["tsl", "tsf"]
     }
   }
